@@ -47,6 +47,9 @@ module MergeAccountingClient
     # The account's number.
     attr_accessor :account_number
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,7 +63,8 @@ module MergeAccountingClient
         :'status' => :'status',
         :'current_balance' => :'current_balance',
         :'currency' => :'currency',
-        :'account_number' => :'account_number'
+        :'account_number' => :'account_number',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -82,7 +86,8 @@ module MergeAccountingClient
         :'status' => :'AccountStatusEnum',
         :'current_balance' => :'Float',
         :'currency' => :'CurrencyEnum',
-        :'account_number' => :'String'
+        :'account_number' => :'String',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -98,7 +103,7 @@ module MergeAccountingClient
         :'status',
         :'current_balance',
         :'currency',
-        :'account_number'
+        :'account_number',
       ])
     end
 
@@ -162,6 +167,10 @@ module MergeAccountingClient
       if attributes.key?(:'account_number')
         self.account_number = attributes[:'account_number']
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -192,7 +201,8 @@ module MergeAccountingClient
           status == o.status &&
           current_balance == o.current_balance &&
           currency == o.currency &&
-          account_number == o.account_number
+          account_number == o.account_number &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -204,7 +214,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, description, classification, type, status, current_balance, currency, account_number].hash
+      [id, remote_id, remote_data, name, description, classification, type, status, current_balance, currency, account_number, remote_was_deleted].hash
     end
 
     # Builds the object from hash

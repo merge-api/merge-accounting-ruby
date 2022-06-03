@@ -26,6 +26,8 @@ module MergeAccountingClient
 
     attr_accessor :tracking_category
 
+    attr_accessor :contact
+
     # The line's description.
     attr_accessor :description
 
@@ -36,6 +38,7 @@ module MergeAccountingClient
         :'account' => :'account',
         :'net_amount' => :'net_amount',
         :'tracking_category' => :'tracking_category',
+        :'contact' => :'contact',
         :'description' => :'description'
       }
     end
@@ -52,6 +55,7 @@ module MergeAccountingClient
         :'account' => :'String',
         :'net_amount' => :'Float',
         :'tracking_category' => :'String',
+        :'contact' => :'String',
         :'description' => :'String'
       }
     end
@@ -63,6 +67,7 @@ module MergeAccountingClient
         :'account',
         :'net_amount',
         :'tracking_category',
+        :'contact',
         :'description'
       ])
     end
@@ -98,6 +103,10 @@ module MergeAccountingClient
         self.tracking_category = attributes[:'tracking_category']
       end
 
+      if attributes.key?(:'contact')
+        self.contact = attributes[:'contact']
+      end
+
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -125,6 +134,7 @@ module MergeAccountingClient
           account == o.account &&
           net_amount == o.net_amount &&
           tracking_category == o.tracking_category &&
+          contact == o.contact &&
           description == o.description
     end
 
@@ -137,7 +147,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, account, net_amount, tracking_category, description].hash
+      [remote_id, account, net_amount, tracking_category, contact, description].hash
     end
 
     # Builds the object from hash

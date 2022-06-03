@@ -23,6 +23,7 @@
 | **remote_updated_at** | **Time** | When the third party&#39;s invoice entry was updated. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
 | **line_items** | [**Array&lt;InvoiceLineItem&gt;**](InvoiceLineItem.md) |  | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
 
 ## Example
 
@@ -48,7 +49,8 @@ instance = MergeAccountingClient::Invoice.new(
   balance: 105,
   remote_updated_at: 2020-04-01T00:00Z,
   payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
-  line_items: [{&quot;id&quot;:&quot;022a2bef-57e5-4def-8ed2-7c41bd9a5ed8&quot;,&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:2.0,&quot;total_amount&quot;:100.0,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}]
+  line_items: [{&quot;id&quot;:&quot;022a2bef-57e5-4def-8ed2-7c41bd9a5ed8&quot;,&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:2.0,&quot;total_amount&quot;:100.0,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}],
+  remote_was_deleted: null
 )
 ```
 

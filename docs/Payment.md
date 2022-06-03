@@ -12,6 +12,7 @@
 | **account** | **String** |  | [optional] |
 | **total_amount** | **Float** | The payment&#39;s total amount. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s payment entry was updated. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = MergeAccountingClient::Payment.new(
   contact: 5b3c1341-a20f-4e51-b72c-f3830a16c97b,
   account: d6e687d6-0c36-48a1-8114-35324b5cb38f,
   total_amount: 50.0,
-  remote_updated_at: 2020-03-31T00:00Z
+  remote_updated_at: 2020-03-31T00:00Z,
+  remote_was_deleted: null
 )
 ```
 

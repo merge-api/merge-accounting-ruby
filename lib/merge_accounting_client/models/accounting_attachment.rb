@@ -29,6 +29,9 @@ module MergeAccountingClient
     # The attachment's url.
     attr_accessor :file_url
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +39,8 @@ module MergeAccountingClient
         :'remote_id' => :'remote_id',
         :'remote_data' => :'remote_data',
         :'file_name' => :'file_name',
-        :'file_url' => :'file_url'
+        :'file_url' => :'file_url',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -52,7 +56,8 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'remote_data' => :'Array<RemoteData>',
         :'file_name' => :'String',
-        :'file_url' => :'String'
+        :'file_url' => :'String',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -62,7 +67,7 @@ module MergeAccountingClient
         :'remote_id',
         :'remote_data',
         :'file_name',
-        :'file_url'
+        :'file_url',
       ])
     end
 
@@ -101,6 +106,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'file_url')
         self.file_url = attributes[:'file_url']
+      end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
     end
 
@@ -141,7 +150,8 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           remote_data == o.remote_data &&
           file_name == o.file_name &&
-          file_url == o.file_url
+          file_url == o.file_url &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -153,7 +163,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, file_name, file_url].hash
+      [id, remote_id, remote_data, file_name, file_url, remote_was_deleted].hash
     end
 
     # Builds the object from hash

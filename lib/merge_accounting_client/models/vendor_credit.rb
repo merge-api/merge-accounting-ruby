@@ -14,19 +14,47 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  class PaginatedWebhookReceiverList
-    attr_accessor :_next
+  # # The VendorCredit Object ### Description The `VendorCredit` object is used to represent a company's vendor credits.  ### Usage Example Fetch from the `GET VendorCredit` endpoint and view a company's vendor credits.
+  class VendorCredit
+    attr_accessor :id
 
-    attr_accessor :previous
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
 
-    attr_accessor :results
+    attr_accessor :remote_data
+
+    # The vendor credit's number.
+    attr_accessor :number
+
+    # The vendor credit's transaction date.
+    attr_accessor :transaction_date
+
+    attr_accessor :vendor
+
+    # The vendor credit's total amount.
+    attr_accessor :total_amount
+
+    # The vendor credit's currency.
+    attr_accessor :currency
+
+    attr_accessor :lines
+
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'_next' => :'next',
-        :'previous' => :'previous',
-        :'results' => :'results'
+        :'id' => :'id',
+        :'remote_id' => :'remote_id',
+        :'remote_data' => :'remote_data',
+        :'number' => :'number',
+        :'transaction_date' => :'transaction_date',
+        :'vendor' => :'vendor',
+        :'total_amount' => :'total_amount',
+        :'currency' => :'currency',
+        :'lines' => :'lines',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -38,17 +66,29 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'_next' => :'String',
-        :'previous' => :'String',
-        :'results' => :'Array<WebhookReceiver>'
+        :'id' => :'String',
+        :'remote_id' => :'String',
+        :'remote_data' => :'Array<RemoteData>',
+        :'number' => :'String',
+        :'transaction_date' => :'Time',
+        :'vendor' => :'String',
+        :'total_amount' => :'Float',
+        :'currency' => :'CurrencyEnum',
+        :'lines' => :'Array<VendorCreditLine>',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'_next',
-        :'previous',
+        :'remote_id',
+        :'remote_data',
+        :'number',
+        :'transaction_date',
+        :'vendor',
+        :'total_amount',
+        :'currency',
       ])
     end
 
@@ -56,29 +96,59 @@ module MergeAccountingClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MergeAccountingClient::PaginatedWebhookReceiverList` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MergeAccountingClient::VendorCredit` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MergeAccountingClient::PaginatedWebhookReceiverList`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MergeAccountingClient::VendorCredit`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'_next')
-        self._next = attributes[:'_next']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'previous')
-        self.previous = attributes[:'previous']
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
       end
 
-      if attributes.key?(:'results')
-        if (value = attributes[:'results']).is_a?(Array)
-          self.results = value
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
         end
+      end
+
+      if attributes.key?(:'number')
+        self.number = attributes[:'number']
+      end
+
+      if attributes.key?(:'transaction_date')
+        self.transaction_date = attributes[:'transaction_date']
+      end
+
+      if attributes.key?(:'vendor')
+        self.vendor = attributes[:'vendor']
+      end
+
+      if attributes.key?(:'total_amount')
+        self.total_amount = attributes[:'total_amount']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'lines')
+        if (value = attributes[:'lines']).is_a?(Array)
+          self.lines = value
+        end
+      end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
     end
 
@@ -100,9 +170,16 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _next == o._next &&
-          previous == o.previous &&
-          results == o.results
+          id == o.id &&
+          remote_id == o.remote_id &&
+          remote_data == o.remote_data &&
+          number == o.number &&
+          transaction_date == o.transaction_date &&
+          vendor == o.vendor &&
+          total_amount == o.total_amount &&
+          currency == o.currency &&
+          lines == o.lines &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -114,7 +191,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_next, previous, results].hash
+      [id, remote_id, remote_data, number, transaction_date, vendor, total_amount, currency, lines, remote_was_deleted].hash
     end
 
     # Builds the object from hash

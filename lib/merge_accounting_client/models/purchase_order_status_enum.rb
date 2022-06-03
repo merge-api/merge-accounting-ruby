@@ -32,8 +32,6 @@ module MergeAccountingClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = PurchaseOrderStatusEnum.constants.select { |c| PurchaseOrderStatusEnum::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #PurchaseOrderStatusEnum" if constantValues.empty?
       value
     end
   end

@@ -49,6 +49,9 @@ module MergeAccountingClient
     # When the third party's purchase order note was updated.
     attr_accessor :remote_updated_at
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -63,7 +66,8 @@ module MergeAccountingClient
         :'currency' => :'currency',
         :'line_items' => :'line_items',
         :'remote_created_at' => :'remote_created_at',
-        :'remote_updated_at' => :'remote_updated_at'
+        :'remote_updated_at' => :'remote_updated_at',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -86,7 +90,8 @@ module MergeAccountingClient
         :'currency' => :'CurrencyEnum',
         :'line_items' => :'Array<PurchaseOrderLineItem>',
         :'remote_created_at' => :'Time',
-        :'remote_updated_at' => :'Time'
+        :'remote_updated_at' => :'Time',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -102,7 +107,7 @@ module MergeAccountingClient
         :'total_amount',
         :'currency',
         :'remote_created_at',
-        :'remote_updated_at'
+        :'remote_updated_at',
       ])
     end
 
@@ -172,6 +177,10 @@ module MergeAccountingClient
       if attributes.key?(:'remote_updated_at')
         self.remote_updated_at = attributes[:'remote_updated_at']
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -203,7 +212,8 @@ module MergeAccountingClient
           currency == o.currency &&
           line_items == o.line_items &&
           remote_created_at == o.remote_created_at &&
-          remote_updated_at == o.remote_updated_at
+          remote_updated_at == o.remote_updated_at &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -215,7 +225,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, status, issue_date, delivery_date, delivery_address, total_amount, currency, line_items, remote_created_at, remote_updated_at].hash
+      [id, remote_id, remote_data, status, issue_date, delivery_date, delivery_address, total_amount, currency, line_items, remote_created_at, remote_updated_at, remote_was_deleted].hash
     end
 
     # Builds the object from hash

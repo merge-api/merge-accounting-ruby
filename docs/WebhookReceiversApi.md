@@ -10,7 +10,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 ## webhook_receivers_create
 
-> <WebhookReceiver> webhook_receivers_create(webhook_receiver_request)
+> <WebhookReceiver> webhook_receivers_create(x_account_token, webhook_receiver_request)
 
 
 
@@ -30,11 +30,12 @@ MergeAccountingClient.configure do |config|
 end
 
 api_instance = MergeAccountingClient::WebhookReceiversApi.new
+x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 webhook_receiver_request = MergeAccountingClient::WebhookReceiverRequest.new({event: 'event_example', is_active: false}) # WebhookReceiverRequest | 
 
 begin
   
-  result = api_instance.webhook_receivers_create(webhook_receiver_request)
+  result = api_instance.webhook_receivers_create(x_account_token, webhook_receiver_request)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling WebhookReceiversApi->webhook_receivers_create: #{e}"
@@ -45,12 +46,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<WebhookReceiver>, Integer, Hash)> webhook_receivers_create_with_http_info(webhook_receiver_request)
+> <Array(<WebhookReceiver>, Integer, Hash)> webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.webhook_receivers_create_with_http_info(webhook_receiver_request)
+  data, status_code, headers = api_instance.webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <WebhookReceiver>
@@ -63,6 +64,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **x_account_token** | **String** | Token identifying the end user. |  |
 | **webhook_receiver_request** | [**WebhookReceiverRequest**](WebhookReceiverRequest.md) |  |  |
 
 ### Return type
@@ -81,7 +83,7 @@ end
 
 ## webhook_receivers_list
 
-> <PaginatedWebhookReceiverList> webhook_receivers_list(opts)
+> <Array<WebhookReceiver>> webhook_receivers_list(x_account_token)
 
 
 
@@ -101,14 +103,11 @@ MergeAccountingClient.configure do |config|
 end
 
 api_instance = MergeAccountingClient::WebhookReceiversApi.new
-opts = {
-  cursor: 56, # Integer | The pagination cursor value.
-  page_size: 56 # Integer | Number of results to return per page.
-}
+x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 
 begin
   
-  result = api_instance.webhook_receivers_list(opts)
+  result = api_instance.webhook_receivers_list(x_account_token)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling WebhookReceiversApi->webhook_receivers_list: #{e}"
@@ -119,15 +118,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PaginatedWebhookReceiverList>, Integer, Hash)> webhook_receivers_list_with_http_info(opts)
+> <Array(<Array<WebhookReceiver>>, Integer, Hash)> webhook_receivers_list_with_http_info(x_account_token)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.webhook_receivers_list_with_http_info(opts)
+  data, status_code, headers = api_instance.webhook_receivers_list_with_http_info(x_account_token)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PaginatedWebhookReceiverList>
+  p data # => <Array<WebhookReceiver>>
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling WebhookReceiversApi->webhook_receivers_list_with_http_info: #{e}"
 end
@@ -137,12 +136,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **cursor** | **Integer** | The pagination cursor value. | [optional] |
-| **page_size** | **Integer** | Number of results to return per page. | [optional] |
+| **x_account_token** | **String** | Token identifying the end user. |  |
 
 ### Return type
 
-[**PaginatedWebhookReceiverList**](PaginatedWebhookReceiverList.md)
+[**Array&lt;WebhookReceiver&gt;**](WebhookReceiver.md)
 
 ### Authorization
 

@@ -49,6 +49,9 @@ module MergeAccountingClient
     # The income statement's net income.
     attr_accessor :net_income
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +67,8 @@ module MergeAccountingClient
         :'operating_expenses' => :'operating_expenses',
         :'net_operating_income' => :'net_operating_income',
         :'non_operating_expenses' => :'non_operating_expenses',
-        :'net_income' => :'net_income'
+        :'net_income' => :'net_income',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -88,7 +92,8 @@ module MergeAccountingClient
         :'operating_expenses' => :'Array<ReportItem>',
         :'net_operating_income' => :'Float',
         :'non_operating_expenses' => :'Array<ReportItem>',
-        :'net_income' => :'Float'
+        :'net_income' => :'Float',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -102,7 +107,7 @@ module MergeAccountingClient
         :'end_period',
         :'gross_profit',
         :'net_operating_income',
-        :'net_income'
+        :'net_income',
       ])
     end
 
@@ -182,6 +187,10 @@ module MergeAccountingClient
       if attributes.key?(:'net_income')
         self.net_income = attributes[:'net_income']
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -214,7 +223,8 @@ module MergeAccountingClient
           operating_expenses == o.operating_expenses &&
           net_operating_income == o.net_operating_income &&
           non_operating_expenses == o.non_operating_expenses &&
-          net_income == o.net_income
+          net_income == o.net_income &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -226,7 +236,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, start_period, end_period, income, cost_of_sales, gross_profit, operating_expenses, net_operating_income, non_operating_expenses, net_income].hash
+      [id, remote_id, remote_data, name, start_period, end_period, income, cost_of_sales, gross_profit, operating_expenses, net_operating_income, non_operating_expenses, net_income, remote_was_deleted].hash
     end
 
     # Builds the object from hash

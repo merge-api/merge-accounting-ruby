@@ -17,6 +17,7 @@
 | **net_operating_income** | **Float** | The income statement&#39;s net operating profit. | [optional] |
 | **non_operating_expenses** | [**Array&lt;ReportItem&gt;**](ReportItem.md) |  | [optional][readonly] |
 | **net_income** | **Float** | The income statement&#39;s net income. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = MergeAccountingClient::IncomeStatement.new(
   operating_expenses: [{&quot;remote_id&quot;:&quot;10299&quot;,&quot;name&quot;:&quot;Total Operating Expenses&quot;,&quot;value&quot;:100.0,&quot;sub_items&quot;:null}],
   net_operating_income: 200.0,
   non_operating_expenses: [{&quot;remote_id&quot;:&quot;10299&quot;,&quot;name&quot;:&quot;Total Non-Operating Expenses&quot;,&quot;value&quot;:100.0,&quot;sub_items&quot;:null}],
-  net_income: 100.0
+  net_income: 100.0,
+  remote_was_deleted: null
 )
 ```
 

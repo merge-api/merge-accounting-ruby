@@ -15,6 +15,7 @@
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The expense&#39;s currency. | [optional] |
 | **memo** | **String** | The expense&#39;s private note. | [optional] |
 | **lines** | [**Array&lt;ExpenseLine&gt;**](ExpenseLine.md) |  | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -32,7 +33,8 @@ instance = MergeAccountingClient::Expense.new(
   total_amount: 10000.0,
   currency: USD,
   memo: New employee supplies,
-  lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;net_amount&quot;:25.54,&quot;trackingCategory&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;MacBook Pro&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;net_amount&quot;:10,&quot;trackingCategory&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;Desk Lamp&quot;}]
+  lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;net_amount&quot;:25.54,&quot;trackingCategory&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;MacBook Pro&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;net_amount&quot;:10,&quot;trackingCategory&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;Desk Lamp&quot;}],
+  remote_was_deleted: null
 )
 ```
 

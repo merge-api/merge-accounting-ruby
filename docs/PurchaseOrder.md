@@ -16,6 +16,7 @@
 | **line_items** | [**Array&lt;PurchaseOrderLineItem&gt;**](PurchaseOrderLineItem.md) |  | [optional][readonly] |
 | **remote_created_at** | **Time** | When the third party&#39;s purchase order note was created. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s purchase order note was updated. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -34,7 +35,8 @@ instance = MergeAccountingClient::PurchaseOrder.new(
   currency: USD,
   line_items: [{&quot;description&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:25.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;},{&quot;description&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;}],
   remote_created_at: 2020-03-31T00:00Z,
-  remote_updated_at: 2020-03-31T00:00Z
+  remote_updated_at: 2020-03-31T00:00Z,
+  remote_was_deleted: null
 )
 ```
 
