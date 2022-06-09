@@ -17,6 +17,7 @@
 | **remote_updated_at** | **Time** | When the third party&#39;s contact was updated. | [optional] |
 | **addresses** | **Array&lt;String&gt;** | &#x60;Address&#x60; object IDs for the given &#x60;Contacts&#x60; object. | [optional] |
 | **phone_numbers** | [**Array&lt;AccountingPhoneNumber&gt;**](AccountingPhoneNumber.md) | &#x60;AccountingPhoneNumber&#x60; object for the given &#x60;Contacts&#x60; object. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = MergeAccountingClient::Contact.new(
   currency: USD,
   remote_updated_at: 2020-03-31T00:00Z,
   addresses: [&quot;2f2702aa-8948-492b-a412-2acdf6d2c499&quot;,&quot;d98c7428-8dda-48a8-a1da-c570f65e2375&quot;],
-  phone_numbers: [{&quot;number&quot;:&quot;+3198675309&quot;,&quot;type&quot;:&quot;Mobile&quot;}]
+  phone_numbers: [{&quot;number&quot;:&quot;+3198675309&quot;,&quot;type&quot;:&quot;Mobile&quot;}],
+  remote_was_deleted: null
 )
 ```
 

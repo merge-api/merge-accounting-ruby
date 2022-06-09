@@ -35,6 +35,8 @@ module MergeAccountingClient
 
     attr_accessor :account
 
+    attr_accessor :tracking_category
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -44,7 +46,8 @@ module MergeAccountingClient
         :'quantity' => :'quantity',
         :'total_amount' => :'total_amount',
         :'item' => :'item',
-        :'account' => :'account'
+        :'account' => :'account',
+        :'tracking_category' => :'tracking_category'
       }
     end
 
@@ -62,7 +65,8 @@ module MergeAccountingClient
         :'quantity' => :'Float',
         :'total_amount' => :'Float',
         :'item' => :'String',
-        :'account' => :'String'
+        :'account' => :'String',
+        :'tracking_category' => :'String'
       }
     end
 
@@ -75,7 +79,8 @@ module MergeAccountingClient
         :'quantity',
         :'total_amount',
         :'item',
-        :'account'
+        :'account',
+        :'tracking_category'
       ])
     end
 
@@ -121,6 +126,10 @@ module MergeAccountingClient
       if attributes.key?(:'account')
         self.account = attributes[:'account']
       end
+
+      if attributes.key?(:'tracking_category')
+        self.tracking_category = attributes[:'tracking_category']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -147,7 +156,8 @@ module MergeAccountingClient
           quantity == o.quantity &&
           total_amount == o.total_amount &&
           item == o.item &&
-          account == o.account
+          account == o.account &&
+          tracking_category == o.tracking_category
     end
 
     # @see the `==` method
@@ -159,7 +169,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, description, unit_price, quantity, total_amount, item, account].hash
+      [remote_id, description, unit_price, quantity, total_amount, item, account, tracking_category].hash
     end
 
     # Builds the object from hash

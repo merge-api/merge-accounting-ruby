@@ -14,6 +14,7 @@
 | **purchase_account** | **String** |  | [optional] |
 | **sales_account** | **String** |  | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s item note was updated. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = MergeAccountingClient::Item.new(
   purchase_price: 25.0,
   purchase_account: 9871b4a9-f5d2-4f3b-a66b-dfedbed42c46,
   sales_account: 3872b4c9-f5d2-4f3b-a66b-dfedbed42c49,
-  remote_updated_at: 2020-03-31T00:00Z
+  remote_updated_at: 2020-03-31T00:00Z,
+  remote_was_deleted: null
 )
 ```
 

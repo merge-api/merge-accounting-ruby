@@ -15,6 +15,7 @@
 | **remote_created_at** | **Time** | When the third party&#39;s credit note was created. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s credit note was updated. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -32,7 +33,8 @@ instance = MergeAccountingClient::CreditNote.new(
   currency: USD,
   remote_created_at: 2020-03-31T00:00Z,
   remote_updated_at: 2020-03-31T00:00Z,
-  payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;]
+  payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
+  remote_was_deleted: null
 )
 ```
 

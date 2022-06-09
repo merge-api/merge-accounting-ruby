@@ -51,6 +51,9 @@ module MergeAccountingClient
 
     attr_accessor :phone_numbers
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -66,7 +69,8 @@ module MergeAccountingClient
         :'remote_created_at' => :'remote_created_at',
         :'urls' => :'urls',
         :'addresses' => :'addresses',
-        :'phone_numbers' => :'phone_numbers'
+        :'phone_numbers' => :'phone_numbers',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -90,7 +94,8 @@ module MergeAccountingClient
         :'remote_created_at' => :'Time',
         :'urls' => :'Array<String>',
         :'addresses' => :'Array<Address>',
-        :'phone_numbers' => :'Array<AccountingPhoneNumber>'
+        :'phone_numbers' => :'Array<AccountingPhoneNumber>',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -184,6 +189,10 @@ module MergeAccountingClient
           self.phone_numbers = value
         end
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -264,7 +273,8 @@ module MergeAccountingClient
           remote_created_at == o.remote_created_at &&
           urls == o.urls &&
           addresses == o.addresses &&
-          phone_numbers == o.phone_numbers
+          phone_numbers == o.phone_numbers &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -276,7 +286,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, legal_name, tax_number, fiscal_year_end_month, fiscal_year_end_day, currency, remote_created_at, urls, addresses, phone_numbers].hash
+      [id, remote_id, remote_data, name, legal_name, tax_number, fiscal_year_end_month, fiscal_year_end_day, currency, remote_created_at, urls, addresses, phone_numbers, remote_was_deleted].hash
     end
 
     # Builds the object from hash

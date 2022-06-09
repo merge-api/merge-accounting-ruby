@@ -19,6 +19,7 @@ module MergeAccountingClient
     ATS = "ats".freeze
     ACCOUNTING = "accounting".freeze
     TICKETING = "ticketing".freeze
+    CRM = "crm".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
@@ -31,8 +32,6 @@ module MergeAccountingClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = CategoryEnum.constants.select { |c| CategoryEnum::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #CategoryEnum" if constantValues.empty?
       value
     end
   end

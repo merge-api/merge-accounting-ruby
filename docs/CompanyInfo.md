@@ -17,6 +17,7 @@
 | **urls** | **Array&lt;String&gt;** | The company&#39;s urls. | [optional] |
 | **addresses** | [**Array&lt;Address&gt;**](Address.md) |  | [optional] |
 | **phone_numbers** | [**Array&lt;AccountingPhoneNumber&gt;**](AccountingPhoneNumber.md) |  | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = MergeAccountingClient::CompanyInfo.new(
   remote_created_at: 2020-03-31T00:00Z,
   urls: https://www.merge.dev,
   addresses: [{&quot;street_1&quot;:&quot;2920 Broadway&quot;,&quot;street_2&quot;:&quot;2nd Floor&quot;,&quot;city&quot;:&quot;New York&quot;,&quot;state&quot;:&quot;NY&quot;,&quot;country&quot;:&quot;USA&quot;,&quot;zip_code&quot;:&quot;10027&quot;}],
-  phone_numbers: null
+  phone_numbers: null,
+  remote_was_deleted: null
 )
 ```
 

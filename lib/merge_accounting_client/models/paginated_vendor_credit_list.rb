@@ -14,51 +14,19 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Item Object ### Description The `Item` object is used to represent an item that a company buys, sells, or resells, such as products and services.  ### Usage Example Fetch from the `LIST Items` endpoint and view a company's items.
-  class Item
-    attr_accessor :id
+  class PaginatedVendorCreditList
+    attr_accessor :_next
 
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
+    attr_accessor :previous
 
-    attr_accessor :remote_data
-
-    # The item's name.
-    attr_accessor :name
-
-    # The item's status.
-    attr_accessor :status
-
-    # The item's unit price.
-    attr_accessor :unit_price
-
-    # The item's purchase price.
-    attr_accessor :purchase_price
-
-    attr_accessor :purchase_account
-
-    attr_accessor :sales_account
-
-    # When the third party's item note was updated.
-    attr_accessor :remote_updated_at
-
-    # Indicates whether or not this object has been deleted on the third-party.
-    attr_accessor :remote_was_deleted
+    attr_accessor :results
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
-        :'name' => :'name',
-        :'status' => :'status',
-        :'unit_price' => :'unit_price',
-        :'purchase_price' => :'purchase_price',
-        :'purchase_account' => :'purchase_account',
-        :'sales_account' => :'sales_account',
-        :'remote_updated_at' => :'remote_updated_at',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'_next' => :'next',
+        :'previous' => :'previous',
+        :'results' => :'results'
       }
     end
 
@@ -70,32 +38,17 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
-        :'name' => :'String',
-        :'status' => :'Status7d1Enum',
-        :'unit_price' => :'Float',
-        :'purchase_price' => :'Float',
-        :'purchase_account' => :'String',
-        :'sales_account' => :'String',
-        :'remote_updated_at' => :'Time',
-        :'remote_was_deleted' => :'Boolean'
+        :'_next' => :'String',
+        :'previous' => :'String',
+        :'results' => :'Array<VendorCredit>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'remote_id',
-        :'remote_data',
-        :'name',
-        :'status',
-        :'unit_price',
-        :'purchase_price',
-        :'purchase_account',
-        :'sales_account',
-        :'remote_updated_at',
+        :'_next',
+        :'previous',
       ])
     end
 
@@ -103,61 +56,29 @@ module MergeAccountingClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MergeAccountingClient::Item` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MergeAccountingClient::PaginatedVendorCreditList` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MergeAccountingClient::Item`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MergeAccountingClient::PaginatedVendorCreditList`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'_next')
+        self._next = attributes[:'_next']
       end
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
+      if attributes.key?(:'previous')
+        self.previous = attributes[:'previous']
       end
 
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
+      if attributes.key?(:'results')
+        if (value = attributes[:'results']).is_a?(Array)
+          self.results = value
         end
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'unit_price')
-        self.unit_price = attributes[:'unit_price']
-      end
-
-      if attributes.key?(:'purchase_price')
-        self.purchase_price = attributes[:'purchase_price']
-      end
-
-      if attributes.key?(:'purchase_account')
-        self.purchase_account = attributes[:'purchase_account']
-      end
-
-      if attributes.key?(:'sales_account')
-        self.sales_account = attributes[:'sales_account']
-      end
-
-      if attributes.key?(:'remote_updated_at')
-        self.remote_updated_at = attributes[:'remote_updated_at']
-      end
-
-      if attributes.key?(:'remote_was_deleted')
-        self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
     end
 
@@ -179,17 +100,9 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
-          name == o.name &&
-          status == o.status &&
-          unit_price == o.unit_price &&
-          purchase_price == o.purchase_price &&
-          purchase_account == o.purchase_account &&
-          sales_account == o.sales_account &&
-          remote_updated_at == o.remote_updated_at &&
-          remote_was_deleted == o.remote_was_deleted
+          _next == o._next &&
+          previous == o.previous &&
+          results == o.results
     end
 
     # @see the `==` method
@@ -201,7 +114,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, status, unit_price, purchase_price, purchase_account, sales_account, remote_updated_at, remote_was_deleted].hash
+      [_next, previous, results].hash
     end
 
     # Builds the object from hash

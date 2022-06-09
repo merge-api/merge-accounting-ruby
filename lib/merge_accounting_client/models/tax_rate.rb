@@ -32,6 +32,9 @@ module MergeAccountingClient
     # The tax rate's effective tax rate.
     attr_accessor :effective_tax_rate
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,7 +43,8 @@ module MergeAccountingClient
         :'remote_data' => :'remote_data',
         :'description' => :'description',
         :'total_tax_rate' => :'total_tax_rate',
-        :'effective_tax_rate' => :'effective_tax_rate'
+        :'effective_tax_rate' => :'effective_tax_rate',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -57,7 +61,8 @@ module MergeAccountingClient
         :'remote_data' => :'Array<RemoteData>',
         :'description' => :'String',
         :'total_tax_rate' => :'Float',
-        :'effective_tax_rate' => :'Float'
+        :'effective_tax_rate' => :'Float',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -68,7 +73,7 @@ module MergeAccountingClient
         :'remote_data',
         :'description',
         :'total_tax_rate',
-        :'effective_tax_rate'
+        :'effective_tax_rate',
       ])
     end
 
@@ -112,6 +117,10 @@ module MergeAccountingClient
       if attributes.key?(:'effective_tax_rate')
         self.effective_tax_rate = attributes[:'effective_tax_rate']
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -137,7 +146,8 @@ module MergeAccountingClient
           remote_data == o.remote_data &&
           description == o.description &&
           total_tax_rate == o.total_tax_rate &&
-          effective_tax_rate == o.effective_tax_rate
+          effective_tax_rate == o.effective_tax_rate &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -149,7 +159,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, description, total_tax_rate, effective_tax_rate].hash
+      [id, remote_id, remote_data, description, total_tax_rate, effective_tax_rate, remote_was_deleted].hash
     end
 
     # Builds the object from hash

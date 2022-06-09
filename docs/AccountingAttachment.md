@@ -9,6 +9,7 @@
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **file_name** | **String** | The attachment&#39;s name. | [optional] |
 | **file_url** | **String** | The attachment&#39;s url. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = MergeAccountingClient::AccountingAttachment.new(
   remote_id: 1018270,
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}],
   file_name: invoice.png,
-  file_url: https://merge-brand.s3.amazonaws.com/20210315/rect-logo-270x80%402x.png
+  file_url: https://merge-brand.s3.amazonaws.com/20210315/rect-logo-270x80%402x.png,
+  remote_was_deleted: null
 )
 ```
 

@@ -47,6 +47,9 @@ module MergeAccountingClient
     # Array of `Payment` object IDs
     attr_accessor :payments
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,7 +63,8 @@ module MergeAccountingClient
         :'currency' => :'currency',
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
-        :'payments' => :'payments'
+        :'payments' => :'payments',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -82,7 +86,8 @@ module MergeAccountingClient
         :'currency' => :'CurrencyEnum',
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
-        :'payments' => :'Array<String>'
+        :'payments' => :'Array<String>',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -163,6 +168,10 @@ module MergeAccountingClient
           self.payments = value
         end
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -193,7 +202,8 @@ module MergeAccountingClient
           currency == o.currency &&
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
-          payments == o.payments
+          payments == o.payments &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -205,7 +215,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, transaction_date, status, total_amount, remaining_credit, currency, remote_created_at, remote_updated_at, payments].hash
+      [id, remote_id, remote_data, transaction_date, status, total_amount, remaining_credit, currency, remote_created_at, remote_updated_at, payments, remote_was_deleted].hash
     end
 
     # Builds the object from hash

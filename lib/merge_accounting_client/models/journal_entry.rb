@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The JournalEntry Object ### Description The `JournalEntry` object is used to represent a company's journey entries  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
+  # # The JournalEntry Object ### Description The `JournalEntry` object is used to represent a company's journey entries.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
   class JournalEntry
     attr_accessor :id
 
@@ -32,10 +32,15 @@ module MergeAccountingClient
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
-    attr_accessor :lines
-
     # The journal entry's private note.
     attr_accessor :memo
+
+    # The journal's currency.
+    attr_accessor :currency
+
+    attr_accessor :lines
+
+    attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -46,8 +51,10 @@ module MergeAccountingClient
         :'transaction_date' => :'transaction_date',
         :'remote_created_at' => :'remote_created_at',
         :'payments' => :'payments',
+        :'memo' => :'memo',
+        :'currency' => :'currency',
         :'lines' => :'lines',
-        :'memo' => :'memo'
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -65,8 +72,10 @@ module MergeAccountingClient
         :'transaction_date' => :'Time',
         :'remote_created_at' => :'Time',
         :'payments' => :'Array<String>',
+        :'memo' => :'String',
+        :'currency' => :'CurrencyEnum',
         :'lines' => :'Array<JournalLine>',
-        :'memo' => :'String'
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -77,7 +86,8 @@ module MergeAccountingClient
         :'remote_data',
         :'transaction_date',
         :'remote_created_at',
-        :'memo'
+        :'memo',
+        :'currency',
       ])
     end
 
@@ -124,14 +134,22 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'memo')
+        self.memo = attributes[:'memo']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
       if attributes.key?(:'lines')
         if (value = attributes[:'lines']).is_a?(Array)
           self.lines = value
         end
       end
 
-      if attributes.key?(:'memo')
-        self.memo = attributes[:'memo']
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
     end
 
@@ -159,8 +177,10 @@ module MergeAccountingClient
           transaction_date == o.transaction_date &&
           remote_created_at == o.remote_created_at &&
           payments == o.payments &&
+          memo == o.memo &&
+          currency == o.currency &&
           lines == o.lines &&
-          memo == o.memo
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -172,7 +192,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, transaction_date, remote_created_at, payments, lines, memo].hash
+      [id, remote_id, remote_data, transaction_date, remote_created_at, payments, memo, currency, lines, remote_was_deleted].hash
     end
 
     # Builds the object from hash

@@ -15,6 +15,7 @@
 | **current_balance** | **Float** | The account&#39;s current balance. | [optional] |
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The account&#39;s currency. | [optional] |
 | **account_number** | **String** | The account&#39;s number. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
 
 ## Example
 
@@ -32,7 +33,8 @@ instance = MergeAccountingClient::Account.new(
   status: ACTIVE,
   current_balance: null,
   currency: USD,
-  account_number: X12Y9AB
+  account_number: X12Y9AB,
+  remote_was_deleted: null
 )
 ```
 

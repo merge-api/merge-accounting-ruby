@@ -20,21 +20,27 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Creates a `WebhookReceiver` object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
     # @param webhook_receiver_request [WebhookReceiverRequest] 
     # @param [Hash] opts the optional parameters
     # @return [WebhookReceiver]
-    def webhook_receivers_create(webhook_receiver_request, opts = {})
-      data, _status_code, _headers = webhook_receivers_create_with_http_info(webhook_receiver_request, opts)
+    def webhook_receivers_create(x_account_token, webhook_receiver_request, opts = {})
+      data, _status_code, _headers = webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request, opts)
       data
     end
 
     # Creates a &#x60;WebhookReceiver&#x60; object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
     # @param webhook_receiver_request [WebhookReceiverRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebhookReceiver, Integer, Hash)>] WebhookReceiver data, response status code and response headers
-    def webhook_receivers_create_with_http_info(webhook_receiver_request, opts = {})
+    def webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhookReceiversApi.webhook_receivers_create ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling WebhookReceiversApi.webhook_receivers_create"
       end
       # verify the required parameter 'webhook_receiver_request' is set
       if @api_client.config.client_side_validation && webhook_receiver_request.nil?
@@ -52,6 +58,7 @@ module MergeAccountingClient
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'application/x-www-form-urlencoded', 'multipart/form-data'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -83,36 +90,37 @@ module MergeAccountingClient
     end
 
     # Returns a list of `WebhookReceiver` objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :cursor The pagination cursor value.
-    # @option opts [Integer] :page_size Number of results to return per page.
-    # @return [PaginatedWebhookReceiverList]
-    def webhook_receivers_list(opts = {})
-      data, _status_code, _headers = webhook_receivers_list_with_http_info(opts)
+    # @return [Array<WebhookReceiver>]
+    def webhook_receivers_list(x_account_token, opts = {})
+      data, _status_code, _headers = webhook_receivers_list_with_http_info(x_account_token, opts)
       data
     end
 
     # Returns a list of &#x60;WebhookReceiver&#x60; objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :cursor The pagination cursor value.
-    # @option opts [Integer] :page_size Number of results to return per page.
-    # @return [Array<(PaginatedWebhookReceiverList, Integer, Hash)>] PaginatedWebhookReceiverList data, response status code and response headers
-    def webhook_receivers_list_with_http_info(opts = {})
+    # @return [Array<(Array<WebhookReceiver>, Integer, Hash)>] Array<WebhookReceiver> data, response status code and response headers
+    def webhook_receivers_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhookReceiversApi.webhook_receivers_list ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling WebhookReceiversApi.webhook_receivers_list"
       end
       # resource path
       local_var_path = '/webhook-receivers'
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
-      query_params[:'page_size'] = opts[:'page_size'] if !opts[:'page_size'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -121,7 +129,7 @@ module MergeAccountingClient
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PaginatedWebhookReceiverList'
+      return_type = opts[:debug_return_type] || 'Array<WebhookReceiver>'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['tokenAuth']

@@ -333,8 +333,6 @@ module MergeAccountingClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = CurrencyEnum.constants.select { |c| CurrencyEnum::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #CurrencyEnum" if constantValues.empty?
       value
     end
   end

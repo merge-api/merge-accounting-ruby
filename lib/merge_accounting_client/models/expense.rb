@@ -44,6 +44,9 @@ module MergeAccountingClient
 
     attr_accessor :lines
 
+    # Indicates whether or not this object has been deleted on the third-party.
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,7 +60,8 @@ module MergeAccountingClient
         :'total_amount' => :'total_amount',
         :'currency' => :'currency',
         :'memo' => :'memo',
-        :'lines' => :'lines'
+        :'lines' => :'lines',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -79,7 +83,8 @@ module MergeAccountingClient
         :'total_amount' => :'Float',
         :'currency' => :'CurrencyEnum',
         :'memo' => :'String',
-        :'lines' => :'Array<ExpenseLine>'
+        :'lines' => :'Array<ExpenseLine>',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -160,6 +165,10 @@ module MergeAccountingClient
           self.lines = value
         end
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -190,7 +199,8 @@ module MergeAccountingClient
           total_amount == o.total_amount &&
           currency == o.currency &&
           memo == o.memo &&
-          lines == o.lines
+          lines == o.lines &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -202,7 +212,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, transaction_date, remote_created_at, account, contact, total_amount, currency, memo, lines].hash
+      [id, remote_id, remote_data, transaction_date, remote_created_at, account, contact, total_amount, currency, memo, lines, remote_was_deleted].hash
     end
 
     # Builds the object from hash

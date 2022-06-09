@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The JournalEntry Object ### Description The `JournalEntry` object is used to represent a company's journey entries  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
+  # # The JournalEntry Object ### Description The `JournalEntry` object is used to represent a company's journey entries.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
   class JournalEntryRequest
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
@@ -31,6 +31,9 @@ module MergeAccountingClient
     # The journal entry's private note.
     attr_accessor :memo
 
+    # The journal's currency.
+    attr_accessor :currency
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +41,8 @@ module MergeAccountingClient
         :'transaction_date' => :'transaction_date',
         :'remote_created_at' => :'remote_created_at',
         :'payments' => :'payments',
-        :'memo' => :'memo'
+        :'memo' => :'memo',
+        :'currency' => :'currency'
       }
     end
 
@@ -54,7 +58,8 @@ module MergeAccountingClient
         :'transaction_date' => :'Time',
         :'remote_created_at' => :'Time',
         :'payments' => :'Array<String>',
-        :'memo' => :'String'
+        :'memo' => :'String',
+        :'currency' => :'CurrencyEnum'
       }
     end
 
@@ -64,7 +69,8 @@ module MergeAccountingClient
         :'remote_id',
         :'transaction_date',
         :'remote_created_at',
-        :'memo'
+        :'memo',
+        :'currency'
       ])
     end
 
@@ -104,6 +110,10 @@ module MergeAccountingClient
       if attributes.key?(:'memo')
         self.memo = attributes[:'memo']
       end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -128,7 +138,8 @@ module MergeAccountingClient
           transaction_date == o.transaction_date &&
           remote_created_at == o.remote_created_at &&
           payments == o.payments &&
-          memo == o.memo
+          memo == o.memo &&
+          currency == o.currency
     end
 
     # @see the `==` method
@@ -140,7 +151,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, transaction_date, remote_created_at, payments, memo].hash
+      [remote_id, transaction_date, remote_created_at, payments, memo, currency].hash
     end
 
     # Builds the object from hash

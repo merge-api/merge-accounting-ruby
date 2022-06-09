@@ -34,6 +34,7 @@ describe 'WebhookReceiversApi' do
 
   # unit tests for webhook_receivers_create
   # Creates a &#x60;WebhookReceiver&#x60; object with the given values.
+  # @param x_account_token Token identifying the end user.
   # @param webhook_receiver_request 
   # @param [Hash] opts the optional parameters
   # @return [WebhookReceiver]
@@ -45,10 +46,9 @@ describe 'WebhookReceiversApi' do
 
   # unit tests for webhook_receivers_list
   # Returns a list of &#x60;WebhookReceiver&#x60; objects.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :cursor The pagination cursor value.
-  # @option opts [Integer] :page_size Number of results to return per page.
-  # @return [PaginatedWebhookReceiverList]
+  # @return [Array<WebhookReceiver>]
   describe 'webhook_receivers_list test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

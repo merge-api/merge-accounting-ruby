@@ -69,6 +69,8 @@ module MergeAccountingClient
 
     attr_accessor :line_items
 
+    attr_accessor :remote_was_deleted
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -90,7 +92,8 @@ module MergeAccountingClient
         :'balance' => :'balance',
         :'remote_updated_at' => :'remote_updated_at',
         :'payments' => :'payments',
-        :'line_items' => :'line_items'
+        :'line_items' => :'line_items',
+        :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
 
@@ -120,7 +123,8 @@ module MergeAccountingClient
         :'balance' => :'Float',
         :'remote_updated_at' => :'Time',
         :'payments' => :'Array<String>',
-        :'line_items' => :'Array<InvoiceLineItem>'
+        :'line_items' => :'Array<InvoiceLineItem>',
+        :'remote_was_deleted' => :'Boolean'
       }
     end
 
@@ -242,6 +246,10 @@ module MergeAccountingClient
           self.line_items = value
         end
       end
+
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -280,7 +288,8 @@ module MergeAccountingClient
           balance == o.balance &&
           remote_updated_at == o.remote_updated_at &&
           payments == o.payments &&
-          line_items == o.line_items
+          line_items == o.line_items &&
+          remote_was_deleted == o.remote_was_deleted
     end
 
     # @see the `==` method
@@ -292,7 +301,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, type, contact, number, issue_date, due_date, paid_on_date, memo, currency, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, payments, line_items].hash
+      [id, remote_id, remote_data, type, contact, number, issue_date, due_date, paid_on_date, memo, currency, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, payments, line_items, remote_was_deleted].hash
     end
 
     # Builds the object from hash

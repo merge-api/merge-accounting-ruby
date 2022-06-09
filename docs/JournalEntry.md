@@ -10,8 +10,10 @@
 | **transaction_date** | **Time** | The journal entry&#39;s transaction date. | [optional] |
 | **remote_created_at** | **Time** | When the third party&#39;s journal entry was created. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
-| **lines** | [**Array&lt;JournalLine&gt;**](JournalLine.md) |  | [optional][readonly] |
 | **memo** | **String** | The journal entry&#39;s private note. | [optional] |
+| **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The journal&#39;s currency. | [optional] |
+| **lines** | [**Array&lt;JournalLine&gt;**](JournalLine.md) |  | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
 
 ## Example
 
@@ -25,8 +27,10 @@ instance = MergeAccountingClient::JournalEntry.new(
   transaction_date: 2020-03-31T00:00Z,
   remote_created_at: 2020-03-31T00:00Z,
   payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
-  lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;account&quot;:&quot;9d892439-5fab-4dbb-8bd8-34f7f96c7912&quot;,&quot;net_amount&quot;:25.54,&quot;description&quot;:&quot;Cash payment for lunch&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;account&quot;:&quot;f963f34d-3d2f-4f77-b557-cf36bc7e6498&quot;,&quot;net_amount&quot;:10.0}],
-  memo: Weekly Payment
+  memo: Weekly Payment,
+  currency: USD,
+  lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;contact&quot;:&quot;d2d5ea3c-b032-11ec-b909-0242ac120002&quot;,&quot;account&quot;:&quot;9d892439-5fab-4dbb-8bd8-34f7f96c7912&quot;,&quot;net_amount&quot;:25.54,&quot;description&quot;:&quot;Cash payment for lunch&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;account&quot;:&quot;f963f34d-3d2f-4f77-b557-cf36bc7e6498&quot;,&quot;net_amount&quot;:10.0}],
+  remote_was_deleted: null
 )
 ```
 
