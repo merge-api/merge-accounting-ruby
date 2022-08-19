@@ -38,6 +38,7 @@ describe 'AddressesApi' do
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
+  # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
   # @return [Address]
   describe 'addresses_retrieve test' do
     it 'should work' do

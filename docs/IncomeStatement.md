@@ -17,7 +17,7 @@
 | **net_operating_income** | **Float** | The income statement&#39;s net operating profit. | [optional] |
 | **non_operating_expenses** | [**Array&lt;ReportItem&gt;**](ReportItem.md) |  | [optional][readonly] |
 | **net_income** | **Float** | The income statement&#39;s net income. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

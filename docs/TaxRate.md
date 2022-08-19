@@ -10,7 +10,7 @@
 | **description** | **String** | The tax rate&#39;s description. | [optional] |
 | **total_tax_rate** | **Float** | The tax rate&#39;s total tax rate. | [optional] |
 | **effective_tax_rate** | **Float** | The tax rate&#39;s effective tax rate. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

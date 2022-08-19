@@ -21,8 +21,6 @@ module MergeAccountingClient
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
-    attr_accessor :remote_data
-
     # The line item's description.
     attr_accessor :description
 
@@ -46,7 +44,6 @@ module MergeAccountingClient
       {
         :'id' => :'id',
         :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'description' => :'description',
         :'unit_price' => :'unit_price',
         :'quantity' => :'quantity',
@@ -67,7 +64,6 @@ module MergeAccountingClient
       {
         :'id' => :'String',
         :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'description' => :'String',
         :'unit_price' => :'Float',
         :'quantity' => :'Float',
@@ -82,7 +78,6 @@ module MergeAccountingClient
     def self.openapi_nullable
       Set.new([
         :'remote_id',
-        :'remote_data',
         :'description',
         :'unit_price',
         :'quantity',
@@ -114,12 +109,6 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
-      end
-
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
       end
 
       if attributes.key?(:'description')
@@ -171,7 +160,6 @@ module MergeAccountingClient
       self.class == o.class &&
           id == o.id &&
           remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           description == o.description &&
           unit_price == o.unit_price &&
           quantity == o.quantity &&
@@ -190,7 +178,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, description, unit_price, quantity, total_amount, item, account, tracking_category].hash
+      [id, remote_id, description, unit_price, quantity, total_amount, item, account, tracking_category].hash
     end
 
     # Builds the object from hash

@@ -9,7 +9,7 @@
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **name** | **String** | The tracking category&#39;s name. | [optional] |
 | **status** | [**Status7d1Enum**](Status7d1Enum.md) | The tracking category&#39;s status. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

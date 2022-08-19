@@ -15,7 +15,7 @@
 | **current_balance** | **Float** | The account&#39;s current balance. | [optional] |
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The account&#39;s currency. | [optional] |
 | **account_number** | **String** | The account&#39;s number. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

@@ -51,7 +51,7 @@ module MergeAccountingClient
 
     attr_accessor :phone_numbers
 
-    # Indicates whether or not this object has been deleted on the third-party.
+    # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.

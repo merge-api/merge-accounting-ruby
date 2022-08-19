@@ -27,13 +27,29 @@ module MergeAccountingClient
 
     attr_accessor :item
 
+    # The purchase order line item's account.
+    attr_accessor :account
+
+    # The purchase order line item's associated tracking category.
+    attr_accessor :tracking_category
+
+    # The purchase order line item's tax amount.
+    attr_accessor :tax_amount
+
+    # The purchase order line item's total amount.
+    attr_accessor :total_line_amount
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'description' => :'description',
         :'unit_price' => :'unit_price',
         :'quantity' => :'quantity',
-        :'item' => :'item'
+        :'item' => :'item',
+        :'account' => :'account',
+        :'tracking_category' => :'tracking_category',
+        :'tax_amount' => :'tax_amount',
+        :'total_line_amount' => :'total_line_amount'
       }
     end
 
@@ -48,7 +64,11 @@ module MergeAccountingClient
         :'description' => :'String',
         :'unit_price' => :'Float',
         :'quantity' => :'Float',
-        :'item' => :'String'
+        :'item' => :'String',
+        :'account' => :'String',
+        :'tracking_category' => :'String',
+        :'tax_amount' => :'String',
+        :'total_line_amount' => :'String'
       }
     end
 
@@ -58,7 +78,11 @@ module MergeAccountingClient
         :'description',
         :'unit_price',
         :'quantity',
-        :'item'
+        :'item',
+        :'account',
+        :'tracking_category',
+        :'tax_amount',
+        :'total_line_amount'
       ])
     end
 
@@ -92,19 +116,69 @@ module MergeAccountingClient
       if attributes.key?(:'item')
         self.item = attributes[:'item']
       end
+
+      if attributes.key?(:'account')
+        self.account = attributes[:'account']
+      end
+
+      if attributes.key?(:'tracking_category')
+        self.tracking_category = attributes[:'tracking_category']
+      end
+
+      if attributes.key?(:'tax_amount')
+        self.tax_amount = attributes[:'tax_amount']
+      end
+
+      if attributes.key?(:'total_line_amount')
+        self.total_line_amount = attributes[:'total_line_amount']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      if !@tax_amount.nil? && @tax_amount !~ pattern
+        invalid_properties.push("invalid value for \"tax_amount\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      if !@total_line_amount.nil? && @total_line_amount !~ pattern
+        invalid_properties.push("invalid value for \"total_line_amount\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@tax_amount.nil? && @tax_amount !~ Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@total_line_amount.nil? && @total_line_amount !~ Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] tax_amount Value to be assigned
+    def tax_amount=(tax_amount)
+      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      if !tax_amount.nil? && tax_amount !~ pattern
+        fail ArgumentError, "invalid value for \"tax_amount\", must conform to the pattern #{pattern}."
+      end
+
+      @tax_amount = tax_amount
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] total_line_amount Value to be assigned
+    def total_line_amount=(total_line_amount)
+      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      if !total_line_amount.nil? && total_line_amount !~ pattern
+        fail ArgumentError, "invalid value for \"total_line_amount\", must conform to the pattern #{pattern}."
+      end
+
+      @total_line_amount = total_line_amount
     end
 
     # Checks equality by comparing each attribute.
@@ -115,7 +189,11 @@ module MergeAccountingClient
           description == o.description &&
           unit_price == o.unit_price &&
           quantity == o.quantity &&
-          item == o.item
+          item == o.item &&
+          account == o.account &&
+          tracking_category == o.tracking_category &&
+          tax_amount == o.tax_amount &&
+          total_line_amount == o.total_line_amount
     end
 
     # @see the `==` method
@@ -127,7 +205,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [description, unit_price, quantity, item].hash
+      [description, unit_price, quantity, item, account, tracking_category, tax_amount, total_line_amount].hash
     end
 
     # Builds the object from hash

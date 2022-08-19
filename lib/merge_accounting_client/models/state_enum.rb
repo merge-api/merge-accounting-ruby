@@ -75,18 +75,28 @@ module MergeAccountingClient
     WI = "WI".freeze
     WY = "WY".freeze
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
-    end
+    MERGE_NONSTANDARD_VALUE = "MERGE_NONSTANDARD_VALUE".freeze
+
+    attr_accessor :value
+    attr_accessor :raw_value
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      value
+      @raw_value = value
+      if ["AL", "AK", "AS", "AZ", "AR", "AA", "AE", "AP", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", ].include? value
+        @value = value
+      else
+        @value = MERGE_NONSTANDARD_VALUE
+      end
+
+      self
+    end
+
+    def self.build_from_hash(value)
+      IssueStatusEnum.new.build_from_hash(value)
     end
   end
+
 end

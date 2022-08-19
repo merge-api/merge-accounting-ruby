@@ -29,11 +29,19 @@ module MergeAccountingClient
     # The credit note's status.
     attr_accessor :status
 
+    # The credit note's number.
+    attr_accessor :number
+
+    # The credit note's contact.
+    attr_accessor :contact
+
     # The credit note's total amount.
     attr_accessor :total_amount
 
     # The credit note's remaining credit.
     attr_accessor :remaining_credit
+
+    attr_accessor :line_items
 
     # The credit note's currency.
     attr_accessor :currency
@@ -47,7 +55,7 @@ module MergeAccountingClient
     # Array of `Payment` object IDs
     attr_accessor :payments
 
-    # Indicates whether or not this object has been deleted on the third-party.
+    # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -58,8 +66,11 @@ module MergeAccountingClient
         :'remote_data' => :'remote_data',
         :'transaction_date' => :'transaction_date',
         :'status' => :'status',
+        :'number' => :'number',
+        :'contact' => :'contact',
         :'total_amount' => :'total_amount',
         :'remaining_credit' => :'remaining_credit',
+        :'line_items' => :'line_items',
         :'currency' => :'currency',
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
@@ -81,8 +92,11 @@ module MergeAccountingClient
         :'remote_data' => :'Array<RemoteData>',
         :'transaction_date' => :'Time',
         :'status' => :'CreditNoteStatusEnum',
+        :'number' => :'String',
+        :'contact' => :'String',
         :'total_amount' => :'Float',
         :'remaining_credit' => :'Float',
+        :'line_items' => :'Array<CreditNoteLineItem>',
         :'currency' => :'CurrencyEnum',
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
@@ -98,6 +112,8 @@ module MergeAccountingClient
         :'remote_data',
         :'transaction_date',
         :'status',
+        :'number',
+        :'contact',
         :'total_amount',
         :'remaining_credit',
         :'currency',
@@ -143,12 +159,26 @@ module MergeAccountingClient
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'number')
+        self.number = attributes[:'number']
+      end
+
+      if attributes.key?(:'contact')
+        self.contact = attributes[:'contact']
+      end
+
       if attributes.key?(:'total_amount')
         self.total_amount = attributes[:'total_amount']
       end
 
       if attributes.key?(:'remaining_credit')
         self.remaining_credit = attributes[:'remaining_credit']
+      end
+
+      if attributes.key?(:'line_items')
+        if (value = attributes[:'line_items']).is_a?(Array)
+          self.line_items = value
+        end
       end
 
       if attributes.key?(:'currency')
@@ -197,8 +227,11 @@ module MergeAccountingClient
           remote_data == o.remote_data &&
           transaction_date == o.transaction_date &&
           status == o.status &&
+          number == o.number &&
+          contact == o.contact &&
           total_amount == o.total_amount &&
           remaining_credit == o.remaining_credit &&
+          line_items == o.line_items &&
           currency == o.currency &&
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
@@ -215,7 +248,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, transaction_date, status, total_amount, remaining_credit, currency, remote_created_at, remote_updated_at, payments, remote_was_deleted].hash
+      [id, remote_id, remote_data, transaction_date, status, number, contact, total_amount, remaining_credit, line_items, currency, remote_created_at, remote_updated_at, payments, remote_was_deleted].hash
     end
 
     # Builds the object from hash

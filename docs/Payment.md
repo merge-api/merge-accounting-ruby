@@ -12,7 +12,7 @@
 | **account** | **String** |  | [optional] |
 | **total_amount** | **Float** | The payment&#39;s total amount. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s payment entry was updated. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

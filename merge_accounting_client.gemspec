@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://openapi-generator.tech"
   s.summary     = "Merge Accounting API Ruby Gem"
   s.description = "The unified API for building rich integrations with multiple Accounting & Finance platforms."
-  s.license     = "Unlicense"
+  s.license     = "Nonstandard"
   s.required_ruby_version = ">= 2.4"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'

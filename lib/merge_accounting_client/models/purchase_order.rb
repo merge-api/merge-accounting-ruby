@@ -35,6 +35,15 @@ module MergeAccountingClient
     # The purchase order's delivery address.
     attr_accessor :delivery_address
 
+    # The purchase order's customer.
+    attr_accessor :customer
+
+    # The purchase_order's vendor.
+    attr_accessor :vendor
+
+    # A memo attached to the purchase order.
+    attr_accessor :memo
+
     # The purchase order's total amount.
     attr_accessor :total_amount
 
@@ -49,7 +58,7 @@ module MergeAccountingClient
     # When the third party's purchase order note was updated.
     attr_accessor :remote_updated_at
 
-    # Indicates whether or not this object has been deleted on the third-party.
+    # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -62,6 +71,9 @@ module MergeAccountingClient
         :'issue_date' => :'issue_date',
         :'delivery_date' => :'delivery_date',
         :'delivery_address' => :'delivery_address',
+        :'customer' => :'customer',
+        :'vendor' => :'vendor',
+        :'memo' => :'memo',
         :'total_amount' => :'total_amount',
         :'currency' => :'currency',
         :'line_items' => :'line_items',
@@ -86,6 +98,9 @@ module MergeAccountingClient
         :'issue_date' => :'Time',
         :'delivery_date' => :'Time',
         :'delivery_address' => :'String',
+        :'customer' => :'String',
+        :'vendor' => :'String',
+        :'memo' => :'String',
         :'total_amount' => :'Float',
         :'currency' => :'CurrencyEnum',
         :'line_items' => :'Array<PurchaseOrderLineItem>',
@@ -104,6 +119,9 @@ module MergeAccountingClient
         :'issue_date',
         :'delivery_date',
         :'delivery_address',
+        :'customer',
+        :'vendor',
+        :'memo',
         :'total_amount',
         :'currency',
         :'remote_created_at',
@@ -154,6 +172,18 @@ module MergeAccountingClient
 
       if attributes.key?(:'delivery_address')
         self.delivery_address = attributes[:'delivery_address']
+      end
+
+      if attributes.key?(:'customer')
+        self.customer = attributes[:'customer']
+      end
+
+      if attributes.key?(:'vendor')
+        self.vendor = attributes[:'vendor']
+      end
+
+      if attributes.key?(:'memo')
+        self.memo = attributes[:'memo']
       end
 
       if attributes.key?(:'total_amount')
@@ -208,6 +238,9 @@ module MergeAccountingClient
           issue_date == o.issue_date &&
           delivery_date == o.delivery_date &&
           delivery_address == o.delivery_address &&
+          customer == o.customer &&
+          vendor == o.vendor &&
+          memo == o.memo &&
           total_amount == o.total_amount &&
           currency == o.currency &&
           line_items == o.line_items &&
@@ -225,7 +258,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, status, issue_date, delivery_date, delivery_address, total_amount, currency, line_items, remote_created_at, remote_updated_at, remote_was_deleted].hash
+      [id, remote_id, remote_data, status, issue_date, delivery_date, delivery_address, customer, vendor, memo, total_amount, currency, line_items, remote_created_at, remote_updated_at, remote_was_deleted].hash
     end
 
     # Builds the object from hash
