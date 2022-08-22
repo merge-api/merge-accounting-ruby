@@ -15,7 +15,7 @@
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The expense&#39;s currency. | [optional] |
 | **memo** | **String** | The expense&#39;s private note. | [optional] |
 | **lines** | [**Array&lt;ExpenseLine&gt;**](ExpenseLine.md) |  | [optional][readonly] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

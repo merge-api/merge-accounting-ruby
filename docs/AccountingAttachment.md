@@ -9,7 +9,7 @@
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **file_name** | **String** | The attachment&#39;s name. | [optional] |
 | **file_url** | **String** | The attachment&#39;s url. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

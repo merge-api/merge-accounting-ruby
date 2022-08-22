@@ -13,7 +13,7 @@
 | **total_amount** | **Float** | The vendor credit&#39;s total amount. | [optional] |
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The vendor credit&#39;s currency. | [optional] |
 | **lines** | [**Array&lt;VendorCreditLine&gt;**](VendorCreditLine.md) |  | [optional][readonly] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

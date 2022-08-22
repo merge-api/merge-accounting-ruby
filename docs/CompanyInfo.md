@@ -17,7 +17,7 @@
 | **urls** | **Array&lt;String&gt;** | The company&#39;s urls. | [optional] |
 | **addresses** | [**Array&lt;Address&gt;**](Address.md) |  | [optional] |
 | **phone_numbers** | [**Array&lt;AccountingPhoneNumber&gt;**](AccountingPhoneNumber.md) |  | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted on the third-party. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
 

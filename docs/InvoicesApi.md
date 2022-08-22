@@ -118,13 +118,14 @@ opts = {
   created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created before this datetime.
   cursor: 'cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw', # String | The pagination cursor value.
   expand: 'contact', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
-  include_deleted_data: true, # Boolean | Whether to include data that was deleted in the third-party service.
+  include_deleted_data: true, # Boolean | Whether to include data that was marked as deleted by third party webhooks.
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
   modified_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects modified after this datetime.
   modified_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects modified before this datetime.
   page_size: 56, # Integer | Number of results to return per page.
+  remote_fields: 'type', # String | Which fields should be returned in non-normalized form.
   remote_id: 'remote_id_example', # String | The API provider's ID for the given object.
-  type: 'type_example' # String | If provided, will only return Invoices with this type
+  type: 'ACCOUNTS_PAYABLE' # String | If provided, will only return Invoices with this type
 }
 
 begin
@@ -164,11 +165,12 @@ end
 | **created_before** | **Time** | If provided, will only return objects created before this datetime. | [optional] |
 | **cursor** | **String** | The pagination cursor value. | [optional] |
 | **expand** | **String** | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces. | [optional] |
-| **include_deleted_data** | **Boolean** | Whether to include data that was deleted in the third-party service. | [optional] |
+| **include_deleted_data** | **Boolean** | Whether to include data that was marked as deleted by third party webhooks. | [optional] |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
 | **modified_after** | **Time** | If provided, will only return objects modified after this datetime. | [optional] |
 | **modified_before** | **Time** | If provided, will only return objects modified before this datetime. | [optional] |
 | **page_size** | **Integer** | Number of results to return per page. | [optional] |
+| **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
 | **remote_id** | **String** | The API provider&#39;s ID for the given object. | [optional] |
 | **type** | **String** | If provided, will only return Invoices with this type | [optional] |
 
@@ -283,7 +285,8 @@ x_account_token = 'x_account_token_example' # String | Token identifying the end
 id = TODO # String | 
 opts = {
   expand: 'contact', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
-  include_remote_data: true # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
+  include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
+  remote_fields: 'type' # String | Which fields should be returned in non-normalized form.
 }
 
 begin
@@ -321,6 +324,7 @@ end
 | **id** | [**String**](.md) |  |  |
 | **expand** | **String** | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces. | [optional] |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
+| **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
 
 ### Return type
 
