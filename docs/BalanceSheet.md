@@ -8,6 +8,7 @@
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **name** | **String** | The balance sheet&#39;s name. | [optional] |
+| **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The balance sheet&#39;s currency. | [optional] |
 | **date** | **Time** | The balance sheet&#39;s date. The balance sheet data will reflect the company&#39;s financial position this point in time. | [optional] |
 | **net_assets** | **Float** | The balance sheet&#39;s net assets. | [optional] |
 | **assets** | [**Array&lt;ReportItem&gt;**](ReportItem.md) |  | [optional][readonly] |
@@ -26,6 +27,7 @@ instance = MergeAccountingClient::BalanceSheet.new(
   remote_id: 8937018,
   remote_data: null,
   name: BalanceSheet,
+  currency: USD,
   date: null,
   net_assets: 1000.0,
   assets: [{&quot;remote_id&quot;:&quot;10010&quot;,&quot;name&quot;:&quot;Assets&quot;,&quot;value&quot;:1000,&quot;sub_items&quot;:null}],

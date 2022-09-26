@@ -29,6 +29,9 @@ module MergeAccountingClient
     # When the third party's journal entry was created.
     attr_accessor :remote_created_at
 
+    # When the third party's journal entry was updated.
+    attr_accessor :remote_updated_at
+
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
@@ -50,6 +53,7 @@ module MergeAccountingClient
         :'remote_data' => :'remote_data',
         :'transaction_date' => :'transaction_date',
         :'remote_created_at' => :'remote_created_at',
+        :'remote_updated_at' => :'remote_updated_at',
         :'payments' => :'payments',
         :'memo' => :'memo',
         :'currency' => :'currency',
@@ -71,6 +75,7 @@ module MergeAccountingClient
         :'remote_data' => :'Array<RemoteData>',
         :'transaction_date' => :'Time',
         :'remote_created_at' => :'Time',
+        :'remote_updated_at' => :'Time',
         :'payments' => :'Array<String>',
         :'memo' => :'String',
         :'currency' => :'CurrencyEnum',
@@ -86,6 +91,7 @@ module MergeAccountingClient
         :'remote_data',
         :'transaction_date',
         :'remote_created_at',
+        :'remote_updated_at',
         :'memo',
         :'currency',
       ])
@@ -126,6 +132,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_created_at')
         self.remote_created_at = attributes[:'remote_created_at']
+      end
+
+      if attributes.key?(:'remote_updated_at')
+        self.remote_updated_at = attributes[:'remote_updated_at']
       end
 
       if attributes.key?(:'payments')
@@ -176,6 +186,7 @@ module MergeAccountingClient
           remote_data == o.remote_data &&
           transaction_date == o.transaction_date &&
           remote_created_at == o.remote_created_at &&
+          remote_updated_at == o.remote_updated_at &&
           payments == o.payments &&
           memo == o.memo &&
           currency == o.currency &&
@@ -192,7 +203,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, transaction_date, remote_created_at, payments, memo, currency, lines, remote_was_deleted].hash
+      [id, remote_id, remote_data, transaction_date, remote_created_at, remote_updated_at, payments, memo, currency, lines, remote_was_deleted].hash
     end
 
     # Builds the object from hash

@@ -9,6 +9,7 @@
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **name** | **String** | The tracking category&#39;s name. | [optional] |
 | **status** | [**Status7d1Enum**](Status7d1Enum.md) | The tracking category&#39;s status. | [optional] |
+| **category_type** | [**CategoryTypeEnum**](CategoryTypeEnum.md) | The tracking category’s type. | [optional] |
 | **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
@@ -22,6 +23,7 @@ instance = MergeAccountingClient::TrackingCategory.new(
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}],
   name: Marketing Department,
   status: ACTIVE,
+  category_type: DEPARTMENT,
   remote_was_deleted: null
 )
 ```

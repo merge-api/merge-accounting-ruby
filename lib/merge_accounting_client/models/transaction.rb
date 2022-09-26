@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
+  # # The Transaction Object ### Description The `Transaction` object is used to represent a company's transactions.  ### Usage Example Fetch from the `GET Transaction` endpoint and view a company's transactions.
   class Transaction
     attr_accessor :id
 

@@ -26,6 +26,9 @@ module MergeAccountingClient
     # The balance sheet's name.
     attr_accessor :name
 
+    # The balance sheet's currency.
+    attr_accessor :currency
+
     # The balance sheet's date. The balance sheet data will reflect the company's financial position this point in time.
     attr_accessor :date
 
@@ -51,6 +54,7 @@ module MergeAccountingClient
         :'remote_id' => :'remote_id',
         :'remote_data' => :'remote_data',
         :'name' => :'name',
+        :'currency' => :'currency',
         :'date' => :'date',
         :'net_assets' => :'net_assets',
         :'assets' => :'assets',
@@ -73,6 +77,7 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
+        :'currency' => :'CurrencyEnum',
         :'date' => :'Time',
         :'net_assets' => :'Float',
         :'assets' => :'Array<ReportItem>',
@@ -89,6 +94,7 @@ module MergeAccountingClient
         :'remote_id',
         :'remote_data',
         :'name',
+        :'currency',
         :'date',
         :'net_assets',
         :'remote_generated_at',
@@ -126,6 +132,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
       if attributes.key?(:'date')
@@ -185,6 +195,7 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           remote_data == o.remote_data &&
           name == o.name &&
+          currency == o.currency &&
           date == o.date &&
           net_assets == o.net_assets &&
           assets == o.assets &&
@@ -203,7 +214,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, date, net_assets, assets, liabilities, equity, remote_generated_at, remote_was_deleted].hash
+      [id, remote_id, remote_data, name, currency, date, net_assets, assets, liabilities, equity, remote_generated_at, remote_was_deleted].hash
     end
 
     # Builds the object from hash

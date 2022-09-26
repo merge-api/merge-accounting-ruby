@@ -8,6 +8,7 @@
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **name** | **String** | The cash flow statement&#39;s name. | [optional] |
+| **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The cash flow statement&#39;s currency. | [optional] |
 | **start_period** | **Time** | The cash flow statement&#39;s start period. | [optional] |
 | **end_period** | **Time** | The cash flow statement&#39;s end period. | [optional] |
 | **cash_at_beginning_of_period** | **Float** | Cash and cash equivalents at the beginning of the cash flow statement&#39;s period. | [optional] |
@@ -28,6 +29,7 @@ instance = MergeAccountingClient::CashFlowStatement.new(
   remote_id: 8211088,
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}],
   name: CashFlow,
+  currency: USD,
   start_period: 2020-01-01T00:00Z,
   end_period: 2020-03-31T00:00Z,
   cash_at_beginning_of_period: 5000.0,
