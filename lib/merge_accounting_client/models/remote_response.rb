@@ -235,6 +235,9 @@ module MergeAccountingClient
             hash[_deserialize(k_type, k)] = _deserialize(v_type, v)
           end
         end
+      when :AnyType
+        # Return AnyType response as Object directly
+        value
       else # model
         # models (e.g. Pet) or oneOf
         klass = MergeAccountingClient.const_get(type)

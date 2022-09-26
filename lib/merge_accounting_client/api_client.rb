@@ -274,6 +274,9 @@ module MergeAccountingClient
         {}.tap do |hash|
           data.each { |k, v| hash[k] = convert_to_type(v, sub_type) }
         end
+      when 'AnyType'
+        # Return AnyType response as Object directly
+        data
       else
         # models (e.g. Pet) or oneOf
         klass = MergeAccountingClient.const_get(return_type)
