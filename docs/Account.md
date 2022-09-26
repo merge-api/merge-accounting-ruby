@@ -15,6 +15,7 @@
 | **current_balance** | **Float** | The account&#39;s current balance. | [optional] |
 | **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The account&#39;s currency. | [optional] |
 | **account_number** | **String** | The account&#39;s number. | [optional] |
+| **parent_account** | **String** |  | [optional] |
 | **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
@@ -34,6 +35,7 @@ instance = MergeAccountingClient::Account.new(
   current_balance: null,
   currency: USD,
   account_number: X12Y9AB,
+  parent_account: 22d92d6c-22f9-11ed-861d-0242ac120002,
   remote_was_deleted: null
 )
 ```

@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
+  # # The TransactionLineItem Object ### Description The `TransactionLineItem` object is used to represent a transaction's line items.  ### Usage Example Fetch from the `GET TransactionLineItem` endpoint and view the transaction's line items.
   class TransactionLineItem
     # A memo attached to the line item.
     attr_accessor :memo

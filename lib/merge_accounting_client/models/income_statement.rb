@@ -26,6 +26,9 @@ module MergeAccountingClient
     # The income statement's name.
     attr_accessor :name
 
+    # The income statement's currency.
+    attr_accessor :currency
+
     # The income statement's start period.
     attr_accessor :start_period
 
@@ -59,6 +62,7 @@ module MergeAccountingClient
         :'remote_id' => :'remote_id',
         :'remote_data' => :'remote_data',
         :'name' => :'name',
+        :'currency' => :'currency',
         :'start_period' => :'start_period',
         :'end_period' => :'end_period',
         :'income' => :'income',
@@ -84,6 +88,7 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
+        :'currency' => :'CurrencyEnum',
         :'start_period' => :'Time',
         :'end_period' => :'Time',
         :'income' => :'Array<ReportItem>',
@@ -103,6 +108,7 @@ module MergeAccountingClient
         :'remote_id',
         :'remote_data',
         :'name',
+        :'currency',
         :'start_period',
         :'end_period',
         :'gross_profit',
@@ -142,6 +148,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
       if attributes.key?(:'start_period')
@@ -215,6 +225,7 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           remote_data == o.remote_data &&
           name == o.name &&
+          currency == o.currency &&
           start_period == o.start_period &&
           end_period == o.end_period &&
           income == o.income &&
@@ -236,7 +247,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, start_period, end_period, income, cost_of_sales, gross_profit, operating_expenses, net_operating_income, non_operating_expenses, net_income, remote_was_deleted].hash
+      [id, remote_id, remote_data, name, currency, start_period, end_period, income, cost_of_sales, gross_profit, operating_expenses, net_operating_income, non_operating_expenses, net_income, remote_was_deleted].hash
     end
 
     # Builds the object from hash

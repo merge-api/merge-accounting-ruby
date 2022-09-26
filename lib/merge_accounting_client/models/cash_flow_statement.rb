@@ -26,6 +26,9 @@ module MergeAccountingClient
     # The cash flow statement's name.
     attr_accessor :name
 
+    # The cash flow statement's currency.
+    attr_accessor :currency
+
     # The cash flow statement's start period.
     attr_accessor :start_period
 
@@ -57,6 +60,7 @@ module MergeAccountingClient
         :'remote_id' => :'remote_id',
         :'remote_data' => :'remote_data',
         :'name' => :'name',
+        :'currency' => :'currency',
         :'start_period' => :'start_period',
         :'end_period' => :'end_period',
         :'cash_at_beginning_of_period' => :'cash_at_beginning_of_period',
@@ -81,6 +85,7 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
+        :'currency' => :'CurrencyEnum',
         :'start_period' => :'Time',
         :'end_period' => :'Time',
         :'cash_at_beginning_of_period' => :'Float',
@@ -99,6 +104,7 @@ module MergeAccountingClient
         :'remote_id',
         :'remote_data',
         :'name',
+        :'currency',
         :'start_period',
         :'end_period',
         :'cash_at_beginning_of_period',
@@ -138,6 +144,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
       if attributes.key?(:'start_period')
@@ -205,6 +215,7 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           remote_data == o.remote_data &&
           name == o.name &&
+          currency == o.currency &&
           start_period == o.start_period &&
           end_period == o.end_period &&
           cash_at_beginning_of_period == o.cash_at_beginning_of_period &&
@@ -225,7 +236,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, start_period, end_period, cash_at_beginning_of_period, cash_at_end_of_period, operating_activities, investing_activities, financing_activities, remote_generated_at, remote_was_deleted].hash
+      [id, remote_id, remote_data, name, currency, start_period, end_period, cash_at_beginning_of_period, cash_at_end_of_period, operating_activities, investing_activities, financing_activities, remote_generated_at, remote_was_deleted].hash
     end
 
     # Builds the object from hash

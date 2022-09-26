@@ -8,6 +8,7 @@
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 | **name** | **String** | The income statement&#39;s name. | [optional] |
+| **currency** | [**CurrencyEnum**](CurrencyEnum.md) | The income statement&#39;s currency. | [optional] |
 | **start_period** | **Time** | The income statement&#39;s start period. | [optional] |
 | **end_period** | **Time** | The income statement&#39;s end period. | [optional] |
 | **income** | [**Array&lt;ReportItem&gt;**](ReportItem.md) |  | [optional][readonly] |
@@ -29,6 +30,7 @@ instance = MergeAccountingClient::IncomeStatement.new(
   remote_id: 1342348,
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}],
   name: IncomeStatement,
+  currency: USD,
   start_period: null,
   end_period: null,
   income: [{&quot;remote_id&quot;:&quot;10299&quot;,&quot;name&quot;:&quot;Total Income&quot;,&quot;value&quot;:325.0,&quot;sub_items&quot;:[{&quot;remote_id&quot;:&quot;10200&quot;,&quot;name&quot;:&quot;Landscaping Services&quot;,&quot;value&quot;:425,&quot;sub_items&quot;:null},{&quot;remote_id&quot;:&quot;10201&quot;,&quot;name&quot;:&quot;Pest Control Services&quot;,&quot;value&quot;:-100,&quot;sub_items&quot;:null}]}],

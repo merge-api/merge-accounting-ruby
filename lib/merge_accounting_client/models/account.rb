@@ -47,6 +47,8 @@ module MergeAccountingClient
     # The account's number.
     attr_accessor :account_number
 
+    attr_accessor :parent_account
+
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
@@ -64,6 +66,7 @@ module MergeAccountingClient
         :'current_balance' => :'current_balance',
         :'currency' => :'currency',
         :'account_number' => :'account_number',
+        :'parent_account' => :'parent_account',
         :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
@@ -87,6 +90,7 @@ module MergeAccountingClient
         :'current_balance' => :'Float',
         :'currency' => :'CurrencyEnum',
         :'account_number' => :'String',
+        :'parent_account' => :'String',
         :'remote_was_deleted' => :'Boolean'
       }
     end
@@ -104,6 +108,7 @@ module MergeAccountingClient
         :'current_balance',
         :'currency',
         :'account_number',
+        :'parent_account',
       ])
     end
 
@@ -168,6 +173,10 @@ module MergeAccountingClient
         self.account_number = attributes[:'account_number']
       end
 
+      if attributes.key?(:'parent_account')
+        self.parent_account = attributes[:'parent_account']
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
@@ -202,6 +211,7 @@ module MergeAccountingClient
           current_balance == o.current_balance &&
           currency == o.currency &&
           account_number == o.account_number &&
+          parent_account == o.parent_account &&
           remote_was_deleted == o.remote_was_deleted
     end
 
@@ -214,7 +224,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, description, classification, type, status, current_balance, currency, account_number, remote_was_deleted].hash
+      [id, remote_id, remote_data, name, description, classification, type, status, current_balance, currency, account_number, parent_account, remote_was_deleted].hash
     end
 
     # Builds the object from hash
