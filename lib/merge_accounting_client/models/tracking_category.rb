@@ -32,6 +32,8 @@ module MergeAccountingClient
     # The tracking category’s type.
     attr_accessor :category_type
 
+    attr_accessor :parent_category
+
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
@@ -44,6 +46,7 @@ module MergeAccountingClient
         :'name' => :'name',
         :'status' => :'status',
         :'category_type' => :'category_type',
+        :'parent_category' => :'parent_category',
         :'remote_was_deleted' => :'remote_was_deleted'
       }
     end
@@ -62,6 +65,7 @@ module MergeAccountingClient
         :'name' => :'String',
         :'status' => :'Status7d1Enum',
         :'category_type' => :'CategoryTypeEnum',
+        :'parent_category' => :'String',
         :'remote_was_deleted' => :'Boolean'
       }
     end
@@ -74,6 +78,7 @@ module MergeAccountingClient
         :'name',
         :'status',
         :'category_type',
+        :'parent_category',
       ])
     end
 
@@ -118,6 +123,10 @@ module MergeAccountingClient
         self.category_type = attributes[:'category_type']
       end
 
+      if attributes.key?(:'parent_category')
+        self.parent_category = attributes[:'parent_category']
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
@@ -147,6 +156,7 @@ module MergeAccountingClient
           name == o.name &&
           status == o.status &&
           category_type == o.category_type &&
+          parent_category == o.parent_category &&
           remote_was_deleted == o.remote_was_deleted
     end
 
@@ -159,7 +169,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, status, category_type, remote_was_deleted].hash
+      [id, remote_id, remote_data, name, status, category_type, parent_category, remote_was_deleted].hash
     end
 
     # Builds the object from hash

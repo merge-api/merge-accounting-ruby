@@ -48,7 +48,7 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'name' => :'String',
         :'value' => :'Float',
-        :'sub_items' => :'Hash<String, AnyType>'
+        :'sub_items' => :'Hash<String, Object>'
       }
     end
 

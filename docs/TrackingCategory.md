@@ -10,6 +10,7 @@
 | **name** | **String** | The tracking category&#39;s name. | [optional] |
 | **status** | [**Status7d1Enum**](Status7d1Enum.md) | The tracking category&#39;s status. | [optional] |
 | **category_type** | [**CategoryTypeEnum**](CategoryTypeEnum.md) | The tracking category’s type. | [optional] |
+| **parent_category** | **String** |  | [optional] |
 | **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = MergeAccountingClient::TrackingCategory.new(
   name: Marketing Department,
   status: ACTIVE,
   category_type: DEPARTMENT,
+  parent_category: d25d609b-945f-4762-b55a-1c8fb220c43c,
   remote_was_deleted: null
 )
 ```
