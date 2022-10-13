@@ -10,7 +10,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 ## payments_list
 
-> <PaginatedPaymentList> payments_list(x_account_token, opts)
+> <PaginatedPaymentList> payments_list(opts)
 
 
 
@@ -23,14 +23,16 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: tokenAuth
-  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: accountTokenAuth
+  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['tokenAuth'] = 'Bearer'
+  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = MergeAccountingClient::PaymentsApi.new
-x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 opts = {
   account_id: 'account_id_example', # String | If provided, will only return payments for this account.
   contact_id: 'contact_id_example', # String | If provided, will only return payments for this contact.
@@ -48,7 +50,7 @@ opts = {
 
 begin
   
-  result = api_instance.payments_list(x_account_token, opts)
+  result = api_instance.payments_list(opts)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling PaymentsApi->payments_list: #{e}"
@@ -59,12 +61,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PaginatedPaymentList>, Integer, Hash)> payments_list_with_http_info(x_account_token, opts)
+> <Array(<PaginatedPaymentList>, Integer, Hash)> payments_list_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.payments_list_with_http_info(x_account_token, opts)
+  data, status_code, headers = api_instance.payments_list_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PaginatedPaymentList>
@@ -77,7 +79,6 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **x_account_token** | **String** | Token identifying the end user. |  |
 | **account_id** | **String** | If provided, will only return payments for this account. | [optional] |
 | **contact_id** | **String** | If provided, will only return payments for this contact. | [optional] |
 | **created_after** | **Time** | If provided, will only return objects created after this datetime. | [optional] |
@@ -97,7 +98,7 @@ end
 
 ### Authorization
 
-[tokenAuth](../README.md#tokenAuth)
+[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -107,7 +108,7 @@ end
 
 ## payments_retrieve
 
-> <Payment> payments_retrieve(x_account_token, id, opts)
+> <Payment> payments_retrieve(id, opts)
 
 
 
@@ -120,14 +121,16 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: tokenAuth
-  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: accountTokenAuth
+  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['tokenAuth'] = 'Bearer'
+  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = MergeAccountingClient::PaymentsApi.new
-x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 id = TODO # String | 
 opts = {
   expand: 'account', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
@@ -136,7 +139,7 @@ opts = {
 
 begin
   
-  result = api_instance.payments_retrieve(x_account_token, id, opts)
+  result = api_instance.payments_retrieve(id, opts)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling PaymentsApi->payments_retrieve: #{e}"
@@ -147,12 +150,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Payment>, Integer, Hash)> payments_retrieve_with_http_info(x_account_token, id, opts)
+> <Array(<Payment>, Integer, Hash)> payments_retrieve_with_http_info(id, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.payments_retrieve_with_http_info(x_account_token, id, opts)
+  data, status_code, headers = api_instance.payments_retrieve_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Payment>
@@ -165,7 +168,6 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **x_account_token** | **String** | Token identifying the end user. |  |
 | **id** | [**String**](.md) |  |  |
 | **expand** | **String** | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces. | [optional] |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
@@ -176,7 +178,7 @@ end
 
 ### Authorization
 
-[tokenAuth](../README.md#tokenAuth)
+[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

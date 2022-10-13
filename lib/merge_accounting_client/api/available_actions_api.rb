@@ -20,25 +20,19 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Returns a list of models and actions available for an account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [AvailableActions]
-    def available_actions_retrieve(x_account_token, opts = {})
-      data, _status_code, _headers = available_actions_retrieve_with_http_info(x_account_token, opts)
+    def available_actions_retrieve(opts = {})
+      data, _status_code, _headers = available_actions_retrieve_with_http_info(opts)
       data
     end
 
     # Returns a list of models and actions available for an account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AvailableActions, Integer, Hash)>] AvailableActions data, response status code and response headers
-    def available_actions_retrieve_with_http_info(x_account_token, opts = {})
+    def available_actions_retrieve_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AvailableActionsApi.available_actions_retrieve ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling AvailableActionsApi.available_actions_retrieve"
       end
       # resource path
       local_var_path = '/available-actions'
@@ -50,7 +44,6 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -62,7 +55,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'AvailableActions'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AvailableActionsApi.available_actions_retrieve",

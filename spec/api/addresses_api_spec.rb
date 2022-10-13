@@ -34,7 +34,6 @@ describe 'AddressesApi' do
 
   # unit tests for addresses_retrieve
   # Returns an &#x60;Address&#x60; object with the given &#x60;id&#x60;.
-  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.

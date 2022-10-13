@@ -34,7 +34,6 @@ describe 'InvoicesApi' do
 
   # unit tests for invoices_create
   # Creates an &#x60;Invoice&#x60; object with the given values.
-  # @param x_account_token Token identifying the end user.
   # @param invoice_endpoint_request 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
@@ -48,7 +47,6 @@ describe 'InvoicesApi' do
 
   # unit tests for invoices_list
   # Returns a list of &#x60;Invoice&#x60; objects.
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :contact_id If provided, will only return invoices for this contact.
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
@@ -72,7 +70,6 @@ describe 'InvoicesApi' do
 
   # unit tests for invoices_meta_post_retrieve
   # Returns metadata for &#x60;Invoice&#x60; POSTs.
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [MetaResponse]
   describe 'invoices_meta_post_retrieve test' do
@@ -83,7 +80,6 @@ describe 'InvoicesApi' do
 
   # unit tests for invoices_retrieve
   # Returns an &#x60;Invoice&#x60; object with the given &#x60;id&#x60;.
-  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.

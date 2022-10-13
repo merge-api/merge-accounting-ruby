@@ -34,7 +34,6 @@ describe 'ForceResyncApi' do
 
   # unit tests for sync_status_resync_create
   # Force re-sync of all models. This is only available for organizations on Merge&#39;s Grow and Expand plans.
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [Array<SyncStatus>]
   describe 'sync_status_resync_create test' do

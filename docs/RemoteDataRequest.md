@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **path** | **String** |  |  |
-| **data** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
+| **data** | [**Hash&lt;String, Object&gt;**](Object.md) |  | [optional] |
 
 ## Example
 

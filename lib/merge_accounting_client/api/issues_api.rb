@@ -98,7 +98,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedIssueList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
         :operation => :"IssuesApi.issues_list",
@@ -159,7 +159,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'Issue'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
         :operation => :"IssuesApi.issues_retrieve",

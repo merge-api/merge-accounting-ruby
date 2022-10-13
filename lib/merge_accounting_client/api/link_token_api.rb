@@ -63,7 +63,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'LinkToken'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
         :operation => :"LinkTokenApi.link_token_create",

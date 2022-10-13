@@ -38,7 +38,7 @@ module MergeAccountingClient
     end
 
     def self.build_from_hash(value)
-      IssueStatusEnum.new.build_from_hash(value)
+      Status7d1Enum.new.build_from_hash(value)
     end
   end
 

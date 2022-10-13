@@ -34,7 +34,6 @@ describe 'PassthroughApi' do
 
   # unit tests for passthrough_create
   # Pull data from an endpoint not currently supported by Merge.
-  # @param x_account_token Token identifying the end user.
   # @param data_passthrough_request 
   # @param [Hash] opts the optional parameters
   # @return [RemoteResponse]

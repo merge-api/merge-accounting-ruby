@@ -34,7 +34,6 @@ describe 'DeleteAccountApi' do
 
   # unit tests for delete_account_create
   # Delete a linked account.
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_account_create test' do

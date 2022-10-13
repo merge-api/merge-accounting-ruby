@@ -20,25 +20,19 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Delete a linked account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def delete_account_create(x_account_token, opts = {})
-      delete_account_create_with_http_info(x_account_token, opts)
+    def delete_account_create(opts = {})
+      delete_account_create_with_http_info(opts)
       nil
     end
 
     # Delete a linked account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_account_create_with_http_info(x_account_token, opts = {})
+    def delete_account_create_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: DeleteAccountApi.delete_account_create ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling DeleteAccountApi.delete_account_create"
       end
       # resource path
       local_var_path = '/delete-account'
@@ -48,7 +42,6 @@ module MergeAccountingClient
 
       # header parameters
       header_params = opts[:header_params] || {}
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -60,7 +53,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type]
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"DeleteAccountApi.delete_account_create",

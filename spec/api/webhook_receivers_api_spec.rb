@@ -34,7 +34,6 @@ describe 'WebhookReceiversApi' do
 
   # unit tests for webhook_receivers_create
   # Creates a &#x60;WebhookReceiver&#x60; object with the given values.
-  # @param x_account_token Token identifying the end user.
   # @param webhook_receiver_request 
   # @param [Hash] opts the optional parameters
   # @return [WebhookReceiver]
@@ -46,7 +45,6 @@ describe 'WebhookReceiversApi' do
 
   # unit tests for webhook_receivers_list
   # Returns a list of &#x60;WebhookReceiver&#x60; objects.
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [Array<WebhookReceiver>]
   describe 'webhook_receivers_list test' do

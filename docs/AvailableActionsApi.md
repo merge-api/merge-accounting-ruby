@@ -9,7 +9,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 ## available_actions_retrieve
 
-> <AvailableActions> available_actions_retrieve(x_account_token)
+> <AvailableActions> available_actions_retrieve
 
 
 
@@ -22,18 +22,20 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: tokenAuth
-  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: accountTokenAuth
+  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['tokenAuth'] = 'Bearer'
+  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = MergeAccountingClient::AvailableActionsApi.new
-x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 
 begin
   
-  result = api_instance.available_actions_retrieve(x_account_token)
+  result = api_instance.available_actions_retrieve
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling AvailableActionsApi->available_actions_retrieve: #{e}"
@@ -44,12 +46,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AvailableActions>, Integer, Hash)> available_actions_retrieve_with_http_info(x_account_token)
+> <Array(<AvailableActions>, Integer, Hash)> available_actions_retrieve_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.available_actions_retrieve_with_http_info(x_account_token)
+  data, status_code, headers = api_instance.available_actions_retrieve_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AvailableActions>
@@ -60,9 +62,7 @@ end
 
 ### Parameters
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **x_account_token** | **String** | Token identifying the end user. |  |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -70,7 +70,7 @@ end
 
 ### Authorization
 
-[tokenAuth](../README.md#tokenAuth)
+[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

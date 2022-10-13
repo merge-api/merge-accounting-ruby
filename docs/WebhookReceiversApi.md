@@ -10,7 +10,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 ## webhook_receivers_create
 
-> <WebhookReceiver> webhook_receivers_create(x_account_token, webhook_receiver_request)
+> <WebhookReceiver> webhook_receivers_create(webhook_receiver_request)
 
 
 
@@ -23,19 +23,21 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: tokenAuth
-  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: accountTokenAuth
+  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['tokenAuth'] = 'Bearer'
+  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = MergeAccountingClient::WebhookReceiversApi.new
-x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 webhook_receiver_request = MergeAccountingClient::WebhookReceiverRequest.new({event: 'event_example', is_active: false}) # WebhookReceiverRequest | 
 
 begin
   
-  result = api_instance.webhook_receivers_create(x_account_token, webhook_receiver_request)
+  result = api_instance.webhook_receivers_create(webhook_receiver_request)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling WebhookReceiversApi->webhook_receivers_create: #{e}"
@@ -46,12 +48,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<WebhookReceiver>, Integer, Hash)> webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request)
+> <Array(<WebhookReceiver>, Integer, Hash)> webhook_receivers_create_with_http_info(webhook_receiver_request)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.webhook_receivers_create_with_http_info(x_account_token, webhook_receiver_request)
+  data, status_code, headers = api_instance.webhook_receivers_create_with_http_info(webhook_receiver_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <WebhookReceiver>
@@ -64,7 +66,6 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **x_account_token** | **String** | Token identifying the end user. |  |
 | **webhook_receiver_request** | [**WebhookReceiverRequest**](WebhookReceiverRequest.md) |  |  |
 
 ### Return type
@@ -73,7 +74,7 @@ end
 
 ### Authorization
 
-[tokenAuth](../README.md#tokenAuth)
+[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -83,7 +84,7 @@ end
 
 ## webhook_receivers_list
 
-> <Array<WebhookReceiver>> webhook_receivers_list(x_account_token)
+> <Array<WebhookReceiver>> webhook_receivers_list
 
 
 
@@ -96,18 +97,20 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: tokenAuth
-  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: accountTokenAuth
+  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['tokenAuth'] = 'Bearer'
+  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
 api_instance = MergeAccountingClient::WebhookReceiversApi.new
-x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 
 begin
   
-  result = api_instance.webhook_receivers_list(x_account_token)
+  result = api_instance.webhook_receivers_list
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling WebhookReceiversApi->webhook_receivers_list: #{e}"
@@ -118,12 +121,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<WebhookReceiver>>, Integer, Hash)> webhook_receivers_list_with_http_info(x_account_token)
+> <Array(<Array<WebhookReceiver>>, Integer, Hash)> webhook_receivers_list_with_http_info
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.webhook_receivers_list_with_http_info(x_account_token)
+  data, status_code, headers = api_instance.webhook_receivers_list_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<WebhookReceiver>>
@@ -134,9 +137,7 @@ end
 
 ### Parameters
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **x_account_token** | **String** | Token identifying the end user. |  |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -144,7 +145,7 @@ end
 
 ### Authorization
 
-[tokenAuth](../README.md#tokenAuth)
+[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

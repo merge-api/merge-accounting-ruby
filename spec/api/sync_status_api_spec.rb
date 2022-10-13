@@ -34,7 +34,6 @@ describe 'SyncStatusApi' do
 
   # unit tests for sync_status_list
   # Get syncing status. Possible values: &#x60;DISABLED&#x60;, &#x60;DONE&#x60;, &#x60;FAILED&#x60;, &#x60;PAUSED&#x60;, &#x60;SYNCING&#x60;
-  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :cursor The pagination cursor value.
   # @option opts [Integer] :page_size Number of results to return per page.

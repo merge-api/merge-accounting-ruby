@@ -98,7 +98,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedAccountDetailsAndActionsList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
         :operation => :"LinkedAccountsApi.linked_accounts_list",

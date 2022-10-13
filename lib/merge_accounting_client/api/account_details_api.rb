@@ -20,25 +20,19 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Get details for a linked account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [AccountDetails]
-    def account_details_retrieve(x_account_token, opts = {})
-      data, _status_code, _headers = account_details_retrieve_with_http_info(x_account_token, opts)
+    def account_details_retrieve(opts = {})
+      data, _status_code, _headers = account_details_retrieve_with_http_info(opts)
       data
     end
 
     # Get details for a linked account.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountDetails, Integer, Hash)>] AccountDetails data, response status code and response headers
-    def account_details_retrieve_with_http_info(x_account_token, opts = {})
+    def account_details_retrieve_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountDetailsApi.account_details_retrieve ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling AccountDetailsApi.account_details_retrieve"
       end
       # resource path
       local_var_path = '/account-details'
@@ -50,7 +44,6 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -62,7 +55,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'AccountDetails'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AccountDetailsApi.account_details_retrieve",

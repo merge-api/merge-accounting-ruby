@@ -20,31 +20,25 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Creates an `Invoice` object with the given values.
-    # @param x_account_token [String] Token identifying the end user.
     # @param invoice_endpoint_request [InvoiceEndpointRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
     # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
     # @return [InvoiceResponse]
-    def invoices_create(x_account_token, invoice_endpoint_request, opts = {})
-      data, _status_code, _headers = invoices_create_with_http_info(x_account_token, invoice_endpoint_request, opts)
+    def invoices_create(invoice_endpoint_request, opts = {})
+      data, _status_code, _headers = invoices_create_with_http_info(invoice_endpoint_request, opts)
       data
     end
 
     # Creates an &#x60;Invoice&#x60; object with the given values.
-    # @param x_account_token [String] Token identifying the end user.
     # @param invoice_endpoint_request [InvoiceEndpointRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
     # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
     # @return [Array<(InvoiceResponse, Integer, Hash)>] InvoiceResponse data, response status code and response headers
-    def invoices_create_with_http_info(x_account_token, invoice_endpoint_request, opts = {})
+    def invoices_create_with_http_info(invoice_endpoint_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InvoicesApi.invoices_create ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_create"
       end
       # verify the required parameter 'invoice_endpoint_request' is set
       if @api_client.config.client_side_validation && invoice_endpoint_request.nil?
@@ -64,7 +58,6 @@ module MergeAccountingClient
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'application/x-www-form-urlencoded', 'multipart/form-data'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -76,7 +69,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'InvoiceResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"InvoicesApi.invoices_create",
@@ -96,7 +89,6 @@ module MergeAccountingClient
     end
 
     # Returns a list of `Invoice` objects.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :contact_id If provided, will only return invoices for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
@@ -112,13 +104,12 @@ module MergeAccountingClient
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @option opts [String] :type If provided, will only return Invoices with this type
     # @return [PaginatedInvoiceList]
-    def invoices_list(x_account_token, opts = {})
-      data, _status_code, _headers = invoices_list_with_http_info(x_account_token, opts)
+    def invoices_list(opts = {})
+      data, _status_code, _headers = invoices_list_with_http_info(opts)
       data
     end
 
     # Returns a list of &#x60;Invoice&#x60; objects.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :contact_id If provided, will only return invoices for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
@@ -134,13 +125,9 @@ module MergeAccountingClient
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @option opts [String] :type If provided, will only return Invoices with this type
     # @return [Array<(PaginatedInvoiceList, Integer, Hash)>] PaginatedInvoiceList data, response status code and response headers
-    def invoices_list_with_http_info(x_account_token, opts = {})
+    def invoices_list_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InvoicesApi.invoices_list ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_list"
       end
       allowable_values = ["contact", "line_items", "line_items,contact", "payments", "payments,contact", "payments,line_items", "payments,line_items,contact"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
@@ -177,7 +164,6 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -189,7 +175,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedInvoiceList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"InvoicesApi.invoices_list",
@@ -209,25 +195,19 @@ module MergeAccountingClient
     end
 
     # Returns metadata for `Invoice` POSTs.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [MetaResponse]
-    def invoices_meta_post_retrieve(x_account_token, opts = {})
-      data, _status_code, _headers = invoices_meta_post_retrieve_with_http_info(x_account_token, opts)
+    def invoices_meta_post_retrieve(opts = {})
+      data, _status_code, _headers = invoices_meta_post_retrieve_with_http_info(opts)
       data
     end
 
     # Returns metadata for &#x60;Invoice&#x60; POSTs.
-    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(MetaResponse, Integer, Hash)>] MetaResponse data, response status code and response headers
-    def invoices_meta_post_retrieve_with_http_info(x_account_token, opts = {})
+    def invoices_meta_post_retrieve_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InvoicesApi.invoices_meta_post_retrieve ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_meta_post_retrieve"
       end
       # resource path
       local_var_path = '/invoices/meta/post'
@@ -239,7 +219,6 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -251,7 +230,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'MetaResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"InvoicesApi.invoices_meta_post_retrieve",
@@ -271,33 +250,27 @@ module MergeAccountingClient
     end
 
     # Returns an `Invoice` object with the given `id`.
-    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Invoice]
-    def invoices_retrieve(x_account_token, id, opts = {})
-      data, _status_code, _headers = invoices_retrieve_with_http_info(x_account_token, id, opts)
+    def invoices_retrieve(id, opts = {})
+      data, _status_code, _headers = invoices_retrieve_with_http_info(id, opts)
       data
     end
 
     # Returns an &#x60;Invoice&#x60; object with the given &#x60;id&#x60;.
-    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Array<(Invoice, Integer, Hash)>] Invoice data, response status code and response headers
-    def invoices_retrieve_with_http_info(x_account_token, id, opts = {})
+    def invoices_retrieve_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InvoicesApi.invoices_retrieve ...'
-      end
-      # verify the required parameter 'x_account_token' is set
-      if @api_client.config.client_side_validation && x_account_token.nil?
-        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_retrieve"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -324,7 +297,6 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -336,7 +308,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'Invoice'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"InvoicesApi.invoices_retrieve",
