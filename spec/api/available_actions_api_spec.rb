@@ -34,6 +34,7 @@ describe 'AvailableActionsApi' do
 
   # unit tests for available_actions_retrieve
   # Returns a list of models and actions available for an account.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [AvailableActions]
   describe 'available_actions_retrieve test' do

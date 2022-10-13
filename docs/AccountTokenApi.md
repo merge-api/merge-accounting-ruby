@@ -22,8 +22,10 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure Bearer authorization: bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
+  # Configure API key authorization: tokenAuth
+  config.api_key['tokenAuth'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['tokenAuth'] = 'Bearer'
 end
 
 api_instance = MergeAccountingClient::AccountTokenApi.new
@@ -68,7 +70,7 @@ end
 
 ### Authorization
 
-[bearerAuth](../README.md#bearerAuth)
+[tokenAuth](../README.md#tokenAuth)
 
 ### HTTP request headers
 

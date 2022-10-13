@@ -10,7 +10,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 ## accounts_list
 
-> <PaginatedAccountList> accounts_list(opts)
+> <PaginatedAccountList> accounts_list(x_account_token, opts)
 
 
 
@@ -23,16 +23,14 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: accountTokenAuth
-  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: tokenAuth
+  config.api_key['tokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
-
-  # Configure Bearer authorization: bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
+  # config.api_key_prefix['tokenAuth'] = 'Bearer'
 end
 
 api_instance = MergeAccountingClient::AccountsApi.new
+x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 opts = {
   created_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created after this datetime.
   created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created before this datetime.
@@ -48,7 +46,7 @@ opts = {
 
 begin
   
-  result = api_instance.accounts_list(opts)
+  result = api_instance.accounts_list(x_account_token, opts)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling AccountsApi->accounts_list: #{e}"
@@ -59,12 +57,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PaginatedAccountList>, Integer, Hash)> accounts_list_with_http_info(opts)
+> <Array(<PaginatedAccountList>, Integer, Hash)> accounts_list_with_http_info(x_account_token, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.accounts_list_with_http_info(opts)
+  data, status_code, headers = api_instance.accounts_list_with_http_info(x_account_token, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PaginatedAccountList>
@@ -77,6 +75,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **x_account_token** | **String** | Token identifying the end user. |  |
 | **created_after** | **Time** | If provided, will only return objects created after this datetime. | [optional] |
 | **created_before** | **Time** | If provided, will only return objects created before this datetime. | [optional] |
 | **cursor** | **String** | The pagination cursor value. | [optional] |
@@ -94,7 +93,7 @@ end
 
 ### Authorization
 
-[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
+[tokenAuth](../README.md#tokenAuth)
 
 ### HTTP request headers
 
@@ -104,7 +103,7 @@ end
 
 ## accounts_retrieve
 
-> <Account> accounts_retrieve(id, opts)
+> <Account> accounts_retrieve(x_account_token, id, opts)
 
 
 
@@ -117,16 +116,14 @@ require 'time'
 require 'merge_accounting_client'
 # setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: accountTokenAuth
-  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: tokenAuth
+  config.api_key['tokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
-
-  # Configure Bearer authorization: bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
+  # config.api_key_prefix['tokenAuth'] = 'Bearer'
 end
 
 api_instance = MergeAccountingClient::AccountsApi.new
+x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 id = TODO # String | 
 opts = {
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
@@ -135,7 +132,7 @@ opts = {
 
 begin
   
-  result = api_instance.accounts_retrieve(id, opts)
+  result = api_instance.accounts_retrieve(x_account_token, id, opts)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Error when calling AccountsApi->accounts_retrieve: #{e}"
@@ -146,12 +143,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Account>, Integer, Hash)> accounts_retrieve_with_http_info(id, opts)
+> <Array(<Account>, Integer, Hash)> accounts_retrieve_with_http_info(x_account_token, id, opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.accounts_retrieve_with_http_info(id, opts)
+  data, status_code, headers = api_instance.accounts_retrieve_with_http_info(x_account_token, id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Account>
@@ -164,6 +161,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **x_account_token** | **String** | Token identifying the end user. |  |
 | **id** | [**String**](.md) |  |  |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
 | **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
@@ -174,7 +172,7 @@ end
 
 ### Authorization
 
-[accountTokenAuth](../README.md#accountTokenAuth), [bearerAuth](../README.md#bearerAuth)
+[tokenAuth](../README.md#tokenAuth)
 
 ### HTTP request headers
 

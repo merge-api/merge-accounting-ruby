@@ -34,6 +34,7 @@ describe 'BalanceSheetsApi' do
 
   # unit tests for balance_sheets_list
   # Returns a list of &#x60;BalanceSheet&#x60; objects.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -53,6 +54,7 @@ describe 'BalanceSheetsApi' do
 
   # unit tests for balance_sheets_retrieve
   # Returns a &#x60;BalanceSheet&#x60; object with the given &#x60;id&#x60;.
+  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.

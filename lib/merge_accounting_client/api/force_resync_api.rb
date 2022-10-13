@@ -20,19 +20,25 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Force re-sync of all models. This is only available for organizations on Merge's Grow and Expand plans.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<SyncStatus>]
-    def sync_status_resync_create(opts = {})
-      data, _status_code, _headers = sync_status_resync_create_with_http_info(opts)
+    def sync_status_resync_create(x_account_token, opts = {})
+      data, _status_code, _headers = sync_status_resync_create_with_http_info(x_account_token, opts)
       data
     end
 
     # Force re-sync of all models. This is only available for organizations on Merge&#39;s Grow and Expand plans.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SyncStatus>, Integer, Hash)>] Array<SyncStatus> data, response status code and response headers
-    def sync_status_resync_create_with_http_info(opts = {})
+    def sync_status_resync_create_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ForceResyncApi.sync_status_resync_create ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling ForceResyncApi.sync_status_resync_create"
       end
       # resource path
       local_var_path = '/sync-status/resync'
@@ -44,6 +50,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -55,7 +62,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'Array<SyncStatus>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"ForceResyncApi.sync_status_resync_create",

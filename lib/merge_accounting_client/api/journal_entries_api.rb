@@ -20,25 +20,31 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Creates a `JournalEntry` object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
     # @param journal_entry_endpoint_request [JournalEntryEndpointRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
     # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
     # @return [JournalEntryResponse]
-    def journal_entries_create(journal_entry_endpoint_request, opts = {})
-      data, _status_code, _headers = journal_entries_create_with_http_info(journal_entry_endpoint_request, opts)
+    def journal_entries_create(x_account_token, journal_entry_endpoint_request, opts = {})
+      data, _status_code, _headers = journal_entries_create_with_http_info(x_account_token, journal_entry_endpoint_request, opts)
       data
     end
 
     # Creates a &#x60;JournalEntry&#x60; object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
     # @param journal_entry_endpoint_request [JournalEntryEndpointRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
     # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
     # @return [Array<(JournalEntryResponse, Integer, Hash)>] JournalEntryResponse data, response status code and response headers
-    def journal_entries_create_with_http_info(journal_entry_endpoint_request, opts = {})
+    def journal_entries_create_with_http_info(x_account_token, journal_entry_endpoint_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: JournalEntriesApi.journal_entries_create ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling JournalEntriesApi.journal_entries_create"
       end
       # verify the required parameter 'journal_entry_endpoint_request' is set
       if @api_client.config.client_side_validation && journal_entry_endpoint_request.nil?
@@ -58,6 +64,7 @@ module MergeAccountingClient
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'application/x-www-form-urlencoded', 'multipart/form-data'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -69,7 +76,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'JournalEntryResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"JournalEntriesApi.journal_entries_create",
@@ -89,6 +96,7 @@ module MergeAccountingClient
     end
 
     # Returns a list of `JournalEntry` objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -101,12 +109,13 @@ module MergeAccountingClient
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [PaginatedJournalEntryList]
-    def journal_entries_list(opts = {})
-      data, _status_code, _headers = journal_entries_list_with_http_info(opts)
+    def journal_entries_list(x_account_token, opts = {})
+      data, _status_code, _headers = journal_entries_list_with_http_info(x_account_token, opts)
       data
     end
 
     # Returns a list of &#x60;JournalEntry&#x60; objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -119,9 +128,13 @@ module MergeAccountingClient
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [Array<(PaginatedJournalEntryList, Integer, Hash)>] PaginatedJournalEntryList data, response status code and response headers
-    def journal_entries_list_with_http_info(opts = {})
+    def journal_entries_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: JournalEntriesApi.journal_entries_list ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling JournalEntriesApi.journal_entries_list"
       end
       allowable_values = ["lines", "lines,payments", "payments"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
@@ -147,6 +160,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -158,7 +172,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedJournalEntryList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"JournalEntriesApi.journal_entries_list",
@@ -178,19 +192,25 @@ module MergeAccountingClient
     end
 
     # Returns metadata for `JournalEntry` POSTs.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [MetaResponse]
-    def journal_entries_meta_post_retrieve(opts = {})
-      data, _status_code, _headers = journal_entries_meta_post_retrieve_with_http_info(opts)
+    def journal_entries_meta_post_retrieve(x_account_token, opts = {})
+      data, _status_code, _headers = journal_entries_meta_post_retrieve_with_http_info(x_account_token, opts)
       data
     end
 
     # Returns metadata for &#x60;JournalEntry&#x60; POSTs.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(MetaResponse, Integer, Hash)>] MetaResponse data, response status code and response headers
-    def journal_entries_meta_post_retrieve_with_http_info(opts = {})
+    def journal_entries_meta_post_retrieve_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: JournalEntriesApi.journal_entries_meta_post_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling JournalEntriesApi.journal_entries_meta_post_retrieve"
       end
       # resource path
       local_var_path = '/journal-entries/meta/post'
@@ -202,6 +222,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -213,7 +234,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'MetaResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"JournalEntriesApi.journal_entries_meta_post_retrieve",
@@ -233,25 +254,31 @@ module MergeAccountingClient
     end
 
     # Returns a `JournalEntry` object with the given `id`.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [JournalEntry]
-    def journal_entries_retrieve(id, opts = {})
-      data, _status_code, _headers = journal_entries_retrieve_with_http_info(id, opts)
+    def journal_entries_retrieve(x_account_token, id, opts = {})
+      data, _status_code, _headers = journal_entries_retrieve_with_http_info(x_account_token, id, opts)
       data
     end
 
     # Returns a &#x60;JournalEntry&#x60; object with the given &#x60;id&#x60;.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [Array<(JournalEntry, Integer, Hash)>] JournalEntry data, response status code and response headers
-    def journal_entries_retrieve_with_http_info(id, opts = {})
+    def journal_entries_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: JournalEntriesApi.journal_entries_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling JournalEntriesApi.journal_entries_retrieve"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -273,6 +300,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -284,7 +312,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'JournalEntry'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"JournalEntriesApi.journal_entries_retrieve",

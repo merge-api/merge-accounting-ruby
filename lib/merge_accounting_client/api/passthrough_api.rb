@@ -20,21 +20,27 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Pull data from an endpoint not currently supported by Merge.
+    # @param x_account_token [String] Token identifying the end user.
     # @param data_passthrough_request [DataPassthroughRequest] 
     # @param [Hash] opts the optional parameters
     # @return [RemoteResponse]
-    def passthrough_create(data_passthrough_request, opts = {})
-      data, _status_code, _headers = passthrough_create_with_http_info(data_passthrough_request, opts)
+    def passthrough_create(x_account_token, data_passthrough_request, opts = {})
+      data, _status_code, _headers = passthrough_create_with_http_info(x_account_token, data_passthrough_request, opts)
       data
     end
 
     # Pull data from an endpoint not currently supported by Merge.
+    # @param x_account_token [String] Token identifying the end user.
     # @param data_passthrough_request [DataPassthroughRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RemoteResponse, Integer, Hash)>] RemoteResponse data, response status code and response headers
-    def passthrough_create_with_http_info(data_passthrough_request, opts = {})
+    def passthrough_create_with_http_info(x_account_token, data_passthrough_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PassthroughApi.passthrough_create ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling PassthroughApi.passthrough_create"
       end
       # verify the required parameter 'data_passthrough_request' is set
       if @api_client.config.client_side_validation && data_passthrough_request.nil?
@@ -52,6 +58,7 @@ module MergeAccountingClient
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'application/x-www-form-urlencoded', 'multipart/form-data'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -63,7 +70,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'RemoteResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"PassthroughApi.passthrough_create",

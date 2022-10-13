@@ -20,6 +20,7 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Returns a list of `Account` objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -32,12 +33,13 @@ module MergeAccountingClient
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [PaginatedAccountList]
-    def accounts_list(opts = {})
-      data, _status_code, _headers = accounts_list_with_http_info(opts)
+    def accounts_list(x_account_token, opts = {})
+      data, _status_code, _headers = accounts_list_with_http_info(x_account_token, opts)
       data
     end
 
     # Returns a list of &#x60;Account&#x60; objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -50,9 +52,13 @@ module MergeAccountingClient
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [Array<(PaginatedAccountList, Integer, Hash)>] PaginatedAccountList data, response status code and response headers
-    def accounts_list_with_http_info(opts = {})
+    def accounts_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.accounts_list ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling AccountsApi.accounts_list"
       end
       allowable_values = ["classification", "classification,status", "status"]
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
@@ -78,6 +84,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -89,7 +96,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedAccountList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"AccountsApi.accounts_list",
@@ -109,25 +116,31 @@ module MergeAccountingClient
     end
 
     # Returns an `Account` object with the given `id`.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Account]
-    def accounts_retrieve(id, opts = {})
-      data, _status_code, _headers = accounts_retrieve_with_http_info(id, opts)
+    def accounts_retrieve(x_account_token, id, opts = {})
+      data, _status_code, _headers = accounts_retrieve_with_http_info(x_account_token, id, opts)
       data
     end
 
     # Returns an &#x60;Account&#x60; object with the given &#x60;id&#x60;.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
-    def accounts_retrieve_with_http_info(id, opts = {})
+    def accounts_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.accounts_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling AccountsApi.accounts_retrieve"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -149,6 +162,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -160,7 +174,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'Account'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"AccountsApi.accounts_retrieve",

@@ -20,6 +20,7 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Returns a list of `Item` objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -33,12 +34,13 @@ module MergeAccountingClient
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [PaginatedItemList]
-    def items_list(opts = {})
-      data, _status_code, _headers = items_list_with_http_info(opts)
+    def items_list(x_account_token, opts = {})
+      data, _status_code, _headers = items_list_with_http_info(x_account_token, opts)
       data
     end
 
     # Returns a list of &#x60;Item&#x60; objects.
+    # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -52,9 +54,13 @@ module MergeAccountingClient
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
     # @return [Array<(PaginatedItemList, Integer, Hash)>] PaginatedItemList data, response status code and response headers
-    def items_list_with_http_info(opts = {})
+    def items_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ItemsApi.items_list ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling ItemsApi.items_list"
       end
       allowable_values = ["purchase_account", "purchase_account,sales_account", "sales_account"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
@@ -85,6 +91,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -96,7 +103,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'PaginatedItemList'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"ItemsApi.items_list",
@@ -116,27 +123,33 @@ module MergeAccountingClient
     end
 
     # Returns an `Item` object with the given `id`.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Item]
-    def items_retrieve(id, opts = {})
-      data, _status_code, _headers = items_retrieve_with_http_info(id, opts)
+    def items_retrieve(x_account_token, id, opts = {})
+      data, _status_code, _headers = items_retrieve_with_http_info(x_account_token, id, opts)
       data
     end
 
     # Returns an &#x60;Item&#x60; object with the given &#x60;id&#x60;.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
     # @return [Array<(Item, Integer, Hash)>] Item data, response status code and response headers
-    def items_retrieve_with_http_info(id, opts = {})
+    def items_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ItemsApi.items_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling ItemsApi.items_retrieve"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -163,6 +176,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -174,7 +188,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'Item'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"ItemsApi.items_retrieve",

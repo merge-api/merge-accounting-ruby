@@ -63,7 +63,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'RemoteKey'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"GenerateKeyApi.generate_key_create",

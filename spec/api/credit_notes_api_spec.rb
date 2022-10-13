@@ -34,6 +34,7 @@ describe 'CreditNotesApi' do
 
   # unit tests for credit_notes_list
   # Returns a list of &#x60;CreditNote&#x60; objects.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -55,6 +56,7 @@ describe 'CreditNotesApi' do
 
   # unit tests for credit_notes_retrieve
   # Returns a &#x60;CreditNote&#x60; object with the given &#x60;id&#x60;.
+  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.

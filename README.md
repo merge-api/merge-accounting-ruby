@@ -59,19 +59,17 @@ require 'merge_accounting_client'
 
 # Setup authorization
 MergeAccountingClient.configure do |config|
-  # Configure API key authorization: accountTokenAuth
-  config.api_key['accountTokenAuth'] = 'YOUR API KEY'
+  # Configure API key authorization: tokenAuth
+  config.api_key['tokenAuth'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['accountTokenAuth'] = 'Bearer'
-
-  # Configure Bearer authorization: bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
+  # config.api_key_prefix['tokenAuth'] = 'Bearer'
 end
 
 api_instance = MergeAccountingClient::AccountDetailsApi.new
+x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 
 begin
-  result = api_instance.account_details_retrieve
+  result = api_instance.account_details_retrieve(x_account_token)
   p result
 rescue MergeAccountingClient::ApiError => e
   puts "Exception when calling AccountDetailsApi->account_details_retrieve: #{e}"
@@ -255,14 +253,10 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 
-### accountTokenAuth
+### tokenAuth
 
 
 - **Type**: API key
-- **API key parameter name**: X-Account-Token
+- **API key parameter name**: Authorization
 - **Location**: HTTP header
-
-### bearerAuth
-
-- **Type**: Bearer authentication
 

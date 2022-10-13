@@ -20,23 +20,29 @@ module MergeAccountingClient
       @api_client = api_client
     end
     # Returns an `AccountingPhoneNumber` object with the given `id`.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [AccountingPhoneNumber]
-    def phone_numbers_retrieve(id, opts = {})
-      data, _status_code, _headers = phone_numbers_retrieve_with_http_info(id, opts)
+    def phone_numbers_retrieve(x_account_token, id, opts = {})
+      data, _status_code, _headers = phone_numbers_retrieve_with_http_info(x_account_token, id, opts)
       data
     end
 
     # Returns an &#x60;AccountingPhoneNumber&#x60; object with the given &#x60;id&#x60;.
+    # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [Array<(AccountingPhoneNumber, Integer, Hash)>] AccountingPhoneNumber data, response status code and response headers
-    def phone_numbers_retrieve_with_http_info(id, opts = {})
+    def phone_numbers_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.phone_numbers_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling PhoneNumbersApi.phone_numbers_retrieve"
       end
       # verify the required parameter 'id' is set
       if @api_client.config.client_side_validation && id.nil?
@@ -53,6 +59,7 @@ module MergeAccountingClient
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -64,7 +71,7 @@ module MergeAccountingClient
       return_type = opts[:debug_return_type] || 'AccountingPhoneNumber'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || ['accountTokenAuth', 'bearerAuth']
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
 
       new_options = opts.merge(
         :operation => :"PhoneNumbersApi.phone_numbers_retrieve",

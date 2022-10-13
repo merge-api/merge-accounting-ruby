@@ -34,6 +34,7 @@ describe 'PaymentsApi' do
 
   # unit tests for payments_list
   # Returns a list of &#x60;Payment&#x60; objects.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :account_id If provided, will only return payments for this account.
   # @option opts [String] :contact_id If provided, will only return payments for this contact.
@@ -56,6 +57,7 @@ describe 'PaymentsApi' do
 
   # unit tests for payments_retrieve
   # Returns a &#x60;Payment&#x60; object with the given &#x60;id&#x60;.
+  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.

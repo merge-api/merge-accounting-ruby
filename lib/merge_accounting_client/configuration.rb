@@ -215,19 +215,12 @@ module MergeAccountingClient
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'accountTokenAuth' =>
+        'tokenAuth' =>
           {
             type: 'api_key',
             in: 'header',
-            key: 'X-Account-Token',
-            value: api_key_with_prefix('accountTokenAuth')
-          },
-        'bearerAuth' =>
-          {
-            type: 'bearer',
-            in: 'header',
             key: 'Authorization',
-            value: "Bearer #{access_token}"
+            value: api_key_with_prefix('tokenAuth')
           },
       }
     end

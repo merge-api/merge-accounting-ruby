@@ -34,6 +34,7 @@ describe 'JournalEntriesApi' do
 
   # unit tests for journal_entries_create
   # Creates a &#x60;JournalEntry&#x60; object with the given values.
+  # @param x_account_token Token identifying the end user.
   # @param journal_entry_endpoint_request 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
@@ -47,6 +48,7 @@ describe 'JournalEntriesApi' do
 
   # unit tests for journal_entries_list
   # Returns a list of &#x60;JournalEntry&#x60; objects.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
@@ -67,6 +69,7 @@ describe 'JournalEntriesApi' do
 
   # unit tests for journal_entries_meta_post_retrieve
   # Returns metadata for &#x60;JournalEntry&#x60; POSTs.
+  # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
   # @return [MetaResponse]
   describe 'journal_entries_meta_post_retrieve test' do
@@ -77,6 +80,7 @@ describe 'JournalEntriesApi' do
 
   # unit tests for journal_entries_retrieve
   # Returns a &#x60;JournalEntry&#x60; object with the given &#x60;id&#x60;.
+  # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
