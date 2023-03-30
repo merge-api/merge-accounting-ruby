@@ -32,10 +32,25 @@ describe 'AttachmentsApi' do
     end
   end
 
+  # unit tests for attachments_create
+  # Creates an &#x60;AccountingAttachment&#x60; object with the given values.
+  # @param x_account_token Token identifying the end user.
+  # @param accounting_attachment_endpoint_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
+  # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
+  # @return [AccountingAttachmentResponse]
+  describe 'attachments_create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for attachments_list
   # Returns a list of &#x60;AccountingAttachment&#x60; objects.
   # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :company_id If provided, will only return accounting attachments for this company.
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
   # @option opts [String] :cursor The pagination cursor value.
@@ -47,6 +62,17 @@ describe 'AttachmentsApi' do
   # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
   # @return [PaginatedAccountingAttachmentList]
   describe 'attachments_list test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for attachments_meta_post_retrieve
+  # Returns metadata for &#x60;AccountingAttachment&#x60; POSTs.
+  # @param x_account_token Token identifying the end user.
+  # @param [Hash] opts the optional parameters
+  # @return [MetaResponse]
+  describe 'attachments_meta_post_retrieve test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

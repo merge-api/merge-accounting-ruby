@@ -36,6 +36,7 @@ describe 'TrackingCategoriesApi' do
   # Returns a list of &#x60;TrackingCategory&#x60; objects.
   # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :company_id If provided, will only return tracking categories for this company.
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
   # @option opts [String] :cursor The pagination cursor value.
@@ -44,8 +45,9 @@ describe 'TrackingCategoriesApi' do
   # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
   # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
   # @option opts [Integer] :page_size Number of results to return per page.
-  # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+  # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
   # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
+  # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
   # @return [PaginatedTrackingCategoryList]
   describe 'tracking_categories_list test' do
     it 'should work' do
@@ -59,7 +61,8 @@ describe 'TrackingCategoriesApi' do
   # @param id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-  # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+  # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+  # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
   # @return [TrackingCategory]
   describe 'tracking_categories_retrieve test' do
     it 'should work' do

@@ -22,6 +22,7 @@ module MergeAccountingClient
     # Returns a list of `TaxRate` objects.
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :company_id If provided, will only return tax rates for this company.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
@@ -40,6 +41,7 @@ module MergeAccountingClient
     # Returns a list of &#x60;TaxRate&#x60; objects.
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :company_id If provided, will only return tax rates for this company.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
@@ -63,6 +65,7 @@ module MergeAccountingClient
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'company_id'] = opts[:'company_id'] if !opts[:'company_id'].nil?
       query_params[:'created_after'] = opts[:'created_after'] if !opts[:'created_after'].nil?
       query_params[:'created_before'] = opts[:'created_before'] if !opts[:'created_before'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?

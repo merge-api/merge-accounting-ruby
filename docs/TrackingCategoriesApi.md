@@ -32,6 +32,7 @@ end
 api_instance = MergeAccountingClient::TrackingCategoriesApi.new
 x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 opts = {
+  company_id: 'company_id_example', # String | If provided, will only return tracking categories for this company.
   created_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created after this datetime.
   created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created before this datetime.
   cursor: 'cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw', # String | The pagination cursor value.
@@ -40,8 +41,9 @@ opts = {
   modified_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects modified after this datetime.
   modified_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects modified before this datetime.
   page_size: 56, # Integer | Number of results to return per page.
-  remote_fields: 'status', # String | Which fields should be returned in non-normalized form.
-  remote_id: 'remote_id_example' # String | The API provider's ID for the given object.
+  remote_fields: 'status', # String | Deprecated. Use show_enum_origins.
+  remote_id: 'remote_id_example', # String | The API provider's ID for the given object.
+  show_enum_origins: 'status' # String | Which fields should be returned in non-normalized form.
 }
 
 begin
@@ -76,6 +78,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **x_account_token** | **String** | Token identifying the end user. |  |
+| **company_id** | **String** | If provided, will only return tracking categories for this company. | [optional] |
 | **created_after** | **Time** | If provided, will only return objects created after this datetime. | [optional] |
 | **created_before** | **Time** | If provided, will only return objects created before this datetime. | [optional] |
 | **cursor** | **String** | The pagination cursor value. | [optional] |
@@ -84,8 +87,9 @@ end
 | **modified_after** | **Time** | If provided, will only return objects modified after this datetime. | [optional] |
 | **modified_before** | **Time** | If provided, will only return objects modified before this datetime. | [optional] |
 | **page_size** | **Integer** | Number of results to return per page. | [optional] |
-| **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
+| **remote_fields** | **String** | Deprecated. Use show_enum_origins. | [optional] |
 | **remote_id** | **String** | The API provider&#39;s ID for the given object. | [optional] |
+| **show_enum_origins** | **String** | Which fields should be returned in non-normalized form. | [optional] |
 
 ### Return type
 
@@ -127,7 +131,8 @@ x_account_token = 'x_account_token_example' # String | Token identifying the end
 id = TODO # String | 
 opts = {
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
-  remote_fields: 'status' # String | Which fields should be returned in non-normalized form.
+  remote_fields: 'status', # String | Deprecated. Use show_enum_origins.
+  show_enum_origins: 'status' # String | Which fields should be returned in non-normalized form.
 }
 
 begin
@@ -164,7 +169,8 @@ end
 | **x_account_token** | **String** | Token identifying the end user. |  |
 | **id** | [**String**](.md) |  |  |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
-| **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
+| **remote_fields** | **String** | Deprecated. Use show_enum_origins. | [optional] |
+| **show_enum_origins** | **String** | Which fields should be returned in non-normalized form. | [optional] |
 
 ### Return type
 

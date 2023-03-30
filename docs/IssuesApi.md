@@ -43,7 +43,7 @@ opts = {
   last_incident_time_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return issues whose first incident time was before this datetime.
   page_size: 56, # Integer | Number of results to return per page.
   start_date: 'start_date_example', # String | If included, will only include issues whose most recent action occurred after this time
-  status: 'ONGOING' # String | 
+  status: 'ONGOING' # String | * `ONGOING` - ONGOING * `RESOLVED` - RESOLVED  * `ONGOING` - ONGOING * `RESOLVED` - RESOLVED
 }
 
 begin
@@ -89,7 +89,7 @@ end
 | **last_incident_time_before** | **Time** | If provided, will only return issues whose first incident time was before this datetime. | [optional] |
 | **page_size** | **Integer** | Number of results to return per page. | [optional] |
 | **start_date** | **String** | If included, will only include issues whose most recent action occurred after this time | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | **String** | * &#x60;ONGOING&#x60; - ONGOING * &#x60;RESOLVED&#x60; - RESOLVED  * &#x60;ONGOING&#x60; - ONGOING * &#x60;RESOLVED&#x60; - RESOLVED | [optional] |
 
 ### Return type
 

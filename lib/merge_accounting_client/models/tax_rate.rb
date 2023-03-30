@@ -16,13 +16,6 @@ require 'time'
 module MergeAccountingClient
   # # The TaxRate Object ### Description The `TaxRate` object is used to represent a tax rate.  ### Usage Example Fetch from the `LIST TaxRates` endpoint and view tax rates relevant to a company.
   class TaxRate
-    attr_accessor :id
-
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
-
-    attr_accessor :remote_data
-
     # The tax rate's description.
     attr_accessor :description
 
@@ -32,19 +25,33 @@ module MergeAccountingClient
     # The tax rate's effective tax rate.
     attr_accessor :effective_tax_rate
 
+    # The company the tax rate belongs to.
+    attr_accessor :company
+
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :id
+
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
+    attr_accessor :field_mappings
+
+    attr_accessor :remote_data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'description' => :'description',
         :'total_tax_rate' => :'total_tax_rate',
         :'effective_tax_rate' => :'effective_tax_rate',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'company' => :'company',
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'id' => :'id',
+        :'remote_id' => :'remote_id',
+        :'field_mappings' => :'field_mappings',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -56,24 +63,28 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'description' => :'String',
         :'total_tax_rate' => :'Float',
         :'effective_tax_rate' => :'Float',
-        :'remote_was_deleted' => :'Boolean'
+        :'company' => :'String',
+        :'remote_was_deleted' => :'Boolean',
+        :'id' => :'String',
+        :'remote_id' => :'String',
+        :'field_mappings' => :'Hash<String, Object>',
+        :'remote_data' => :'Array<RemoteData>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'remote_id',
-        :'remote_data',
         :'description',
         :'total_tax_rate',
         :'effective_tax_rate',
+        :'company',
+        :'remote_id',
+        :'field_mappings',
+        :'remote_data'
       ])
     end
 
@@ -92,20 +103,6 @@ module MergeAccountingClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
-      end
-
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -118,8 +115,32 @@ module MergeAccountingClient
         self.effective_tax_rate = attributes[:'effective_tax_rate']
       end
 
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'field_mappings')
+        if (value = attributes[:'field_mappings']).is_a?(Hash)
+          self.field_mappings = value
+        end
+      end
+
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
+        end
       end
     end
 
@@ -141,13 +162,15 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           description == o.description &&
           total_tax_rate == o.total_tax_rate &&
           effective_tax_rate == o.effective_tax_rate &&
-          remote_was_deleted == o.remote_was_deleted
+          company == o.company &&
+          remote_was_deleted == o.remote_was_deleted &&
+          id == o.id &&
+          remote_id == o.remote_id &&
+          field_mappings == o.field_mappings &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -159,7 +182,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, description, total_tax_rate, effective_tax_rate, remote_was_deleted].hash
+      [description, total_tax_rate, effective_tax_rate, company, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

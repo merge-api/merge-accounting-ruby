@@ -16,38 +16,46 @@ require 'time'
 module MergeAccountingClient
   # # The TrackingCategory Object ### Description The `TrackingCategory` object is used to represent a company's tracking categories.  ### Usage Example Fetch from the `GET TrackingCategory` endpoint and view a company's tracking category.
   class TrackingCategory
+    # The tracking category's name.
+    attr_accessor :name
+
+    # The tracking category's status.  * `ACTIVE` - ACTIVE * `ARCHIVED` - ARCHIVED
+    attr_accessor :status
+
+    # The tracking category’s type.  * `CLASS` - CLASS * `DEPARTMENT` - DEPARTMENT
+    attr_accessor :category_type
+
+    # ID of the parent tracking category.
+    attr_accessor :parent_category
+
+    # The company the tracking category belongs to.
+    attr_accessor :company
+
+    # Indicates whether or not this object has been deleted by third party webhooks.
+    attr_accessor :remote_was_deleted
+
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
+    attr_accessor :field_mappings
+
     attr_accessor :remote_data
-
-    # The tracking category's name.
-    attr_accessor :name
-
-    # The tracking category's status.
-    attr_accessor :status
-
-    # The tracking category’s type.
-    attr_accessor :category_type
-
-    attr_accessor :parent_category
-
-    # Indicates whether or not this object has been deleted by third party webhooks.
-    attr_accessor :remote_was_deleted
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'name' => :'name',
         :'status' => :'status',
         :'category_type' => :'category_type',
         :'parent_category' => :'parent_category',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'company' => :'company',
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'id' => :'id',
+        :'remote_id' => :'remote_id',
+        :'field_mappings' => :'field_mappings',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -59,26 +67,30 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
         :'status' => :'Status7d1Enum',
         :'category_type' => :'CategoryTypeEnum',
         :'parent_category' => :'String',
-        :'remote_was_deleted' => :'Boolean'
+        :'company' => :'String',
+        :'remote_was_deleted' => :'Boolean',
+        :'id' => :'String',
+        :'remote_id' => :'String',
+        :'field_mappings' => :'Hash<String, Object>',
+        :'remote_data' => :'Array<RemoteData>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'remote_id',
-        :'remote_data',
         :'name',
         :'status',
         :'category_type',
         :'parent_category',
+        :'company',
+        :'remote_id',
+        :'field_mappings',
+        :'remote_data'
       ])
     end
 
@@ -97,20 +109,6 @@ module MergeAccountingClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
-      end
-
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
@@ -127,8 +125,32 @@ module MergeAccountingClient
         self.parent_category = attributes[:'parent_category']
       end
 
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'field_mappings')
+        if (value = attributes[:'field_mappings']).is_a?(Hash)
+          self.field_mappings = value
+        end
+      end
+
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
+        end
       end
     end
 
@@ -150,14 +172,16 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           name == o.name &&
           status == o.status &&
           category_type == o.category_type &&
           parent_category == o.parent_category &&
-          remote_was_deleted == o.remote_was_deleted
+          company == o.company &&
+          remote_was_deleted == o.remote_was_deleted &&
+          id == o.id &&
+          remote_id == o.remote_id &&
+          field_mappings == o.field_mappings &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -169,7 +193,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, status, category_type, parent_category, remote_was_deleted].hash
+      [name, status, category_type, parent_category, company, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

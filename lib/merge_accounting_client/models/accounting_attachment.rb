@@ -21,26 +21,33 @@ module MergeAccountingClient
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
-    attr_accessor :remote_data
-
     # The attachment's name.
     attr_accessor :file_name
 
     # The attachment's url.
     attr_accessor :file_url
 
+    # The company the accounting attachment belongs to.
+    attr_accessor :company
+
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :field_mappings
+
+    attr_accessor :remote_data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'file_name' => :'file_name',
         :'file_url' => :'file_url',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'company' => :'company',
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'field_mappings' => :'field_mappings',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -54,10 +61,12 @@ module MergeAccountingClient
       {
         :'id' => :'String',
         :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'file_name' => :'String',
         :'file_url' => :'String',
-        :'remote_was_deleted' => :'Boolean'
+        :'company' => :'String',
+        :'remote_was_deleted' => :'Boolean',
+        :'field_mappings' => :'Hash<String, Object>',
+        :'remote_data' => :'Array<RemoteData>'
       }
     end
 
@@ -65,9 +74,11 @@ module MergeAccountingClient
     def self.openapi_nullable
       Set.new([
         :'remote_id',
-        :'remote_data',
         :'file_name',
         :'file_url',
+        :'company',
+        :'field_mappings',
+        :'remote_data'
       ])
     end
 
@@ -94,12 +105,6 @@ module MergeAccountingClient
         self.remote_id = attributes[:'remote_id']
       end
 
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
-      end
-
       if attributes.key?(:'file_name')
         self.file_name = attributes[:'file_name']
       end
@@ -108,8 +113,24 @@ module MergeAccountingClient
         self.file_url = attributes[:'file_url']
       end
 
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'field_mappings')
+        if (value = attributes[:'field_mappings']).is_a?(Hash)
+          self.field_mappings = value
+        end
+      end
+
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
+        end
       end
     end
 
@@ -148,10 +169,12 @@ module MergeAccountingClient
       self.class == o.class &&
           id == o.id &&
           remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           file_name == o.file_name &&
           file_url == o.file_url &&
-          remote_was_deleted == o.remote_was_deleted
+          company == o.company &&
+          remote_was_deleted == o.remote_was_deleted &&
+          field_mappings == o.field_mappings &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -163,7 +186,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, file_name, file_url, remote_was_deleted].hash
+      [id, remote_id, file_name, file_url, company, remote_was_deleted, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

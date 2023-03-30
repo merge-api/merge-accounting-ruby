@@ -16,9 +16,6 @@ require 'time'
 module MergeAccountingClient
   # # The ExpenseLine Object ### Description The `ExpenseLine` object is used to represent an expense's line items.  ### Usage Example Fetch from the `GET Expense` endpoint and view the expense's line items.
   class ExpenseLine
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
-
     # The line's item.
     attr_accessor :item
 
@@ -27,20 +24,35 @@ module MergeAccountingClient
 
     attr_accessor :tracking_category
 
+    attr_accessor :tracking_categories
+
+    # The company the line belongs to.
+    attr_accessor :company
+
+    # The expense's payment account.
     attr_accessor :account
 
-    # The line item's description.
+    # The expense's contact.
+    attr_accessor :contact
+
+    # The description of the item that was purchased by the company.
     attr_accessor :description
+
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_id' => :'remote_id',
         :'item' => :'item',
         :'net_amount' => :'net_amount',
         :'tracking_category' => :'tracking_category',
+        :'tracking_categories' => :'tracking_categories',
+        :'company' => :'company',
         :'account' => :'account',
-        :'description' => :'description'
+        :'contact' => :'contact',
+        :'description' => :'description',
+        :'remote_id' => :'remote_id'
       }
     end
 
@@ -52,24 +64,29 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_id' => :'String',
         :'item' => :'String',
         :'net_amount' => :'Float',
         :'tracking_category' => :'String',
+        :'tracking_categories' => :'Array<String>',
+        :'company' => :'String',
         :'account' => :'String',
-        :'description' => :'String'
+        :'contact' => :'String',
+        :'description' => :'String',
+        :'remote_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'remote_id',
         :'item',
         :'net_amount',
         :'tracking_category',
+        :'company',
         :'account',
-        :'description'
+        :'contact',
+        :'description',
+        :'remote_id'
       ])
     end
 
@@ -88,10 +105,6 @@ module MergeAccountingClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
       if attributes.key?(:'item')
         self.item = attributes[:'item']
       end
@@ -104,12 +117,30 @@ module MergeAccountingClient
         self.tracking_category = attributes[:'tracking_category']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'account')
         self.account = attributes[:'account']
       end
 
+      if attributes.key?(:'contact')
+        self.contact = attributes[:'contact']
+      end
+
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
       end
     end
 
@@ -131,12 +162,15 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_id == o.remote_id &&
           item == o.item &&
           net_amount == o.net_amount &&
           tracking_category == o.tracking_category &&
+          tracking_categories == o.tracking_categories &&
+          company == o.company &&
           account == o.account &&
-          description == o.description
+          contact == o.contact &&
+          description == o.description &&
+          remote_id == o.remote_id
     end
 
     # @see the `==` method
@@ -148,7 +182,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, item, net_amount, tracking_category, account, description].hash
+      [item, net_amount, tracking_category, tracking_categories, company, account, contact, description, remote_id].hash
     end
 
     # Builds the object from hash

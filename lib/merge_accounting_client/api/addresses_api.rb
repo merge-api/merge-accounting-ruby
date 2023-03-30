@@ -24,7 +24,8 @@ module MergeAccountingClient
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
     # @return [Address]
     def addresses_retrieve(x_account_token, id, opts = {})
       data, _status_code, _headers = addresses_retrieve_with_http_info(x_account_token, id, opts)
@@ -36,7 +37,8 @@ module MergeAccountingClient
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
     # @return [Array<(Address, Integer, Hash)>] Address data, response status code and response headers
     def addresses_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
@@ -54,6 +56,10 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
         fail ArgumentError, "invalid value for \"remote_fields\", must be one of #{allowable_values}"
       end
+      allowable_values = ["type"]
+      if @api_client.config.client_side_validation && opts[:'show_enum_origins'] && !allowable_values.include?(opts[:'show_enum_origins'])
+        fail ArgumentError, "invalid value for \"show_enum_origins\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/addresses/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
@@ -61,6 +67,7 @@ module MergeAccountingClient
       query_params = opts[:query_params] || {}
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
       query_params[:'remote_fields'] = opts[:'remote_fields'] if !opts[:'remote_fields'].nil?
+      query_params[:'show_enum_origins'] = opts[:'show_enum_origins'] if !opts[:'show_enum_origins'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

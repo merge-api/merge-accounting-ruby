@@ -18,7 +18,7 @@ module MergeAccountingClient
     # Company name.
     attr_accessor :name
 
-    # Category or categories this integration belongs to. Multiple categories should be comma separated.<br/><br>Example: For [ats, hris], enter <i>ats,hris</i>
+    # Category or categories this integration belongs to. Multiple categories should be comma separated, i.e. [ats, hris].
     attr_accessor :categories
 
     # Company logo in rectangular shape. <b>Upload an image with a clear background.</b>
