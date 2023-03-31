@@ -19,21 +19,99 @@ module MergeAccountingClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Creates a `Payment` object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
+    # @param payment_endpoint_request [PaymentEndpointRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
+    # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
+    # @return [PaymentResponse]
+    def payments_create(x_account_token, payment_endpoint_request, opts = {})
+      data, _status_code, _headers = payments_create_with_http_info(x_account_token, payment_endpoint_request, opts)
+      data
+    end
+
+    # Creates a &#x60;Payment&#x60; object with the given values.
+    # @param x_account_token [String] Token identifying the end user.
+    # @param payment_endpoint_request [PaymentEndpointRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
+    # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
+    # @return [Array<(PaymentResponse, Integer, Hash)>] PaymentResponse data, response status code and response headers
+    def payments_create_with_http_info(x_account_token, payment_endpoint_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentsApi.payments_create ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling PaymentsApi.payments_create"
+      end
+      # verify the required parameter 'payment_endpoint_request' is set
+      if @api_client.config.client_side_validation && payment_endpoint_request.nil?
+        fail ArgumentError, "Missing the required parameter 'payment_endpoint_request' when calling PaymentsApi.payments_create"
+      end
+      # resource path
+      local_var_path = '/payments'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'is_debug_mode'] = opts[:'is_debug_mode'] if !opts[:'is_debug_mode'].nil?
+      query_params[:'run_async'] = opts[:'run_async'] if !opts[:'run_async'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'application/x-www-form-urlencoded', 'multipart/form-data'])
+      header_params[:'X-Account-Token'] = x_account_token
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(payment_endpoint_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PaymentResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+
+      new_options = opts.merge(
+        :operation => :"PaymentsApi.payments_create",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentsApi#payments_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Returns a list of `Payment` objects.
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account_id If provided, will only return payments for this account.
+    # @option opts [String] :company_id If provided, will only return payments for this company.
     # @option opts [String] :contact_id If provided, will only return payments for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
     # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
+    # @option opts [Time] :transaction_date_after If provided, will only return objects created after this datetime.
+    # @option opts [Time] :transaction_date_before If provided, will only return objects created before this datetime.
     # @return [PaginatedPaymentList]
     def payments_list(x_account_token, opts = {})
       data, _status_code, _headers = payments_list_with_http_info(x_account_token, opts)
@@ -44,17 +122,19 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account_id If provided, will only return payments for this account.
+    # @option opts [String] :company_id If provided, will only return payments for this company.
     # @option opts [String] :contact_id If provided, will only return payments for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
     # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
+    # @option opts [Time] :transaction_date_after If provided, will only return objects created after this datetime.
+    # @option opts [Time] :transaction_date_before If provided, will only return objects created before this datetime.
     # @return [Array<(PaginatedPaymentList, Integer, Hash)>] PaginatedPaymentList data, response status code and response headers
     def payments_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
@@ -64,27 +144,25 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling PaymentsApi.payments_list"
       end
-      allowable_values = ["account", "contact", "contact,account"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
-        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
-      end
       # resource path
       local_var_path = '/payments'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'account_id'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'company_id'] = opts[:'company_id'] if !opts[:'company_id'].nil?
       query_params[:'contact_id'] = opts[:'contact_id'] if !opts[:'contact_id'].nil?
       query_params[:'created_after'] = opts[:'created_after'] if !opts[:'created_after'].nil?
       query_params[:'created_before'] = opts[:'created_before'] if !opts[:'created_before'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
-      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_deleted_data'] = opts[:'include_deleted_data'] if !opts[:'include_deleted_data'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
       query_params[:'modified_after'] = opts[:'modified_after'] if !opts[:'modified_after'].nil?
       query_params[:'modified_before'] = opts[:'modified_before'] if !opts[:'modified_before'].nil?
       query_params[:'page_size'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'remote_id'] = opts[:'remote_id'] if !opts[:'remote_id'].nil?
+      query_params[:'transaction_date_after'] = opts[:'transaction_date_after'] if !opts[:'transaction_date_after'].nil?
+      query_params[:'transaction_date_before'] = opts[:'transaction_date_before'] if !opts[:'transaction_date_before'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -121,11 +199,72 @@ module MergeAccountingClient
       return data, status_code, headers
     end
 
+    # Returns metadata for `Payment` POSTs.
+    # @param x_account_token [String] Token identifying the end user.
+    # @param [Hash] opts the optional parameters
+    # @return [MetaResponse]
+    def payments_meta_post_retrieve(x_account_token, opts = {})
+      data, _status_code, _headers = payments_meta_post_retrieve_with_http_info(x_account_token, opts)
+      data
+    end
+
+    # Returns metadata for &#x60;Payment&#x60; POSTs.
+    # @param x_account_token [String] Token identifying the end user.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(MetaResponse, Integer, Hash)>] MetaResponse data, response status code and response headers
+    def payments_meta_post_retrieve_with_http_info(x_account_token, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentsApi.payments_meta_post_retrieve ...'
+      end
+      # verify the required parameter 'x_account_token' is set
+      if @api_client.config.client_side_validation && x_account_token.nil?
+        fail ArgumentError, "Missing the required parameter 'x_account_token' when calling PaymentsApi.payments_meta_post_retrieve"
+      end
+      # resource path
+      local_var_path = '/payments/meta/post'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      header_params[:'X-Account-Token'] = x_account_token
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MetaResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['tokenAuth']
+
+      new_options = opts.merge(
+        :operation => :"PaymentsApi.payments_meta_post_retrieve",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentsApi#payments_meta_post_retrieve\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Returns a `Payment` object with the given `id`.
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [Payment]
     def payments_retrieve(x_account_token, id, opts = {})
@@ -137,7 +276,6 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @return [Array<(Payment, Integer, Hash)>] Payment data, response status code and response headers
     def payments_retrieve_with_http_info(x_account_token, id, opts = {})
@@ -152,16 +290,11 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling PaymentsApi.payments_retrieve"
       end
-      allowable_values = ["account", "contact", "contact,account"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
-        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
-      end
       # resource path
       local_var_path = '/payments/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
 
       # header parameters

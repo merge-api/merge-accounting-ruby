@@ -20,7 +20,7 @@ module MergeAccountingClient
     # The credit note line item's name.
     attr_accessor :name
 
-    # The credit note line item's description.
+    # The description of the item that is owed.
     attr_accessor :description
 
     # The credit note line item's quantity.
@@ -38,11 +38,17 @@ module MergeAccountingClient
     # The credit note line item's total.
     attr_accessor :total_line_amount
 
-    # The purchase order line item's associated tracking category.
+    # The credit note line item's associated tracking category.
     attr_accessor :tracking_category
+
+    # The credit note line item's associated tracking categories.
+    attr_accessor :tracking_categories
 
     # The credit note line item's account.
     attr_accessor :account
+
+    # The company the credit note belongs to.
+    attr_accessor :company
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
@@ -59,7 +65,9 @@ module MergeAccountingClient
         :'tax_rate' => :'tax_rate',
         :'total_line_amount' => :'total_line_amount',
         :'tracking_category' => :'tracking_category',
+        :'tracking_categories' => :'tracking_categories',
         :'account' => :'account',
+        :'company' => :'company',
         :'remote_id' => :'remote_id'
       }
     end
@@ -81,7 +89,9 @@ module MergeAccountingClient
         :'tax_rate' => :'String',
         :'total_line_amount' => :'String',
         :'tracking_category' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'account' => :'String',
+        :'company' => :'String',
         :'remote_id' => :'String'
       }
     end
@@ -99,6 +109,7 @@ module MergeAccountingClient
         :'total_line_amount',
         :'tracking_category',
         :'account',
+        :'company',
         :'remote_id'
       ])
     end
@@ -154,8 +165,18 @@ module MergeAccountingClient
         self.tracking_category = attributes[:'tracking_category']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'account')
         self.account = attributes[:'account']
+      end
+
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
       end
 
       if attributes.key?(:'remote_id')
@@ -167,19 +188,23 @@ module MergeAccountingClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      pattern = Regexp.new(/^\d{0,24}(?:\.\d{0,8})?$/)
+      pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
       if !@quantity.nil? && @quantity !~ pattern
         invalid_properties.push("invalid value for \"quantity\", must conform to the pattern #{pattern}.")
       end
 
-      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       if !@unit_price.nil? && @unit_price !~ pattern
         invalid_properties.push("invalid value for \"unit_price\", must conform to the pattern #{pattern}.")
       end
 
-      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       if !@total_line_amount.nil? && @total_line_amount !~ pattern
         invalid_properties.push("invalid value for \"total_line_amount\", must conform to the pattern #{pattern}.")
+      end
+
+      if @tracking_categories.nil?
+        invalid_properties.push('invalid value for "tracking_categories", tracking_categories cannot be nil.')
       end
 
       invalid_properties
@@ -188,16 +213,17 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@quantity.nil? && @quantity !~ Regexp.new(/^\d{0,24}(?:\.\d{0,8})?$/)
-      return false if !@unit_price.nil? && @unit_price !~ Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
-      return false if !@total_line_amount.nil? && @total_line_amount !~ Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@quantity.nil? && @quantity !~ Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
+      return false if !@unit_price.nil? && @unit_price !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@total_line_amount.nil? && @total_line_amount !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if @tracking_categories.nil?
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] quantity Value to be assigned
     def quantity=(quantity)
-      pattern = Regexp.new(/^\d{0,24}(?:\.\d{0,8})?$/)
+      pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
       if !quantity.nil? && quantity !~ pattern
         fail ArgumentError, "invalid value for \"quantity\", must conform to the pattern #{pattern}."
       end
@@ -208,7 +234,7 @@ module MergeAccountingClient
     # Custom attribute writer method with validation
     # @param [Object] unit_price Value to be assigned
     def unit_price=(unit_price)
-      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       if !unit_price.nil? && unit_price !~ pattern
         fail ArgumentError, "invalid value for \"unit_price\", must conform to the pattern #{pattern}."
       end
@@ -219,7 +245,7 @@ module MergeAccountingClient
     # Custom attribute writer method with validation
     # @param [Object] total_line_amount Value to be assigned
     def total_line_amount=(total_line_amount)
-      pattern = Regexp.new(/^\d{0,32}(?:\.\d{0,16})?$/)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       if !total_line_amount.nil? && total_line_amount !~ pattern
         fail ArgumentError, "invalid value for \"total_line_amount\", must conform to the pattern #{pattern}."
       end
@@ -241,7 +267,9 @@ module MergeAccountingClient
           tax_rate == o.tax_rate &&
           total_line_amount == o.total_line_amount &&
           tracking_category == o.tracking_category &&
+          tracking_categories == o.tracking_categories &&
           account == o.account &&
+          company == o.company &&
           remote_id == o.remote_id
     end
 
@@ -254,7 +282,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [item, name, description, quantity, memo, unit_price, tax_rate, total_line_amount, tracking_category, account, remote_id].hash
+      [item, name, description, quantity, memo, unit_price, tax_rate, total_line_amount, tracking_category, tracking_categories, account, company, remote_id].hash
     end
 
     # Builds the object from hash

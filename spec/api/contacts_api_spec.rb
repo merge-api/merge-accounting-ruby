@@ -32,23 +32,49 @@ describe 'ContactsApi' do
     end
   end
 
+  # unit tests for contacts_create
+  # Creates a &#x60;Contact&#x60; object with the given values.
+  # @param x_account_token Token identifying the end user.
+  # @param contact_endpoint_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :is_debug_mode Whether to include debug fields (such as log file links) in the response.
+  # @option opts [Boolean] :run_async Whether or not third-party updates should be run asynchronously.
+  # @return [ContactResponse]
+  describe 'contacts_create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for contacts_list
   # Returns a list of &#x60;Contact&#x60; objects.
   # @param x_account_token Token identifying the end user.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :company_id If provided, will only return contacts for this company.
   # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
   # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
   # @option opts [String] :cursor The pagination cursor value.
-  # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
   # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
   # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
   # @option opts [Integer] :page_size Number of results to return per page.
-  # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+  # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
   # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
+  # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
   # @return [PaginatedContactList]
   describe 'contacts_list test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for contacts_meta_post_retrieve
+  # Returns metadata for &#x60;Contact&#x60; POSTs.
+  # @param x_account_token Token identifying the end user.
+  # @param [Hash] opts the optional parameters
+  # @return [MetaResponse]
+  describe 'contacts_meta_post_retrieve test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -59,9 +85,9 @@ describe 'ContactsApi' do
   # @param x_account_token Token identifying the end user.
   # @param id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-  # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+  # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+  # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
   # @return [Contact]
   describe 'contacts_retrieve test' do
     it 'should work' do

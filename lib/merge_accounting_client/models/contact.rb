@@ -14,14 +14,12 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Contact Object ### Description The `Contact` object is used to represent a Contact. This can be either a supplier or a customer.  ### Usage Example Fetch from the `LIST Contacts` endpoint and view a company's contacts.
+  # # The Contact Object ### Description The `Contact` object refers to either a supplier or a customer.  ### Usage Example Fetch from the `LIST Contacts` endpoint and view a company's contacts.
   class Contact
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
-
-    attr_accessor :remote_data
 
     # The contact's name.
     attr_accessor :name
@@ -38,7 +36,7 @@ module MergeAccountingClient
     # The contact's tax number.
     attr_accessor :tax_number
 
-    # The contact's status
+    # The contact's status  * `ACTIVE` - ACTIVE * `ARCHIVED` - ARCHIVED
     attr_accessor :status
 
     # The currency the contact's transactions are in.
@@ -46,6 +44,9 @@ module MergeAccountingClient
 
     # When the third party's contact was updated.
     attr_accessor :remote_updated_at
+
+    # The company the contact belongs to.
+    attr_accessor :company
 
     # `Address` object IDs for the given `Contacts` object.
     attr_accessor :addresses
@@ -56,12 +57,15 @@ module MergeAccountingClient
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
+    attr_accessor :field_mappings
+
+    attr_accessor :remote_data
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'name' => :'name',
         :'is_supplier' => :'is_supplier',
         :'is_customer' => :'is_customer',
@@ -70,9 +74,12 @@ module MergeAccountingClient
         :'status' => :'status',
         :'currency' => :'currency',
         :'remote_updated_at' => :'remote_updated_at',
+        :'company' => :'company',
         :'addresses' => :'addresses',
         :'phone_numbers' => :'phone_numbers',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'field_mappings' => :'field_mappings',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -86,7 +93,6 @@ module MergeAccountingClient
       {
         :'id' => :'String',
         :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
         :'is_supplier' => :'Boolean',
         :'is_customer' => :'Boolean',
@@ -95,9 +101,12 @@ module MergeAccountingClient
         :'status' => :'Status7d1Enum',
         :'currency' => :'String',
         :'remote_updated_at' => :'Time',
+        :'company' => :'String',
         :'addresses' => :'Array<String>',
         :'phone_numbers' => :'Array<AccountingPhoneNumber>',
-        :'remote_was_deleted' => :'Boolean'
+        :'remote_was_deleted' => :'Boolean',
+        :'field_mappings' => :'Hash<String, Object>',
+        :'remote_data' => :'Array<RemoteData>'
       }
     end
 
@@ -105,7 +114,6 @@ module MergeAccountingClient
     def self.openapi_nullable
       Set.new([
         :'remote_id',
-        :'remote_data',
         :'name',
         :'is_supplier',
         :'is_customer',
@@ -114,6 +122,9 @@ module MergeAccountingClient
         :'status',
         :'currency',
         :'remote_updated_at',
+        :'company',
+        :'field_mappings',
+        :'remote_data'
       ])
     end
 
@@ -138,12 +149,6 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
-      end
-
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
       end
 
       if attributes.key?(:'name')
@@ -178,6 +183,10 @@ module MergeAccountingClient
         self.remote_updated_at = attributes[:'remote_updated_at']
       end
 
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'addresses')
         if (value = attributes[:'addresses']).is_a?(Array)
           self.addresses = value
@@ -192,6 +201,18 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'field_mappings')
+        if (value = attributes[:'field_mappings']).is_a?(Hash)
+          self.field_mappings = value
+        end
+      end
+
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
+        end
       end
     end
 
@@ -215,7 +236,6 @@ module MergeAccountingClient
       self.class == o.class &&
           id == o.id &&
           remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           name == o.name &&
           is_supplier == o.is_supplier &&
           is_customer == o.is_customer &&
@@ -224,9 +244,12 @@ module MergeAccountingClient
           status == o.status &&
           currency == o.currency &&
           remote_updated_at == o.remote_updated_at &&
+          company == o.company &&
           addresses == o.addresses &&
           phone_numbers == o.phone_numbers &&
-          remote_was_deleted == o.remote_was_deleted
+          remote_was_deleted == o.remote_was_deleted &&
+          field_mappings == o.field_mappings &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -238,7 +261,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, is_supplier, is_customer, email_address, tax_number, status, currency, remote_updated_at, addresses, phone_numbers, remote_was_deleted].hash
+      [id, remote_id, name, is_supplier, is_customer, email_address, tax_number, status, currency, remote_updated_at, company, addresses, phone_numbers, remote_was_deleted, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

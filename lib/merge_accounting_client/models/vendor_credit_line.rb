@@ -19,11 +19,14 @@ module MergeAccountingClient
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
-    # The line's net amount.
+    # The full value of the credit.
     attr_accessor :net_amount
 
     # The line's associated tracking category.
     attr_accessor :tracking_category
+
+    # The line's associated tracking categories.
+    attr_accessor :tracking_categories
 
     # The line's description.
     attr_accessor :description
@@ -31,14 +34,19 @@ module MergeAccountingClient
     # The line's account.
     attr_accessor :account
 
+    # The company the line belongs to.
+    attr_accessor :company
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'remote_id' => :'remote_id',
         :'net_amount' => :'net_amount',
         :'tracking_category' => :'tracking_category',
+        :'tracking_categories' => :'tracking_categories',
         :'description' => :'description',
-        :'account' => :'account'
+        :'account' => :'account',
+        :'company' => :'company'
       }
     end
 
@@ -53,8 +61,10 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'net_amount' => :'Float',
         :'tracking_category' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'description' => :'String',
-        :'account' => :'String'
+        :'account' => :'String',
+        :'company' => :'String'
       }
     end
 
@@ -65,7 +75,8 @@ module MergeAccountingClient
         :'net_amount',
         :'tracking_category',
         :'description',
-        :'account'
+        :'account',
+        :'company'
       ])
     end
 
@@ -96,6 +107,12 @@ module MergeAccountingClient
         self.tracking_category = attributes[:'tracking_category']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -103,18 +120,27 @@ module MergeAccountingClient
       if attributes.key?(:'account')
         self.account = attributes[:'account']
       end
+
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @tracking_categories.nil?
+        invalid_properties.push('invalid value for "tracking_categories", tracking_categories cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @tracking_categories.nil?
       true
     end
 
@@ -126,8 +152,10 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           net_amount == o.net_amount &&
           tracking_category == o.tracking_category &&
+          tracking_categories == o.tracking_categories &&
           description == o.description &&
-          account == o.account
+          account == o.account &&
+          company == o.company
     end
 
     # @see the `==` method
@@ -139,7 +167,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, net_amount, tracking_category, description, account].hash
+      [remote_id, net_amount, tracking_category, tracking_categories, description, account, company].hash
     end
 
     # Builds the object from hash

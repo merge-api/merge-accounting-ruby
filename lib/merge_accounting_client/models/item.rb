@@ -14,30 +14,33 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Item Object ### Description The `Item` object is used to represent an item that a company buys, sells, or resells, such as products and services.  ### Usage Example Fetch from the `LIST Items` endpoint and view a company's items.
+  # # The Item Object ### Description The `Item` object refers to the goods involved in a transaction.  ### Usage Example Fetch from the `LIST Items` endpoint and view a company's items.
   class Item
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
-    attr_accessor :remote_data
-
     # The item's name.
     attr_accessor :name
 
-    # The item's status.
+    # The item's status.  * `ACTIVE` - ACTIVE * `ARCHIVED` - ARCHIVED
     attr_accessor :status
 
     # The item's unit price.
     attr_accessor :unit_price
 
-    # The item's purchase price.
+    # The price at which the item is purchased from a vendor.
     attr_accessor :purchase_price
 
+    # References the default account used to record a purchase of the item.
     attr_accessor :purchase_account
 
+    # References the default account used to record a sale.
     attr_accessor :sales_account
+
+    # The company the item belongs to.
+    attr_accessor :company
 
     # When the third party's item note was updated.
     attr_accessor :remote_updated_at
@@ -45,20 +48,26 @@ module MergeAccountingClient
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
+    attr_accessor :field_mappings
+
+    attr_accessor :remote_data
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'remote_id' => :'remote_id',
-        :'remote_data' => :'remote_data',
         :'name' => :'name',
         :'status' => :'status',
         :'unit_price' => :'unit_price',
         :'purchase_price' => :'purchase_price',
         :'purchase_account' => :'purchase_account',
         :'sales_account' => :'sales_account',
+        :'company' => :'company',
         :'remote_updated_at' => :'remote_updated_at',
-        :'remote_was_deleted' => :'remote_was_deleted'
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'field_mappings' => :'field_mappings',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -72,15 +81,17 @@ module MergeAccountingClient
       {
         :'id' => :'String',
         :'remote_id' => :'String',
-        :'remote_data' => :'Array<RemoteData>',
         :'name' => :'String',
         :'status' => :'Status7d1Enum',
         :'unit_price' => :'Float',
         :'purchase_price' => :'Float',
         :'purchase_account' => :'String',
         :'sales_account' => :'String',
+        :'company' => :'String',
         :'remote_updated_at' => :'Time',
-        :'remote_was_deleted' => :'Boolean'
+        :'remote_was_deleted' => :'Boolean',
+        :'field_mappings' => :'Hash<String, Object>',
+        :'remote_data' => :'Array<RemoteData>'
       }
     end
 
@@ -88,14 +99,16 @@ module MergeAccountingClient
     def self.openapi_nullable
       Set.new([
         :'remote_id',
-        :'remote_data',
         :'name',
         :'status',
         :'unit_price',
         :'purchase_price',
         :'purchase_account',
         :'sales_account',
+        :'company',
         :'remote_updated_at',
+        :'field_mappings',
+        :'remote_data'
       ])
     end
 
@@ -122,12 +135,6 @@ module MergeAccountingClient
         self.remote_id = attributes[:'remote_id']
       end
 
-      if attributes.key?(:'remote_data')
-        if (value = attributes[:'remote_data']).is_a?(Array)
-          self.remote_data = value
-        end
-      end
-
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
@@ -152,12 +159,28 @@ module MergeAccountingClient
         self.sales_account = attributes[:'sales_account']
       end
 
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
+
       if attributes.key?(:'remote_updated_at')
         self.remote_updated_at = attributes[:'remote_updated_at']
       end
 
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'field_mappings')
+        if (value = attributes[:'field_mappings']).is_a?(Hash)
+          self.field_mappings = value
+        end
+      end
+
+      if attributes.key?(:'remote_data')
+        if (value = attributes[:'remote_data']).is_a?(Array)
+          self.remote_data = value
+        end
       end
     end
 
@@ -181,15 +204,17 @@ module MergeAccountingClient
       self.class == o.class &&
           id == o.id &&
           remote_id == o.remote_id &&
-          remote_data == o.remote_data &&
           name == o.name &&
           status == o.status &&
           unit_price == o.unit_price &&
           purchase_price == o.purchase_price &&
           purchase_account == o.purchase_account &&
           sales_account == o.sales_account &&
+          company == o.company &&
           remote_updated_at == o.remote_updated_at &&
-          remote_was_deleted == o.remote_was_deleted
+          remote_was_deleted == o.remote_was_deleted &&
+          field_mappings == o.field_mappings &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -201,7 +226,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_data, name, status, unit_price, purchase_price, purchase_account, sales_account, remote_updated_at, remote_was_deleted].hash
+      [id, remote_id, name, status, unit_price, purchase_price, purchase_account, sales_account, company, remote_updated_at, remote_was_deleted, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

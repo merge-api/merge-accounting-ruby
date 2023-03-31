@@ -27,13 +27,17 @@ module MergeAccountingClient
 
     attr_accessor :sub_items
 
+    # The company the report item belongs to.
+    attr_accessor :company
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'remote_id' => :'remote_id',
         :'name' => :'name',
         :'value' => :'value',
-        :'sub_items' => :'sub_items'
+        :'sub_items' => :'sub_items',
+        :'company' => :'company'
       }
     end
 
@@ -48,7 +52,8 @@ module MergeAccountingClient
         :'remote_id' => :'String',
         :'name' => :'String',
         :'value' => :'Float',
-        :'sub_items' => :'Hash<String, Object>'
+        :'sub_items' => :'Hash<String, Object>',
+        :'company' => :'String'
       }
     end
 
@@ -58,6 +63,7 @@ module MergeAccountingClient
         :'remote_id',
         :'name',
         :'value',
+        :'company'
       ])
     end
 
@@ -93,6 +99,10 @@ module MergeAccountingClient
           self.sub_items = value
         end
       end
+
+      if attributes.key?(:'company')
+        self.company = attributes[:'company']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,7 +126,8 @@ module MergeAccountingClient
           remote_id == o.remote_id &&
           name == o.name &&
           value == o.value &&
-          sub_items == o.sub_items
+          sub_items == o.sub_items &&
+          company == o.company
     end
 
     # @see the `==` method
@@ -128,7 +139,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, name, value, sub_items].hash
+      [remote_id, name, value, sub_items, company].hash
     end
 
     # Builds the object from hash

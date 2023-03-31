@@ -98,19 +98,22 @@ module MergeAccountingClient
     # Returns a list of `Invoice` objects.
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :company_id If provided, will only return invoices for this company.
     # @option opts [String] :contact_id If provided, will only return invoices for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
+    # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
+    # @option opts [Time] :issue_date_before If provided, will only return objects created before this datetime.
     # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
     # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
     # @option opts [Integer] :page_size Number of results to return per page.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
-    # @option opts [String] :type If provided, will only return Invoices with this type
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
+    # @option opts [String] :type If provided, will only return Invoices with this type  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE
     # @return [PaginatedInvoiceList]
     def invoices_list(x_account_token, opts = {})
       data, _status_code, _headers = invoices_list_with_http_info(x_account_token, opts)
@@ -120,19 +123,22 @@ module MergeAccountingClient
     # Returns a list of &#x60;Invoice&#x60; objects.
     # @param x_account_token [String] Token identifying the end user.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :company_id If provided, will only return invoices for this company.
     # @option opts [String] :contact_id If provided, will only return invoices for this contact.
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
+    # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
+    # @option opts [Time] :issue_date_before If provided, will only return objects created before this datetime.
     # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
     # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
     # @option opts [Integer] :page_size Number of results to return per page.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
-    # @option opts [String] :type If provided, will only return Invoices with this type
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
+    # @option opts [String] :type If provided, will only return Invoices with this type  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE
     # @return [Array<(PaginatedInvoiceList, Integer, Hash)>] PaginatedInvoiceList data, response status code and response headers
     def invoices_list_with_http_info(x_account_token, opts = {})
       if @api_client.config.debugging
@@ -142,13 +148,13 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_list"
       end
-      allowable_values = ["contact", "line_items", "line_items,contact", "payments", "payments,contact", "payments,line_items", "payments,line_items,contact"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
-        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
-      end
       allowable_values = ["type"]
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
         fail ArgumentError, "invalid value for \"remote_fields\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["type"]
+      if @api_client.config.client_side_validation && opts[:'show_enum_origins'] && !allowable_values.include?(opts[:'show_enum_origins'])
+        fail ArgumentError, "invalid value for \"show_enum_origins\", must be one of #{allowable_values}"
       end
       allowable_values = ["ACCOUNTS_PAYABLE", "ACCOUNTS_RECEIVABLE"]
       if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
@@ -159,18 +165,21 @@ module MergeAccountingClient
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'company_id'] = opts[:'company_id'] if !opts[:'company_id'].nil?
       query_params[:'contact_id'] = opts[:'contact_id'] if !opts[:'contact_id'].nil?
       query_params[:'created_after'] = opts[:'created_after'] if !opts[:'created_after'].nil?
       query_params[:'created_before'] = opts[:'created_before'] if !opts[:'created_before'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
-      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_deleted_data'] = opts[:'include_deleted_data'] if !opts[:'include_deleted_data'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
+      query_params[:'issue_date_after'] = opts[:'issue_date_after'] if !opts[:'issue_date_after'].nil?
+      query_params[:'issue_date_before'] = opts[:'issue_date_before'] if !opts[:'issue_date_before'].nil?
       query_params[:'modified_after'] = opts[:'modified_after'] if !opts[:'modified_after'].nil?
       query_params[:'modified_before'] = opts[:'modified_before'] if !opts[:'modified_before'].nil?
       query_params[:'page_size'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'remote_fields'] = opts[:'remote_fields'] if !opts[:'remote_fields'].nil?
       query_params[:'remote_id'] = opts[:'remote_id'] if !opts[:'remote_id'].nil?
+      query_params[:'show_enum_origins'] = opts[:'show_enum_origins'] if !opts[:'show_enum_origins'].nil?
       query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
 
       # header parameters
@@ -274,9 +283,9 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
     # @return [Invoice]
     def invoices_retrieve(x_account_token, id, opts = {})
       data, _status_code, _headers = invoices_retrieve_with_http_info(x_account_token, id, opts)
@@ -287,9 +296,9 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
-    # @option opts [String] :remote_fields Which fields should be returned in non-normalized form.
+    # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
+    # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
     # @return [Array<(Invoice, Integer, Hash)>] Invoice data, response status code and response headers
     def invoices_retrieve_with_http_info(x_account_token, id, opts = {})
       if @api_client.config.debugging
@@ -303,22 +312,22 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling InvoicesApi.invoices_retrieve"
       end
-      allowable_values = ["contact", "line_items", "line_items,contact", "payments", "payments,contact", "payments,line_items", "payments,line_items,contact"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
-        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
-      end
       allowable_values = ["type"]
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
         fail ArgumentError, "invalid value for \"remote_fields\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["type"]
+      if @api_client.config.client_side_validation && opts[:'show_enum_origins'] && !allowable_values.include?(opts[:'show_enum_origins'])
+        fail ArgumentError, "invalid value for \"show_enum_origins\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/invoices/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
       query_params[:'remote_fields'] = opts[:'remote_fields'] if !opts[:'remote_fields'].nil?
+      query_params[:'show_enum_origins'] = opts[:'show_enum_origins'] if !opts[:'show_enum_origins'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -33,7 +33,8 @@ x_account_token = 'x_account_token_example' # String | Token identifying the end
 id = TODO # String | 
 opts = {
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
-  remote_fields: 'type' # String | Which fields should be returned in non-normalized form.
+  remote_fields: 'type', # String | Deprecated. Use show_enum_origins.
+  show_enum_origins: 'type' # String | Which fields should be returned in non-normalized form.
 }
 
 begin
@@ -70,7 +71,8 @@ end
 | **x_account_token** | **String** | Token identifying the end user. |  |
 | **id** | [**String**](.md) |  |  |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
-| **remote_fields** | **String** | Which fields should be returned in non-normalized form. | [optional] |
+| **remote_fields** | **String** | Deprecated. Use show_enum_origins. | [optional] |
+| **show_enum_origins** | **String** | Which fields should be returned in non-normalized form. | [optional] |
 
 ### Return type
 

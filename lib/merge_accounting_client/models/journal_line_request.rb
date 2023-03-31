@@ -16,30 +16,39 @@ require 'time'
 module MergeAccountingClient
   # # The JournalLine Object ### Description The `JournalLine` object is used to represent a journal entry's line items.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view the journal entry's line items.
   class JournalLineRequest
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
-
     attr_accessor :account
 
-    # The line's net amount.
+    # The value of the line item including taxes and other fees.
     attr_accessor :net_amount
 
     attr_accessor :tracking_category
+
+    attr_accessor :tracking_categories
 
     attr_accessor :contact
 
     # The line's description.
     attr_accessor :description
 
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
+    attr_accessor :integration_params
+
+    attr_accessor :linked_account_params
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_id' => :'remote_id',
         :'account' => :'account',
         :'net_amount' => :'net_amount',
         :'tracking_category' => :'tracking_category',
+        :'tracking_categories' => :'tracking_categories',
         :'contact' => :'contact',
-        :'description' => :'description'
+        :'description' => :'description',
+        :'remote_id' => :'remote_id',
+        :'integration_params' => :'integration_params',
+        :'linked_account_params' => :'linked_account_params'
       }
     end
 
@@ -51,24 +60,29 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_id' => :'String',
         :'account' => :'String',
         :'net_amount' => :'Float',
         :'tracking_category' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'contact' => :'String',
-        :'description' => :'String'
+        :'description' => :'String',
+        :'remote_id' => :'String',
+        :'integration_params' => :'Hash<String, Object>',
+        :'linked_account_params' => :'Hash<String, Object>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'remote_id',
         :'account',
         :'net_amount',
         :'tracking_category',
         :'contact',
-        :'description'
+        :'description',
+        :'remote_id',
+        :'integration_params',
+        :'linked_account_params'
       ])
     end
 
@@ -87,10 +101,6 @@ module MergeAccountingClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
       if attributes.key?(:'account')
         self.account = attributes[:'account']
       end
@@ -103,12 +113,34 @@ module MergeAccountingClient
         self.tracking_category = attributes[:'tracking_category']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'contact')
         self.contact = attributes[:'contact']
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'integration_params')
+        if (value = attributes[:'integration_params']).is_a?(Hash)
+          self.integration_params = value
+        end
+      end
+
+      if attributes.key?(:'linked_account_params')
+        if (value = attributes[:'linked_account_params']).is_a?(Hash)
+          self.linked_account_params = value
+        end
       end
     end
 
@@ -130,12 +162,15 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_id == o.remote_id &&
           account == o.account &&
           net_amount == o.net_amount &&
           tracking_category == o.tracking_category &&
+          tracking_categories == o.tracking_categories &&
           contact == o.contact &&
-          description == o.description
+          description == o.description &&
+          remote_id == o.remote_id &&
+          integration_params == o.integration_params &&
+          linked_account_params == o.linked_account_params
     end
 
     # @see the `==` method
@@ -147,7 +182,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, account, net_amount, tracking_category, contact, description].hash
+      [account, net_amount, tracking_category, tracking_categories, contact, description, remote_id, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash
