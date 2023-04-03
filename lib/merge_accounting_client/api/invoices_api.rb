@@ -103,6 +103,7 @@ module MergeAccountingClient
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
+    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
@@ -128,6 +129,7 @@ module MergeAccountingClient
     # @option opts [Time] :created_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :created_before If provided, will only return objects created before this datetime.
     # @option opts [String] :cursor The pagination cursor value.
+    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
@@ -147,6 +149,10 @@ module MergeAccountingClient
       # verify the required parameter 'x_account_token' is set
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_list"
+      end
+      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company"]
+      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       allowable_values = ["type"]
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
@@ -170,6 +176,7 @@ module MergeAccountingClient
       query_params[:'created_after'] = opts[:'created_after'] if !opts[:'created_after'].nil?
       query_params[:'created_before'] = opts[:'created_before'] if !opts[:'created_before'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_deleted_data'] = opts[:'include_deleted_data'] if !opts[:'include_deleted_data'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
       query_params[:'issue_date_after'] = opts[:'issue_date_after'] if !opts[:'issue_date_after'].nil?
@@ -283,6 +290,7 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
@@ -296,6 +304,7 @@ module MergeAccountingClient
     # @param x_account_token [String] Token identifying the end user.
     # @param id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :show_enum_origins Which fields should be returned in non-normalized form.
@@ -312,6 +321,10 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling InvoicesApi.invoices_retrieve"
       end
+      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company"]
+      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+        fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
+      end
       allowable_values = ["type"]
       if @api_client.config.client_side_validation && opts[:'remote_fields'] && !allowable_values.include?(opts[:'remote_fields'])
         fail ArgumentError, "invalid value for \"remote_fields\", must be one of #{allowable_values}"
@@ -325,6 +338,7 @@ module MergeAccountingClient
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'include_remote_data'] = opts[:'include_remote_data'] if !opts[:'include_remote_data'].nil?
       query_params[:'remote_fields'] = opts[:'remote_fields'] if !opts[:'remote_fields'].nil?
       query_params[:'show_enum_origins'] = opts[:'show_enum_origins'] if !opts[:'show_enum_origins'].nil?
