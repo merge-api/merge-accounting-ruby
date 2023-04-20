@@ -189,17 +189,17 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
-      if !@quantity.nil? && @quantity !~ pattern
+      if !@quantity.nil? && @quantity.to_s !~ pattern
         invalid_properties.push("invalid value for \"quantity\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@unit_price.nil? && @unit_price !~ pattern
+      if !@unit_price.nil? && @unit_price.to_s !~ pattern
         invalid_properties.push("invalid value for \"unit_price\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@total_line_amount.nil? && @total_line_amount !~ pattern
+      if !@total_line_amount.nil? && @total_line_amount.to_s !~ pattern
         invalid_properties.push("invalid value for \"total_line_amount\", must conform to the pattern #{pattern}.")
       end
 
@@ -213,9 +213,9 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@quantity.nil? && @quantity !~ Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
-      return false if !@unit_price.nil? && @unit_price !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      return false if !@total_line_amount.nil? && @total_line_amount !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@quantity.nil? && @quantity.to_s !~ Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
+      return false if !@unit_price.nil? && @unit_price.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@total_line_amount.nil? && @total_line_amount.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       return false if @tracking_categories.nil?
       true
     end
@@ -224,7 +224,7 @@ module MergeAccountingClient
     # @param [Object] quantity Value to be assigned
     def quantity=(quantity)
       pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
-      if !quantity.nil? && quantity !~ pattern
+      if !quantity.nil? && quantity.to_s !~ pattern
         fail ArgumentError, "invalid value for \"quantity\", must conform to the pattern #{pattern}."
       end
 
@@ -235,7 +235,7 @@ module MergeAccountingClient
     # @param [Object] unit_price Value to be assigned
     def unit_price=(unit_price)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !unit_price.nil? && unit_price !~ pattern
+      if !unit_price.nil? && unit_price.to_s !~ pattern
         fail ArgumentError, "invalid value for \"unit_price\", must conform to the pattern #{pattern}."
       end
 
@@ -246,7 +246,7 @@ module MergeAccountingClient
     # @param [Object] total_line_amount Value to be assigned
     def total_line_amount=(total_line_amount)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !total_line_amount.nil? && total_line_amount !~ pattern
+      if !total_line_amount.nil? && total_line_amount.to_s !~ pattern
         fail ArgumentError, "invalid value for \"total_line_amount\", must conform to the pattern #{pattern}."
       end
 

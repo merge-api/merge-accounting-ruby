@@ -67,4 +67,10 @@ describe MergeAccountingClient::VendorCreditLine do
     end
   end
 
+  describe 'test attribute "exchange_rate"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

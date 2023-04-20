@@ -25,20 +25,20 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::PurchaseOrderRequest.new(
-  status: SUBMITTED,
+  status: null,
   issue_date: null,
-  delivery_date: 2020-04-15T00:00Z,
+  delivery_date: null,
   delivery_address: null,
-  customer: 3e442c5d-8f51-4103-b5c9-dcee39c30a08,
-  vendor: 2c22ce34-5c6e-4fc7-a594-7f26bb4cf78b,
-  memo: private note,
-  company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  total_amount: 260.0,
-  currency: USD,
-  exchange_rate: 2.9,
-  line_items: [{&quot;description&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:25.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:260.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;},{&quot;description&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:20.0}],
-  integration_params: {&quot;unique_integration_field&quot;:&quot;unique_integration_field_value&quot;},
-  linked_account_params: {&quot;unique_linked_account_field&quot;:&quot;unique_linked_account_field_value&quot;}
+  customer: null,
+  vendor: null,
+  memo: null,
+  company: null,
+  total_amount: null,
+  currency: null,
+  exchange_rate: null,
+  line_items: null,
+  integration_params: null,
+  linked_account_params: null
 )
 ```
 

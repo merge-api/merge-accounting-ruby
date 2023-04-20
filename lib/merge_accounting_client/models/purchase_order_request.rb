@@ -202,7 +202,7 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@exchange_rate.nil? && @exchange_rate !~ pattern
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
@@ -212,7 +212,7 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@exchange_rate.nil? && @exchange_rate !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
     end
 
@@ -220,7 +220,7 @@ module MergeAccountingClient
     # @param [Object] exchange_rate Value to be assigned
     def exchange_rate=(exchange_rate)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !exchange_rate.nil? && exchange_rate !~ pattern
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
         fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
       end
 

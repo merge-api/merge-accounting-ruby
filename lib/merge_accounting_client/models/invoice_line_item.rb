@@ -16,6 +16,9 @@ require 'time'
 module MergeAccountingClient
   # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable, invoice is a bill, if type = accounts_receivable it's an invoice.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
   class InvoiceLineItem
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
     # The line item's description.
     attr_accessor :description
 
@@ -47,14 +50,12 @@ module MergeAccountingClient
 
     attr_accessor :id
 
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
-
     attr_accessor :field_mappings
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_id' => :'remote_id',
         :'description' => :'description',
         :'unit_price' => :'unit_price',
         :'quantity' => :'quantity',
@@ -67,7 +68,6 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'company' => :'company',
         :'id' => :'id',
-        :'remote_id' => :'remote_id',
         :'field_mappings' => :'field_mappings'
       }
     end
@@ -80,6 +80,7 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'remote_id' => :'String',
         :'description' => :'String',
         :'unit_price' => :'Float',
         :'quantity' => :'Float',
@@ -92,7 +93,6 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'company' => :'String',
         :'id' => :'String',
-        :'remote_id' => :'String',
         :'field_mappings' => :'Hash<String, Object>'
       }
     end
@@ -100,6 +100,7 @@ module MergeAccountingClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_id',
         :'description',
         :'unit_price',
         :'quantity',
@@ -110,7 +111,6 @@ module MergeAccountingClient
         :'account',
         :'tracking_category',
         :'company',
-        :'remote_id',
         :'field_mappings'
       ])
     end
@@ -129,6 +129,10 @@ module MergeAccountingClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
@@ -180,10 +184,6 @@ module MergeAccountingClient
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
       if attributes.key?(:'field_mappings')
         if (value = attributes[:'field_mappings']).is_a?(Hash)
           self.field_mappings = value
@@ -196,7 +196,7 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@exchange_rate.nil? && @exchange_rate !~ pattern
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
@@ -206,7 +206,7 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@exchange_rate.nil? && @exchange_rate !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
     end
 
@@ -214,7 +214,7 @@ module MergeAccountingClient
     # @param [Object] exchange_rate Value to be assigned
     def exchange_rate=(exchange_rate)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !exchange_rate.nil? && exchange_rate !~ pattern
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
         fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
       end
 
@@ -226,6 +226,7 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_id == o.remote_id &&
           description == o.description &&
           unit_price == o.unit_price &&
           quantity == o.quantity &&
@@ -238,7 +239,6 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           company == o.company &&
           id == o.id &&
-          remote_id == o.remote_id &&
           field_mappings == o.field_mappings
     end
 
@@ -251,7 +251,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, id, remote_id, field_mappings].hash
+      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, id, field_mappings].hash
     end
 
     # Builds the object from hash

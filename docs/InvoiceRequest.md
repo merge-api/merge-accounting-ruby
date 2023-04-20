@@ -30,25 +30,25 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::InvoiceRequest.new(
-  type: ACCOUNTS_RECEIVABLE,
-  contact: 022a2bef-57e5-4def-8ed2-7c41bd9a5ed8,
-  number: AIQ12546,
-  issue_date: 2020-03-31T00:00Z,
-  due_date: 2020-04-15T00:00Z,
-  paid_on_date: 2020-04-01T00:00Z,
-  memo: Weekly Payment,
-  company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  currency: USD,
-  exchange_rate: 2.9,
+  type: null,
+  contact: null,
+  number: null,
+  issue_date: null,
+  due_date: null,
+  paid_on_date: null,
+  memo: null,
+  company: null,
+  currency: null,
+  exchange_rate: null,
   total_discount: null,
-  sub_total: 100,
-  total_tax_amount: 5,
-  total_amount: 105,
-  balance: 105,
-  payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
-  line_items: [{&quot;id&quot;:&quot;022a2bef-57e5-4def-8ed2-7c41bd9a5ed8&quot;,&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:1.0,&quot;total_amount&quot;:50.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;account&quot;:&quot;cd0f32d4-a493-11ec-b909-0242ac120002&quot;,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}],
-  integration_params: {&quot;unique_integration_field&quot;:&quot;unique_integration_field_value&quot;},
-  linked_account_params: {&quot;unique_linked_account_field&quot;:&quot;unique_linked_account_field_value&quot;}
+  sub_total: null,
+  total_tax_amount: null,
+  total_amount: null,
+  balance: null,
+  payments: null,
+  line_items: null,
+  integration_params: null,
+  linked_account_params: null
 )
 ```
 

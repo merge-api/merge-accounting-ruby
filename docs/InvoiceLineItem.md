@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **description** | **String** | The line item&#39;s description. | [optional] |
 | **unit_price** | **Float** | The line item&#39;s unit price. | [optional] |
 | **quantity** | **Float** | The line item&#39;s quantity. | [optional] |
@@ -16,7 +17,6 @@
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **company** | **String** | The company the line item belongs to. | [optional] |
 | **id** | **String** |  | [optional][readonly] |
-| **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 
 ## Example
@@ -25,6 +25,7 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::InvoiceLineItem.new(
+  remote_id: 8765432,
   description: Pickleball lessons,
   unit_price: 50.0,
   quantity: 1.0,
@@ -37,7 +38,6 @@ instance = MergeAccountingClient::InvoiceLineItem.new(
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   id: 022a2bef-57e5-4def-8ed2-7c41bd9a5ed8,
-  remote_id: 8765432,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}}
 )
 ```

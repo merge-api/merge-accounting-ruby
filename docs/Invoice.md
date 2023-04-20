@@ -21,7 +21,7 @@
 | **balance** | **Float** | The invoice&#39;s remaining balance. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s invoice entry was updated. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
-| **line_items** | [**Array&lt;InvoiceLineItem&gt;**](InvoiceLineItem.md) |  | [optional] |
+| **line_items** | [**Array&lt;InvoiceLineItem&gt;**](InvoiceLineItem.md) |  | [optional][readonly] |
 | **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
 | **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
