@@ -21,16 +21,16 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::JournalEntryRequest.new(
-  transaction_date: 2020-03-31T00:00Z,
-  payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
-  memo: Weekly Payment,
-  currency: USD,
-  exchange_rate: 2.9,
-  company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;account&quot;:&quot;9d892439-5fab-4dbb-8bd8-34f7f96c7912&quot;,&quot;net_amount&quot;:25.54,&quot;tracking_category&quot;:&quot;d25d609b-945f-4762-b55a-1c8fb220c43c&quot;,&quot;tracking_categories&quot;:[&quot;d25d609b-945f-4762-b55a-1c8fb220c43c&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;contact&quot;:&quot;d2d5ea3c-b032-11ec-b909-0242ac120002&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;description&quot;:&quot;Cash payment for lunch&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;account&quot;:&quot;f963f34d-3d2f-4f77-b557-cf36bc7e6498&quot;,&quot;net_amount&quot;:10.0}],
-  posting_status: POSTED,
-  integration_params: {&quot;unique_integration_field&quot;:&quot;unique_integration_field_value&quot;},
-  linked_account_params: {&quot;unique_linked_account_field&quot;:&quot;unique_linked_account_field_value&quot;}
+  transaction_date: null,
+  payments: null,
+  memo: null,
+  currency: null,
+  exchange_rate: null,
+  company: null,
+  lines: null,
+  posting_status: null,
+  integration_params: null,
+  linked_account_params: null
 )
 ```
 

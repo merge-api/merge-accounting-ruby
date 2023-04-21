@@ -124,7 +124,7 @@ module MergeAccountingClient
       end
 
       pattern = Regexp.new(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
-      if !@color.nil? && @color !~ pattern
+      if !@color.nil? && @color.to_s !~ pattern
         invalid_properties.push("invalid value for \"color\", must conform to the pattern #{pattern}.")
       end
 
@@ -136,7 +136,7 @@ module MergeAccountingClient
     def valid?
       return false if @name.nil?
       return false if !@color.nil? && @color.to_s.length > 18
-      return false if !@color.nil? && @color !~ Regexp.new(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
+      return false if !@color.nil? && @color.to_s !~ Regexp.new(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
       true
     end
 
@@ -148,7 +148,7 @@ module MergeAccountingClient
       end
 
       pattern = Regexp.new(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
-      if !color.nil? && color !~ pattern
+      if !color.nil? && color.to_s !~ pattern
         fail ArgumentError, "invalid value for \"color\", must conform to the pattern #{pattern}."
       end
 

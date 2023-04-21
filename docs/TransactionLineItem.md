@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **memo** | **String** | An internal note used by the business to clarify purpose of the transaction. | [optional] |
 | **unit_price** | **String** | The line item&#39;s unit price. | [optional] |
 | **quantity** | **String** | The line item&#39;s quantity. | [optional] |
@@ -23,6 +24,7 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::TransactionLineItem.new(
+  remote_id: 121222,
   memo: Pickleball paddles,
   unit_price: 25.0,
   quantity: 10.0,

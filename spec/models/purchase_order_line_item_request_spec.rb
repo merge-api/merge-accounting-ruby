@@ -25,6 +25,12 @@ describe MergeAccountingClient::PurchaseOrderLineItemRequest do
       expect(instance).to be_instance_of(MergeAccountingClient::PurchaseOrderLineItemRequest)
     end
   end
+  describe 'test attribute "remote_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "description"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

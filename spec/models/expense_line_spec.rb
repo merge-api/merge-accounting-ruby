@@ -25,6 +25,12 @@ describe MergeAccountingClient::ExpenseLine do
       expect(instance).to be_instance_of(MergeAccountingClient::ExpenseLine)
     end
   end
+  describe 'test attribute "remote_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "item"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -73,7 +79,7 @@ describe MergeAccountingClient::ExpenseLine do
     end
   end
 
-  describe 'test attribute "remote_id"' do
+  describe 'test attribute "exchange_rate"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

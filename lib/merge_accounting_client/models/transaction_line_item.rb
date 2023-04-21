@@ -16,6 +16,9 @@ require 'time'
 module MergeAccountingClient
   # # The TransactionLineItem Object ### Description The `TransactionLineItem` object is used to represent a transaction's line items.  ### Usage Example Fetch from the `GET TransactionLineItem` endpoint and view the transaction's line items.
   class TransactionLineItem
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
     # An internal note used by the business to clarify purpose of the transaction.
     attr_accessor :memo
 
@@ -54,6 +57,7 @@ module MergeAccountingClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_id' => :'remote_id',
         :'memo' => :'memo',
         :'unit_price' => :'unit_price',
         :'quantity' => :'quantity',
@@ -77,6 +81,7 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'remote_id' => :'String',
         :'memo' => :'String',
         :'unit_price' => :'String',
         :'quantity' => :'String',
@@ -95,6 +100,7 @@ module MergeAccountingClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_id',
         :'memo',
         :'unit_price',
         :'quantity',
@@ -123,6 +129,10 @@ module MergeAccountingClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
 
       if attributes.key?(:'memo')
         self.memo = attributes[:'memo']
@@ -180,12 +190,12 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@unit_price.nil? && @unit_price !~ pattern
+      if !@unit_price.nil? && @unit_price.to_s !~ pattern
         invalid_properties.push("invalid value for \"unit_price\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
-      if !@quantity.nil? && @quantity !~ pattern
+      if !@quantity.nil? && @quantity.to_s !~ pattern
         invalid_properties.push("invalid value for \"quantity\", must conform to the pattern #{pattern}.")
       end
 
@@ -194,12 +204,12 @@ module MergeAccountingClient
       end
 
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@total_line_amount.nil? && @total_line_amount !~ pattern
+      if !@total_line_amount.nil? && @total_line_amount.to_s !~ pattern
         invalid_properties.push("invalid value for \"total_line_amount\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@exchange_rate.nil? && @exchange_rate !~ pattern
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
@@ -209,11 +219,11 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@unit_price.nil? && @unit_price !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      return false if !@quantity.nil? && @quantity !~ Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
+      return false if !@unit_price.nil? && @unit_price.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@quantity.nil? && @quantity.to_s !~ Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
       return false if @tracking_categories.nil?
-      return false if !@total_line_amount.nil? && @total_line_amount !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      return false if !@exchange_rate.nil? && @exchange_rate !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@total_line_amount.nil? && @total_line_amount.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
     end
 
@@ -221,7 +231,7 @@ module MergeAccountingClient
     # @param [Object] unit_price Value to be assigned
     def unit_price=(unit_price)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !unit_price.nil? && unit_price !~ pattern
+      if !unit_price.nil? && unit_price.to_s !~ pattern
         fail ArgumentError, "invalid value for \"unit_price\", must conform to the pattern #{pattern}."
       end
 
@@ -232,7 +242,7 @@ module MergeAccountingClient
     # @param [Object] quantity Value to be assigned
     def quantity=(quantity)
       pattern = Regexp.new(/^-?\d{0,24}(?:\.\d{0,8})?$/)
-      if !quantity.nil? && quantity !~ pattern
+      if !quantity.nil? && quantity.to_s !~ pattern
         fail ArgumentError, "invalid value for \"quantity\", must conform to the pattern #{pattern}."
       end
 
@@ -243,7 +253,7 @@ module MergeAccountingClient
     # @param [Object] total_line_amount Value to be assigned
     def total_line_amount=(total_line_amount)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !total_line_amount.nil? && total_line_amount !~ pattern
+      if !total_line_amount.nil? && total_line_amount.to_s !~ pattern
         fail ArgumentError, "invalid value for \"total_line_amount\", must conform to the pattern #{pattern}."
       end
 
@@ -254,7 +264,7 @@ module MergeAccountingClient
     # @param [Object] exchange_rate Value to be assigned
     def exchange_rate=(exchange_rate)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !exchange_rate.nil? && exchange_rate !~ pattern
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
         fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
       end
 
@@ -266,6 +276,7 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_id == o.remote_id &&
           memo == o.memo &&
           unit_price == o.unit_price &&
           quantity == o.quantity &&
@@ -289,7 +300,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [memo, unit_price, quantity, item, account, tracking_category, tracking_categories, total_line_amount, tax_rate, currency, exchange_rate, company].hash
+      [remote_id, memo, unit_price, quantity, item, account, tracking_category, tracking_categories, total_line_amount, tax_rate, currency, exchange_rate, company].hash
     end
 
     # Builds the object from hash

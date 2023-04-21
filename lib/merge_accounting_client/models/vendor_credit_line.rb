@@ -37,6 +37,9 @@ module MergeAccountingClient
     # The company the line belongs to.
     attr_accessor :company
 
+    # The vendor credit line item's exchange rate.
+    attr_accessor :exchange_rate
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -46,7 +49,8 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'description' => :'description',
         :'account' => :'account',
-        :'company' => :'company'
+        :'company' => :'company',
+        :'exchange_rate' => :'exchange_rate'
       }
     end
 
@@ -64,7 +68,8 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'description' => :'String',
         :'account' => :'String',
-        :'company' => :'String'
+        :'company' => :'String',
+        :'exchange_rate' => :'String'
       }
     end
 
@@ -76,7 +81,8 @@ module MergeAccountingClient
         :'tracking_category',
         :'description',
         :'account',
-        :'company'
+        :'company',
+        :'exchange_rate'
       ])
     end
 
@@ -124,6 +130,10 @@ module MergeAccountingClient
       if attributes.key?(:'company')
         self.company = attributes[:'company']
       end
+
+      if attributes.key?(:'exchange_rate')
+        self.exchange_rate = attributes[:'exchange_rate']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,6 +144,11 @@ module MergeAccountingClient
         invalid_properties.push('invalid value for "tracking_categories", tracking_categories cannot be nil.')
       end
 
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
+        invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -141,7 +156,19 @@ module MergeAccountingClient
     # @return true if the model is valid
     def valid?
       return false if @tracking_categories.nil?
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] exchange_rate Value to be assigned
+    def exchange_rate=(exchange_rate)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
+        fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
+      end
+
+      @exchange_rate = exchange_rate
     end
 
     # Checks equality by comparing each attribute.
@@ -155,7 +182,8 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           description == o.description &&
           account == o.account &&
-          company == o.company
+          company == o.company &&
+          exchange_rate == o.exchange_rate
     end
 
     # @see the `==` method
@@ -167,7 +195,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, net_amount, tracking_category, tracking_categories, description, account, company].hash
+      [remote_id, net_amount, tracking_category, tracking_categories, description, account, company, exchange_rate].hash
     end
 
     # Builds the object from hash

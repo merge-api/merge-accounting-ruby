@@ -66,7 +66,7 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling TransactionsApi.transactions_list"
       end
-      allowable_values = ["account", "contact", "contact,account", "line_items", "line_items,account", "line_items,contact", "line_items,contact,account"]
+      allowable_values = ["account", "contact", "contact,account", "line_items", "line_items,account", "line_items,contact", "line_items,contact,account", "line_items,tracking_categories", "line_items,tracking_categories,account", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,account", "tracking_categories", "tracking_categories,account", "tracking_categories,contact", "tracking_categories,contact,account"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
@@ -155,7 +155,7 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling TransactionsApi.transactions_retrieve"
       end
-      allowable_values = ["account", "contact", "contact,account", "line_items", "line_items,account", "line_items,contact", "line_items,contact,account"]
+      allowable_values = ["account", "contact", "contact,account", "line_items", "line_items,account", "line_items,contact", "line_items,contact,account", "line_items,tracking_categories", "line_items,tracking_categories,account", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,account", "tracking_categories", "tracking_categories,account", "tracking_categories,contact", "tracking_categories,contact,account"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end

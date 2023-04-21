@@ -16,6 +16,9 @@ require 'time'
 module MergeAccountingClient
   # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable, invoice is a bill, if type = accounts_receivable it's an invoice.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
   class InvoiceLineItemRequest
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
     # The line item's description.
     attr_accessor :description
 
@@ -45,9 +48,6 @@ module MergeAccountingClient
     # The company the line item belongs to.
     attr_accessor :company
 
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
-
     attr_accessor :integration_params
 
     attr_accessor :linked_account_params
@@ -55,6 +55,7 @@ module MergeAccountingClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_id' => :'remote_id',
         :'description' => :'description',
         :'unit_price' => :'unit_price',
         :'quantity' => :'quantity',
@@ -66,7 +67,6 @@ module MergeAccountingClient
         :'tracking_category' => :'tracking_category',
         :'tracking_categories' => :'tracking_categories',
         :'company' => :'company',
-        :'remote_id' => :'remote_id',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -80,6 +80,7 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'remote_id' => :'String',
         :'description' => :'String',
         :'unit_price' => :'Float',
         :'quantity' => :'Float',
@@ -91,7 +92,6 @@ module MergeAccountingClient
         :'tracking_category' => :'String',
         :'tracking_categories' => :'Array<String>',
         :'company' => :'String',
-        :'remote_id' => :'String',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -100,6 +100,7 @@ module MergeAccountingClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_id',
         :'description',
         :'unit_price',
         :'quantity',
@@ -110,7 +111,6 @@ module MergeAccountingClient
         :'account',
         :'tracking_category',
         :'company',
-        :'remote_id',
         :'integration_params',
         :'linked_account_params'
       ])
@@ -130,6 +130,10 @@ module MergeAccountingClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
@@ -177,10 +181,6 @@ module MergeAccountingClient
         self.company = attributes[:'company']
       end
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
       if attributes.key?(:'integration_params')
         if (value = attributes[:'integration_params']).is_a?(Hash)
           self.integration_params = value
@@ -199,7 +199,7 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@exchange_rate.nil? && @exchange_rate !~ pattern
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
@@ -209,7 +209,7 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@exchange_rate.nil? && @exchange_rate !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
     end
 
@@ -217,7 +217,7 @@ module MergeAccountingClient
     # @param [Object] exchange_rate Value to be assigned
     def exchange_rate=(exchange_rate)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !exchange_rate.nil? && exchange_rate !~ pattern
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
         fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
       end
 
@@ -229,6 +229,7 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_id == o.remote_id &&
           description == o.description &&
           unit_price == o.unit_price &&
           quantity == o.quantity &&
@@ -240,7 +241,6 @@ module MergeAccountingClient
           tracking_category == o.tracking_category &&
           tracking_categories == o.tracking_categories &&
           company == o.company &&
-          remote_id == o.remote_id &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -254,7 +254,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, remote_id, integration_params, linked_account_params].hash
+      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

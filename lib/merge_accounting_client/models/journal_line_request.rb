@@ -16,6 +16,9 @@ require 'time'
 module MergeAccountingClient
   # # The JournalLine Object ### Description The `JournalLine` object is used to represent a journal entry's line items.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view the journal entry's line items.
   class JournalLineRequest
+    # The third-party API ID of the matching object.
+    attr_accessor :remote_id
+
     attr_accessor :account
 
     # The value of the line item including taxes and other fees.
@@ -30,8 +33,8 @@ module MergeAccountingClient
     # The line's description.
     attr_accessor :description
 
-    # The third-party API ID of the matching object.
-    attr_accessor :remote_id
+    # The journal line item's exchange rate.
+    attr_accessor :exchange_rate
 
     attr_accessor :integration_params
 
@@ -40,13 +43,14 @@ module MergeAccountingClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_id' => :'remote_id',
         :'account' => :'account',
         :'net_amount' => :'net_amount',
         :'tracking_category' => :'tracking_category',
         :'tracking_categories' => :'tracking_categories',
         :'contact' => :'contact',
         :'description' => :'description',
-        :'remote_id' => :'remote_id',
+        :'exchange_rate' => :'exchange_rate',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -60,13 +64,14 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'remote_id' => :'String',
         :'account' => :'String',
         :'net_amount' => :'Float',
         :'tracking_category' => :'String',
         :'tracking_categories' => :'Array<String>',
         :'contact' => :'String',
         :'description' => :'String',
-        :'remote_id' => :'String',
+        :'exchange_rate' => :'String',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -75,12 +80,13 @@ module MergeAccountingClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_id',
         :'account',
         :'net_amount',
         :'tracking_category',
         :'contact',
         :'description',
-        :'remote_id',
+        :'exchange_rate',
         :'integration_params',
         :'linked_account_params'
       ])
@@ -100,6 +106,10 @@ module MergeAccountingClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
 
       if attributes.key?(:'account')
         self.account = attributes[:'account']
@@ -127,8 +137,8 @@ module MergeAccountingClient
         self.description = attributes[:'description']
       end
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
+      if attributes.key?(:'exchange_rate')
+        self.exchange_rate = attributes[:'exchange_rate']
       end
 
       if attributes.key?(:'integration_params')
@@ -148,13 +158,30 @@ module MergeAccountingClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
+        invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] exchange_rate Value to be assigned
+    def exchange_rate=(exchange_rate)
+      pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
+        fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
+      end
+
+      @exchange_rate = exchange_rate
     end
 
     # Checks equality by comparing each attribute.
@@ -162,13 +189,14 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_id == o.remote_id &&
           account == o.account &&
           net_amount == o.net_amount &&
           tracking_category == o.tracking_category &&
           tracking_categories == o.tracking_categories &&
           contact == o.contact &&
           description == o.description &&
-          remote_id == o.remote_id &&
+          exchange_rate == o.exchange_rate &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -182,7 +210,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account, net_amount, tracking_category, tracking_categories, contact, description, remote_id, integration_params, linked_account_params].hash
+      [remote_id, account, net_amount, tracking_category, tracking_categories, contact, description, exchange_rate, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

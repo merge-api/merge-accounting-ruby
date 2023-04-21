@@ -43,6 +43,8 @@ module MergeAccountingClient
     # The company the transaction belongs to.
     attr_accessor :company
 
+    attr_accessor :tracking_categories
+
     attr_accessor :line_items
 
     # Indicates whether or not this object has been deleted by third party webhooks.
@@ -69,6 +71,7 @@ module MergeAccountingClient
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
         :'company' => :'company',
+        :'tracking_categories' => :'tracking_categories',
         :'line_items' => :'line_items',
         :'remote_was_deleted' => :'remote_was_deleted',
         :'id' => :'id',
@@ -95,6 +98,7 @@ module MergeAccountingClient
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
         :'company' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'line_items' => :'Array<TransactionLineItem>',
         :'remote_was_deleted' => :'Boolean',
         :'id' => :'String',
@@ -173,6 +177,12 @@ module MergeAccountingClient
         self.company = attributes[:'company']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -209,12 +219,12 @@ module MergeAccountingClient
     def list_invalid_properties
       invalid_properties = Array.new
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@total_amount.nil? && @total_amount !~ pattern
+      if !@total_amount.nil? && @total_amount.to_s !~ pattern
         invalid_properties.push("invalid value for \"total_amount\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !@exchange_rate.nil? && @exchange_rate !~ pattern
+      if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
@@ -224,8 +234,8 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@total_amount.nil? && @total_amount !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      return false if !@exchange_rate.nil? && @exchange_rate !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@total_amount.nil? && @total_amount.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
     end
 
@@ -233,7 +243,7 @@ module MergeAccountingClient
     # @param [Object] total_amount Value to be assigned
     def total_amount=(total_amount)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !total_amount.nil? && total_amount !~ pattern
+      if !total_amount.nil? && total_amount.to_s !~ pattern
         fail ArgumentError, "invalid value for \"total_amount\", must conform to the pattern #{pattern}."
       end
 
@@ -244,7 +254,7 @@ module MergeAccountingClient
     # @param [Object] exchange_rate Value to be assigned
     def exchange_rate=(exchange_rate)
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
-      if !exchange_rate.nil? && exchange_rate !~ pattern
+      if !exchange_rate.nil? && exchange_rate.to_s !~ pattern
         fail ArgumentError, "invalid value for \"exchange_rate\", must conform to the pattern #{pattern}."
       end
 
@@ -265,6 +275,7 @@ module MergeAccountingClient
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
           company == o.company &&
+          tracking_categories == o.tracking_categories &&
           line_items == o.line_items &&
           remote_was_deleted == o.remote_was_deleted &&
           id == o.id &&
@@ -282,7 +293,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, line_items, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
+      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, tracking_categories, line_items, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

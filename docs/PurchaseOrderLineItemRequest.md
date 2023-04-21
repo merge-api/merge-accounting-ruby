@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
 | **description** | **String** | A description of the good being purchased. | [optional] |
 | **unit_price** | **Float** | The line item&#39;s unit price. | [optional] |
 | **quantity** | **Float** | The line item&#39;s quantity. | [optional] |
@@ -25,6 +26,7 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::PurchaseOrderLineItemRequest.new(
+  remote_id: 121222,
   description: Pickleball paddles,
   unit_price: 25.0,
   quantity: 10.0,
