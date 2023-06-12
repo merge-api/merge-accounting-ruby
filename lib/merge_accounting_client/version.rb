@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.1.1
 =end
 
 module MergeAccountingClient
-  VERSION = '1.0.7'
+  VERSION = '1.0.8'
 end
