@@ -17,6 +17,7 @@
 | **account** | **String** | The credit note line item&#39;s account. | [optional] |
 | **company** | **String** | The company the credit note belongs to. | [optional] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = MergeAccountingClient::CreditNoteLineItem.new(
   tracking_categories: [&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   account: 8d9fd929-436c-4fd4-a48b-0c61f68d6178,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  remote_id: 121222
+  remote_id: 121222,
+  modified_at: 2021-10-16T00:00Z
 )
 ```
 

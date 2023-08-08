@@ -17,6 +17,7 @@ module MergeAccountingClient
   class Issue
     attr_accessor :id
 
+    # Status of the issue. Options: ('ONGOING', 'RESOLVED')  * `ONGOING` - ONGOING * `RESOLVED` - RESOLVED
     attr_accessor :status
 
     attr_accessor :error_description

@@ -55,6 +55,9 @@ module MergeAccountingClient
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     attr_accessor :field_mappings
 
     attr_accessor :remote_data
@@ -76,6 +79,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'remote_was_deleted',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
       }
@@ -103,6 +107,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'Boolean',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
@@ -201,6 +206,10 @@ module MergeAccountingClient
         self.remote_id = attributes[:'remote_id']
       end
 
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
+
       if attributes.key?(:'field_mappings')
         if (value = attributes[:'field_mappings']).is_a?(Hash)
           self.field_mappings = value
@@ -280,6 +289,7 @@ module MergeAccountingClient
           remote_was_deleted == o.remote_was_deleted &&
           id == o.id &&
           remote_id == o.remote_id &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
     end
@@ -293,7 +303,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, tracking_categories, line_items, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
+      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, tracking_categories, line_items, remote_was_deleted, id, remote_id, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

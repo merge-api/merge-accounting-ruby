@@ -14,9 +14,11 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Invoice Object     ### Description     The `Invoice` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable `Invoice` is a bill, if type = accounts_receivable it's an invoice.      ### Usage Example     Fetch from the `LIST Invoices` endpoint and view a company's invoices.
+  # # The Invoice Object ### Description The `Invoice` object represents an itemized record of goods and/or services sold to a customer.  ### Usage Example Fetch from the `LIST Invoices` endpoint and view a company's invoices.
   class Invoice
-    # Whether the invoice is an accounts receivable or accounts payable. Accounts payable invoices are commonly referred to as Bills.  * `ACCOUNTS_RECEIVABLE` - ACCOUNTS_RECEIVABLE * `ACCOUNTS_PAYABLE` - ACCOUNTS_PAYABLE
+    attr_accessor :id
+
+    # Whether the invoice is an accounts receivable or accounts payable. If `type` is `accounts_payable`, the invoice is a bill. If `type` is `accounts_receivable`, it is an invoice.  * `ACCOUNTS_RECEIVABLE` - ACCOUNTS_RECEIVABLE * `ACCOUNTS_PAYABLE` - ACCOUNTS_PAYABLE
     attr_accessor :type
 
     # The invoice's contact.
@@ -64,6 +66,8 @@ module MergeAccountingClient
     # When the third party's invoice entry was updated.
     attr_accessor :remote_updated_at
 
+    attr_accessor :tracking_categories
+
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
@@ -71,10 +75,11 @@ module MergeAccountingClient
 
     attr_accessor :remote_was_deleted
 
-    attr_accessor :id
-
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
 
     attr_accessor :field_mappings
 
@@ -83,6 +88,7 @@ module MergeAccountingClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'type' => :'type',
         :'contact' => :'contact',
         :'number' => :'number',
@@ -99,11 +105,12 @@ module MergeAccountingClient
         :'total_amount' => :'total_amount',
         :'balance' => :'balance',
         :'remote_updated_at' => :'remote_updated_at',
+        :'tracking_categories' => :'tracking_categories',
         :'payments' => :'payments',
         :'line_items' => :'line_items',
         :'remote_was_deleted' => :'remote_was_deleted',
-        :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
       }
@@ -117,6 +124,7 @@ module MergeAccountingClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'type' => :'InvoiceTypeEnum',
         :'contact' => :'String',
         :'number' => :'String',
@@ -133,11 +141,12 @@ module MergeAccountingClient
         :'total_amount' => :'Float',
         :'balance' => :'Float',
         :'remote_updated_at' => :'Time',
+        :'tracking_categories' => :'Array<String>',
         :'payments' => :'Array<String>',
         :'line_items' => :'Array<InvoiceLineItem>',
         :'remote_was_deleted' => :'Boolean',
-        :'id' => :'String',
         :'remote_id' => :'String',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
@@ -182,6 +191,10 @@ module MergeAccountingClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
@@ -247,6 +260,12 @@ module MergeAccountingClient
         self.remote_updated_at = attributes[:'remote_updated_at']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'payments')
         if (value = attributes[:'payments']).is_a?(Array)
           self.payments = value
@@ -263,12 +282,12 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
       end
 
       if attributes.key?(:'field_mappings')
@@ -319,6 +338,7 @@ module MergeAccountingClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           type == o.type &&
           contact == o.contact &&
           number == o.number &&
@@ -335,11 +355,12 @@ module MergeAccountingClient
           total_amount == o.total_amount &&
           balance == o.balance &&
           remote_updated_at == o.remote_updated_at &&
+          tracking_categories == o.tracking_categories &&
           payments == o.payments &&
           line_items == o.line_items &&
           remote_was_deleted == o.remote_was_deleted &&
-          id == o.id &&
           remote_id == o.remote_id &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
     end
@@ -353,7 +374,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, payments, line_items, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
+      [id, type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, tracking_categories, payments, line_items, remote_was_deleted, remote_id, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

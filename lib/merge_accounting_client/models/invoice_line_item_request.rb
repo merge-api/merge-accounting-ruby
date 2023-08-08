@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable, invoice is a bill, if type = accounts_receivable it's an invoice.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
+  # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
   class InvoiceLineItemRequest
     # The third-party API ID of the matching object.
     attr_accessor :remote_id

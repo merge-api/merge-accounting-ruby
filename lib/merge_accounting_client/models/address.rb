@@ -40,6 +40,9 @@ module MergeAccountingClient
     # The address's zip code.
     attr_accessor :zip_code
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -50,7 +53,8 @@ module MergeAccountingClient
         :'state' => :'state',
         :'country_subdivision' => :'country_subdivision',
         :'country' => :'country',
-        :'zip_code' => :'zip_code'
+        :'zip_code' => :'zip_code',
+        :'modified_at' => :'modified_at'
       }
     end
 
@@ -69,7 +73,8 @@ module MergeAccountingClient
         :'state' => :'Object',
         :'country_subdivision' => :'String',
         :'country' => :'CountryEnum',
-        :'zip_code' => :'String'
+        :'zip_code' => :'String',
+        :'modified_at' => :'Time'
       }
     end
 
@@ -83,7 +88,7 @@ module MergeAccountingClient
         :'state',
         :'country_subdivision',
         :'country',
-        :'zip_code'
+        :'zip_code',
       ])
     end
 
@@ -133,6 +138,10 @@ module MergeAccountingClient
       if attributes.key?(:'zip_code')
         self.zip_code = attributes[:'zip_code']
       end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -160,7 +169,8 @@ module MergeAccountingClient
           state == o.state &&
           country_subdivision == o.country_subdivision &&
           country == o.country &&
-          zip_code == o.zip_code
+          zip_code == o.zip_code &&
+          modified_at == o.modified_at
     end
 
     # @see the `==` method
@@ -172,7 +182,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, street_1, street_2, city, state, country_subdivision, country, zip_code].hash
+      [type, street_1, street_2, city, state, country_subdivision, country, zip_code, modified_at].hash
     end
 
     # Builds the object from hash

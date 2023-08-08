@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | [**InvoiceTypeEnum**](InvoiceTypeEnum.md) | Whether the invoice is an accounts receivable or accounts payable. Accounts payable invoices are commonly referred to as Bills.  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE | [optional] |
+| **type** | [**InvoiceTypeEnum**](InvoiceTypeEnum.md) | Whether the invoice is an accounts receivable or accounts payable. If &#x60;type&#x60; is &#x60;accounts_payable&#x60;, the invoice is a bill. If &#x60;type&#x60; is &#x60;accounts_receivable&#x60;, it is an invoice.  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE | [optional] |
 | **contact** | **String** | The invoice&#39;s contact. | [optional] |
 | **number** | **String** | The invoice&#39;s number. | [optional] |
 | **issue_date** | **Time** | The invoice&#39;s issue date. | [optional] |
@@ -20,6 +20,7 @@
 | **total_amount** | **Float** | The invoice&#39;s total amount. | [optional] |
 | **balance** | **Float** | The invoice&#39;s remaining balance. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
+| **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **line_items** | [**Array&lt;InvoiceLineItemRequest&gt;**](InvoiceLineItemRequest.md) |  | [optional] |
 | **integration_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 | **linked_account_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
@@ -46,6 +47,7 @@ instance = MergeAccountingClient::InvoiceRequest.new(
   total_amount: null,
   balance: null,
   payments: null,
+  tracking_categories: null,
   line_items: null,
   integration_params: null,
   linked_account_params: null

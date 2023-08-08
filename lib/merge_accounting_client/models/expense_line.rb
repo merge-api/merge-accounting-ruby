@@ -44,6 +44,9 @@ module MergeAccountingClient
     # The expense line item's exchange rate.
     attr_accessor :exchange_rate
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -56,7 +59,8 @@ module MergeAccountingClient
         :'account' => :'account',
         :'contact' => :'contact',
         :'description' => :'description',
-        :'exchange_rate' => :'exchange_rate'
+        :'exchange_rate' => :'exchange_rate',
+        :'modified_at' => :'modified_at'
       }
     end
 
@@ -77,7 +81,8 @@ module MergeAccountingClient
         :'account' => :'String',
         :'contact' => :'String',
         :'description' => :'String',
-        :'exchange_rate' => :'String'
+        :'exchange_rate' => :'String',
+        :'modified_at' => :'Time'
       }
     end
 
@@ -92,7 +97,7 @@ module MergeAccountingClient
         :'account',
         :'contact',
         :'description',
-        :'exchange_rate'
+        :'exchange_rate',
       ])
     end
 
@@ -152,6 +157,10 @@ module MergeAccountingClient
       if attributes.key?(:'exchange_rate')
         self.exchange_rate = attributes[:'exchange_rate']
       end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -198,7 +207,8 @@ module MergeAccountingClient
           account == o.account &&
           contact == o.contact &&
           description == o.description &&
-          exchange_rate == o.exchange_rate
+          exchange_rate == o.exchange_rate &&
+          modified_at == o.modified_at
     end
 
     # @see the `==` method
@@ -210,7 +220,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, item, net_amount, tracking_category, tracking_categories, company, account, contact, description, exchange_rate].hash
+      [remote_id, item, net_amount, tracking_category, tracking_categories, company, account, contact, description, exchange_rate, modified_at].hash
     end
 
     # Builds the object from hash

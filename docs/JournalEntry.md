@@ -13,10 +13,12 @@
 | **exchange_rate** | **String** | The journal entry&#39;s exchange rate. | [optional] |
 | **company** | **String** | The company the journal entry belongs to. | [optional] |
 | **lines** | [**Array&lt;JournalLine&gt;**](JournalLine.md) |  | [optional][readonly] |
+| **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
 | **posting_status** | [**PostingStatusEnum**](PostingStatusEnum.md) | The journal&#39;s posting status.  * &#x60;UNPOSTED&#x60; - UNPOSTED * &#x60;POSTED&#x60; - POSTED | [optional] |
 | **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 
@@ -35,10 +37,12 @@ instance = MergeAccountingClient::JournalEntry.new(
   exchange_rate: 2.9,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;account&quot;:&quot;9d892439-5fab-4dbb-8bd8-34f7f96c7912&quot;,&quot;net_amount&quot;:25.54,&quot;tracking_category&quot;:&quot;d25d609b-945f-4762-b55a-1c8fb220c43c&quot;,&quot;tracking_categories&quot;:[&quot;d25d609b-945f-4762-b55a-1c8fb220c43c&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;contact&quot;:&quot;d2d5ea3c-b032-11ec-b909-0242ac120002&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;description&quot;:&quot;Cash payment for lunch&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;account&quot;:&quot;f963f34d-3d2f-4f77-b557-cf36bc7e6498&quot;,&quot;net_amount&quot;:10.0}],
+  tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   remote_was_deleted: null,
   posting_status: POSTED,
   id: ecbe05ac-62a3-46c5-ab31-4b478b37d1b4,
   remote_id: 088899,
+  modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]
 )

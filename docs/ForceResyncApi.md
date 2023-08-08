@@ -13,7 +13,7 @@ All URIs are relative to *https://api.merge.dev/api/accounting/v1*
 
 
 
-Force re-sync of all models. This is available for all organizations via the dashboard. Force re-sync is also available for monthly and quarterly sync frequency customers on the Core, Professional, or Enterprise plans.
+Force re-sync of all models. This is available for all organizations via the dashboard. Force re-sync is also available programmatically via API for monthly, quarterly, and highest sync frequency customers on the Core, Professional, or Enterprise plans. Doing so will consume a sync credit for the relevant linked account.
 
 ### Examples
 

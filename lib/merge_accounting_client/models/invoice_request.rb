@@ -16,7 +16,7 @@ require 'time'
 module MergeAccountingClient
   # # The Invoice Object     ### Description     The `Invoice` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable `Invoice` is a bill, if type = accounts_receivable it's an invoice.      ### Usage Example     Fetch from the `LIST Invoices` endpoint and view a company's invoices.
   class InvoiceRequest
-    # Whether the invoice is an accounts receivable or accounts payable. Accounts payable invoices are commonly referred to as Bills.  * `ACCOUNTS_RECEIVABLE` - ACCOUNTS_RECEIVABLE * `ACCOUNTS_PAYABLE` - ACCOUNTS_PAYABLE
+    # Whether the invoice is an accounts receivable or accounts payable. If `type` is `accounts_payable`, the invoice is a bill. If `type` is `accounts_receivable`, it is an invoice.  * `ACCOUNTS_RECEIVABLE` - ACCOUNTS_RECEIVABLE * `ACCOUNTS_PAYABLE` - ACCOUNTS_PAYABLE
     attr_accessor :type
 
     # The invoice's contact.
@@ -64,6 +64,8 @@ module MergeAccountingClient
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
+    attr_accessor :tracking_categories
+
     attr_accessor :line_items
 
     attr_accessor :integration_params
@@ -89,6 +91,7 @@ module MergeAccountingClient
         :'total_amount' => :'total_amount',
         :'balance' => :'balance',
         :'payments' => :'payments',
+        :'tracking_categories' => :'tracking_categories',
         :'line_items' => :'line_items',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
@@ -119,6 +122,7 @@ module MergeAccountingClient
         :'total_amount' => :'Float',
         :'balance' => :'Float',
         :'payments' => :'Array<String>',
+        :'tracking_categories' => :'Array<String>',
         :'line_items' => :'Array<InvoiceLineItemRequest>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
@@ -229,6 +233,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -299,6 +309,7 @@ module MergeAccountingClient
           total_amount == o.total_amount &&
           balance == o.balance &&
           payments == o.payments &&
+          tracking_categories == o.tracking_categories &&
           line_items == o.line_items &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
@@ -313,7 +324,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, payments, line_items, integration_params, linked_account_params].hash
+      [type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, payments, tracking_categories, line_items, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

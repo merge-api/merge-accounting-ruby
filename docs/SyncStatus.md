@@ -24,7 +24,7 @@ instance = MergeAccountingClient::SyncStatus.new(
   next_sync_start: 2021-03-30T20:44:18.662942Z,
   status: SYNCING,
   is_initial_sync: true,
-  selective_sync_configurations_usage: IN_NEXT_SYNC
+  selective_sync_configurations_usage: null
 )
 ```
 

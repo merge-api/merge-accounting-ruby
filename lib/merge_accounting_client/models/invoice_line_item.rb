@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer. If type = accounts_payable, invoice is a bill, if type = accounts_receivable it's an invoice.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
+  # # The InvoiceLineItem Object ### Description The `InvoiceLineItem` object represents an itemized record of goods and/or services sold to a customer.  ### Usage Example Fetch from the `GET Invoice` endpoint and view the invoice's line items.
   class InvoiceLineItem
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
@@ -50,6 +50,9 @@ module MergeAccountingClient
 
     attr_accessor :id
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     attr_accessor :field_mappings
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -68,6 +71,7 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'company' => :'company',
         :'id' => :'id',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings'
       }
     end
@@ -93,6 +97,7 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'company' => :'String',
         :'id' => :'String',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>'
       }
     end
@@ -184,6 +189,10 @@ module MergeAccountingClient
         self.id = attributes[:'id']
       end
 
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
+
       if attributes.key?(:'field_mappings')
         if (value = attributes[:'field_mappings']).is_a?(Hash)
           self.field_mappings = value
@@ -239,6 +248,7 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           company == o.company &&
           id == o.id &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings
     end
 
@@ -251,7 +261,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, id, field_mappings].hash
+      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, id, modified_at, field_mappings].hash
     end
 
     # Builds the object from hash

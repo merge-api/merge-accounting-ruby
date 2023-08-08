@@ -22,11 +22,15 @@ module MergeAccountingClient
     # The phone number's type.
     attr_accessor :type
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'number' => :'number',
-        :'type' => :'type'
+        :'type' => :'type',
+        :'modified_at' => :'modified_at'
       }
     end
 
@@ -39,7 +43,8 @@ module MergeAccountingClient
     def self.openapi_types
       {
         :'number' => :'String',
-        :'type' => :'String'
+        :'type' => :'String',
+        :'modified_at' => :'Time'
       }
     end
 
@@ -47,7 +52,7 @@ module MergeAccountingClient
     def self.openapi_nullable
       Set.new([
         :'number',
-        :'type'
+        :'type',
       ])
     end
 
@@ -73,6 +78,10 @@ module MergeAccountingClient
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -94,7 +103,8 @@ module MergeAccountingClient
       return true if self.equal?(o)
       self.class == o.class &&
           number == o.number &&
-          type == o.type
+          type == o.type &&
+          modified_at == o.modified_at
     end
 
     # @see the `==` method
@@ -106,7 +116,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [number, type].hash
+      [number, type, modified_at].hash
     end
 
     # Builds the object from hash

@@ -103,4 +103,10 @@ describe MergeAccountingClient::CreditNoteLineItem do
     end
   end
 
+  describe 'test attribute "modified_at"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

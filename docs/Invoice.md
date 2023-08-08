@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | [**InvoiceTypeEnum**](InvoiceTypeEnum.md) | Whether the invoice is an accounts receivable or accounts payable. Accounts payable invoices are commonly referred to as Bills.  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE | [optional] |
+| **id** | **String** |  | [optional][readonly] |
+| **type** | [**InvoiceTypeEnum**](InvoiceTypeEnum.md) | Whether the invoice is an accounts receivable or accounts payable. If &#x60;type&#x60; is &#x60;accounts_payable&#x60;, the invoice is a bill. If &#x60;type&#x60; is &#x60;accounts_receivable&#x60;, it is an invoice.  * &#x60;ACCOUNTS_RECEIVABLE&#x60; - ACCOUNTS_RECEIVABLE * &#x60;ACCOUNTS_PAYABLE&#x60; - ACCOUNTS_PAYABLE | [optional] |
 | **contact** | **String** | The invoice&#39;s contact. | [optional] |
 | **number** | **String** | The invoice&#39;s number. | [optional] |
 | **issue_date** | **Time** | The invoice&#39;s issue date. | [optional] |
@@ -20,11 +21,12 @@
 | **total_amount** | **Float** | The invoice&#39;s total amount. | [optional] |
 | **balance** | **Float** | The invoice&#39;s remaining balance. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s invoice entry was updated. | [optional] |
+| **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
 | **line_items** | [**Array&lt;InvoiceLineItem&gt;**](InvoiceLineItem.md) |  | [optional][readonly] |
 | **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
-| **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 
@@ -34,6 +36,7 @@
 require 'merge_accounting_client'
 
 instance = MergeAccountingClient::Invoice.new(
+  id: 9871b4a9-f5d2-4f3b-a66b-dfedbed42c46,
   type: ACCOUNTS_RECEIVABLE,
   contact: 022a2bef-57e5-4def-8ed2-7c41bd9a5ed8,
   number: AIQ12546,
@@ -50,11 +53,12 @@ instance = MergeAccountingClient::Invoice.new(
   total_amount: 105,
   balance: 105,
   remote_updated_at: 2020-04-01T00:00Z,
+  tracking_categories: [&quot;7dc5ca17-d311-44cd-9ce0-333080367a18&quot;,&quot;6aa0700c-48e1-4c4a-8162-02e6a582df05&quot;,&quot;8c933d61-8f5b-4360-ac0c-c9dc87bee763&quot;],
   payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
   line_items: [{&quot;id&quot;:&quot;022a2bef-57e5-4def-8ed2-7c41bd9a5ed8&quot;,&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:1.0,&quot;total_amount&quot;:50.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;account&quot;:&quot;cd0f32d4-a493-11ec-b909-0242ac120002&quot;,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}],
   remote_was_deleted: null,
-  id: 9871b4a9-f5d2-4f3b-a66b-dfedbed42c46,
   remote_id: 990110,
+  modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]
 )

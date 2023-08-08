@@ -13,6 +13,7 @@
 | **company** | **String** | The company the expense belongs to. | [optional] |
 | **memo** | **String** | The expense&#39;s private note. | [optional] |
 | **lines** | [**Array&lt;ExpenseLineRequest&gt;**](ExpenseLineRequest.md) |  | [optional] |
+| **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **integration_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 | **linked_account_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 
@@ -31,6 +32,7 @@ instance = MergeAccountingClient::ExpenseRequest.new(
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   memo: New employee supplies,
   lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;net_amount&quot;:25.54,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;contact&quot;:&quot;c640b80b-fac9-409f-aa19-1f9221aec445&quot;,&quot;description&quot;:&quot;MacBook Pro&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;net_amount&quot;:10,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;Desk Lamp&quot;}],
+  tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   integration_params: {&quot;unique_integration_field&quot;:&quot;unique_integration_field_value&quot;},
   linked_account_params: {&quot;unique_linked_account_field&quot;:&quot;unique_linked_account_field_value&quot;}
 )
