@@ -10,6 +10,7 @@
 | **file_url** | **String** | The attachment&#39;s url. | [optional] |
 | **company** | **String** | The company the accounting attachment belongs to. | [optional] |
 | **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 
@@ -25,6 +26,7 @@ instance = MergeAccountingClient::AccountingAttachment.new(
   file_url: https://merge-brand.s3.amazonaws.com/20210315/rect-logo-270x80%402x.png,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   remote_was_deleted: null,
+  modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]
 )

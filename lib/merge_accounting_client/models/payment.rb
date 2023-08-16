@@ -42,11 +42,16 @@ module MergeAccountingClient
     # The total amount of money being paid to the supplier, or customer, after taxes.
     attr_accessor :total_amount
 
+    attr_accessor :tracking_categories
+
     # When the third party's payment entry was updated.
     attr_accessor :remote_updated_at
 
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
+
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
 
     attr_accessor :field_mappings
 
@@ -64,8 +69,10 @@ module MergeAccountingClient
         :'exchange_rate' => :'exchange_rate',
         :'company' => :'company',
         :'total_amount' => :'total_amount',
+        :'tracking_categories' => :'tracking_categories',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
       }
@@ -88,8 +95,10 @@ module MergeAccountingClient
         :'exchange_rate' => :'String',
         :'company' => :'String',
         :'total_amount' => :'Float',
+        :'tracking_categories' => :'Array<String>',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
@@ -163,12 +172,22 @@ module MergeAccountingClient
         self.total_amount = attributes[:'total_amount']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'remote_updated_at')
         self.remote_updated_at = attributes[:'remote_updated_at']
       end
 
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
       end
 
       if attributes.key?(:'field_mappings')
@@ -228,8 +247,10 @@ module MergeAccountingClient
           exchange_rate == o.exchange_rate &&
           company == o.company &&
           total_amount == o.total_amount &&
+          tracking_categories == o.tracking_categories &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
     end
@@ -243,7 +264,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, transaction_date, contact, account, currency, exchange_rate, company, total_amount, remote_updated_at, remote_was_deleted, field_mappings, remote_data].hash
+      [id, remote_id, transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, remote_updated_at, remote_was_deleted, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

@@ -30,6 +30,9 @@ module MergeAccountingClient
     # The company the report item belongs to.
     attr_accessor :company
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +40,8 @@ module MergeAccountingClient
         :'name' => :'name',
         :'value' => :'value',
         :'sub_items' => :'sub_items',
-        :'company' => :'company'
+        :'company' => :'company',
+        :'modified_at' => :'modified_at'
       }
     end
 
@@ -53,7 +57,8 @@ module MergeAccountingClient
         :'name' => :'String',
         :'value' => :'Float',
         :'sub_items' => :'Hash<String, Object>',
-        :'company' => :'String'
+        :'company' => :'String',
+        :'modified_at' => :'Time'
       }
     end
 
@@ -63,7 +68,7 @@ module MergeAccountingClient
         :'remote_id',
         :'name',
         :'value',
-        :'company'
+        :'company',
       ])
     end
 
@@ -103,6 +108,10 @@ module MergeAccountingClient
       if attributes.key?(:'company')
         self.company = attributes[:'company']
       end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -127,7 +136,8 @@ module MergeAccountingClient
           name == o.name &&
           value == o.value &&
           sub_items == o.sub_items &&
-          company == o.company
+          company == o.company &&
+          modified_at == o.modified_at
     end
 
     # @see the `==` method
@@ -139,7 +149,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, name, value, sub_items, company].hash
+      [remote_id, name, value, sub_items, company, modified_at].hash
     end
 
     # Builds the object from hash

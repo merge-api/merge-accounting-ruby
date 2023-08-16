@@ -42,6 +42,8 @@ module MergeAccountingClient
 
     attr_accessor :lines
 
+    attr_accessor :tracking_categories
+
     attr_accessor :integration_params
 
     attr_accessor :linked_account_params
@@ -58,6 +60,7 @@ module MergeAccountingClient
         :'company' => :'company',
         :'memo' => :'memo',
         :'lines' => :'lines',
+        :'tracking_categories' => :'tracking_categories',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -80,6 +83,7 @@ module MergeAccountingClient
         :'company' => :'String',
         :'memo' => :'String',
         :'lines' => :'Array<ExpenseLineRequest>',
+        :'tracking_categories' => :'Array<String>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -154,6 +158,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'integration_params')
         if (value = attributes[:'integration_params']).is_a?(Hash)
           self.integration_params = value
@@ -211,6 +221,7 @@ module MergeAccountingClient
           company == o.company &&
           memo == o.memo &&
           lines == o.lines &&
+          tracking_categories == o.tracking_categories &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -224,7 +235,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, account, contact, total_amount, currency, exchange_rate, company, memo, lines, integration_params, linked_account_params].hash
+      [transaction_date, account, contact, total_amount, currency, exchange_rate, company, memo, lines, tracking_categories, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

@@ -51,6 +51,8 @@ module MergeAccountingClient
 
     attr_accessor :line_items
 
+    attr_accessor :tracking_categories
+
     # When the third party's purchase order note was created.
     attr_accessor :remote_created_at
 
@@ -64,6 +66,9 @@ module MergeAccountingClient
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
 
     attr_accessor :field_mappings
 
@@ -84,11 +89,13 @@ module MergeAccountingClient
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
         :'line_items' => :'line_items',
+        :'tracking_categories' => :'tracking_categories',
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
       }
@@ -114,11 +121,13 @@ module MergeAccountingClient
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
         :'line_items' => :'Array<PurchaseOrderLineItem>',
+        :'tracking_categories' => :'Array<String>',
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
@@ -211,6 +220,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'remote_created_at')
         self.remote_created_at = attributes[:'remote_created_at']
       end
@@ -229,6 +244,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
       end
 
       if attributes.key?(:'field_mappings')
@@ -291,11 +310,13 @@ module MergeAccountingClient
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
           line_items == o.line_items &&
+          tracking_categories == o.tracking_categories &&
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
           id == o.id &&
           remote_id == o.remote_id &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
     end
@@ -309,7 +330,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, issue_date, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, line_items, remote_created_at, remote_updated_at, remote_was_deleted, id, remote_id, field_mappings, remote_data].hash
+      [status, issue_date, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, line_items, tracking_categories, remote_created_at, remote_updated_at, remote_was_deleted, id, remote_id, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

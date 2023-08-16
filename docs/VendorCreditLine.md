@@ -12,6 +12,7 @@
 | **account** | **String** | The line&#39;s account. | [optional] |
 | **company** | **String** | The company the line belongs to. | [optional] |
 | **exchange_rate** | **String** | The vendor credit line item&#39;s exchange rate. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = MergeAccountingClient::VendorCreditLine.new(
   description: Gifted Merge Credit,
   account: 9d892439-5fab-4dbb-8bd8-34f7f96c7912,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  exchange_rate: 2.9
+  exchange_rate: 2.9,
+  modified_at: 2021-10-16T00:00Z
 )
 ```
 

@@ -48,6 +48,9 @@ module MergeAccountingClient
     # Indicates whether or not this object has been deleted by third party webhooks.
     attr_accessor :remote_was_deleted
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     attr_accessor :field_mappings
 
     attr_accessor :remote_data
@@ -66,6 +69,7 @@ module MergeAccountingClient
         :'company' => :'company',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
       }
@@ -90,6 +94,7 @@ module MergeAccountingClient
         :'company' => :'String',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
+        :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
@@ -171,6 +176,10 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
+      end
+
       if attributes.key?(:'field_mappings')
         if (value = attributes[:'field_mappings']).is_a?(Hash)
           self.field_mappings = value
@@ -213,6 +222,7 @@ module MergeAccountingClient
           company == o.company &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
+          modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
     end
@@ -226,7 +236,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, name, status, unit_price, purchase_price, purchase_account, sales_account, company, remote_updated_at, remote_was_deleted, field_mappings, remote_data].hash
+      [id, remote_id, name, status, unit_price, purchase_price, purchase_account, sales_account, company, remote_updated_at, remote_was_deleted, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

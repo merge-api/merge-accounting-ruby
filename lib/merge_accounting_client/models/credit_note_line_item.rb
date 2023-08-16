@@ -53,6 +53,9 @@ module MergeAccountingClient
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
 
+    # This is the datetime that this object was last updated by Merge
+    attr_accessor :modified_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -68,7 +71,8 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'account' => :'account',
         :'company' => :'company',
-        :'remote_id' => :'remote_id'
+        :'remote_id' => :'remote_id',
+        :'modified_at' => :'modified_at'
       }
     end
 
@@ -92,7 +96,8 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'account' => :'String',
         :'company' => :'String',
-        :'remote_id' => :'String'
+        :'remote_id' => :'String',
+        :'modified_at' => :'Time'
       }
     end
 
@@ -110,7 +115,7 @@ module MergeAccountingClient
         :'tracking_category',
         :'account',
         :'company',
-        :'remote_id'
+        :'remote_id',
       ])
     end
 
@@ -181,6 +186,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'modified_at')
+        self.modified_at = attributes[:'modified_at']
       end
     end
 
@@ -270,7 +279,8 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           account == o.account &&
           company == o.company &&
-          remote_id == o.remote_id
+          remote_id == o.remote_id &&
+          modified_at == o.modified_at
     end
 
     # @see the `==` method
@@ -282,7 +292,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [item, name, description, quantity, memo, unit_price, tax_rate, total_line_amount, tracking_category, tracking_categories, account, company, remote_id].hash
+      [item, name, description, quantity, memo, unit_price, tax_rate, total_line_amount, tracking_category, tracking_categories, account, company, remote_id, modified_at].hash
     end
 
     # Builds the object from hash

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional][readonly] |
-| **status** | [**IssueStatusEnum**](IssueStatusEnum.md) |  | [optional] |
+| **status** | [**IssueStatusEnum**](IssueStatusEnum.md) | Status of the issue. Options: (&#39;ONGOING&#39;, &#39;RESOLVED&#39;)  * &#x60;ONGOING&#x60; - ONGOING * &#x60;RESOLVED&#x60; - RESOLVED | [optional] |
 | **error_description** | **String** |  |  |
 | **end_user** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **first_incident_time** | **Time** |  | [optional] |

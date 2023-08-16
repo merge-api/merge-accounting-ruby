@@ -32,6 +32,12 @@ module MergeAccountingClient
 
     attr_accessor :slug
 
+    # If checked, this integration will not appear in the linking flow, and will appear elsewhere with a Beta tag.
+    attr_accessor :is_in_beta
+
+    # Mapping of API endpoints to documentation urls for support. Example: {'GET': [['/common-model-scopes', 'https://docs.merge.dev/accounting/common-model-scopes/#common_model_scopes_retrieve'],['/common-model-actions', 'https://docs.merge.dev/accounting/common-model-actions/#common_model_actions_retrieve']], 'POST': []}
+    attr_accessor :api_endpoints_to_documentation_urls
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,7 +46,9 @@ module MergeAccountingClient
         :'image' => :'image',
         :'square_image' => :'square_image',
         :'color' => :'color',
-        :'slug' => :'slug'
+        :'slug' => :'slug',
+        :'is_in_beta' => :'is_in_beta',
+        :'api_endpoints_to_documentation_urls' => :'api_endpoints_to_documentation_urls'
       }
     end
 
@@ -57,7 +65,9 @@ module MergeAccountingClient
         :'image' => :'String',
         :'square_image' => :'String',
         :'color' => :'String',
-        :'slug' => :'String'
+        :'slug' => :'String',
+        :'is_in_beta' => :'Boolean',
+        :'api_endpoints_to_documentation_urls' => :'Hash<String, Object>'
       }
     end
 
@@ -108,6 +118,16 @@ module MergeAccountingClient
 
       if attributes.key?(:'slug')
         self.slug = attributes[:'slug']
+      end
+
+      if attributes.key?(:'is_in_beta')
+        self.is_in_beta = attributes[:'is_in_beta']
+      end
+
+      if attributes.key?(:'api_endpoints_to_documentation_urls')
+        if (value = attributes[:'api_endpoints_to_documentation_urls']).is_a?(Hash)
+          self.api_endpoints_to_documentation_urls = value
+        end
       end
     end
 
@@ -165,7 +185,9 @@ module MergeAccountingClient
           image == o.image &&
           square_image == o.square_image &&
           color == o.color &&
-          slug == o.slug
+          slug == o.slug &&
+          is_in_beta == o.is_in_beta &&
+          api_endpoints_to_documentation_urls == o.api_endpoints_to_documentation_urls
     end
 
     # @see the `==` method
@@ -177,7 +199,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, categories, image, square_image, color, slug].hash
+      [name, categories, image, square_image, color, slug, is_in_beta, api_endpoints_to_documentation_urls].hash
     end
 
     # Builds the object from hash

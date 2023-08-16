@@ -108,8 +108,8 @@ module MergeAccountingClient
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :issue_date_before If provided, will only return objects created before this datetime.
-    # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
-    # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
+    # @option opts [Time] :modified_after If provided, only objects synced by Merge after this date time will be returned.
+    # @option opts [Time] :modified_before If provided, only objects synced by Merge before this date time will be returned.
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
@@ -134,8 +134,8 @@ module MergeAccountingClient
     # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
     # @option opts [Time] :issue_date_after If provided, will only return objects created after this datetime.
     # @option opts [Time] :issue_date_before If provided, will only return objects created before this datetime.
-    # @option opts [Time] :modified_after If provided, will only return objects modified after this datetime.
-    # @option opts [Time] :modified_before If provided, will only return objects modified before this datetime.
+    # @option opts [Time] :modified_after If provided, only objects synced by Merge after this date time will be returned.
+    # @option opts [Time] :modified_before If provided, only objects synced by Merge before this date time will be returned.
     # @option opts [Integer] :page_size Number of results to return per page.
     # @option opts [String] :remote_fields Deprecated. Use show_enum_origins.
     # @option opts [String] :remote_id The API provider&#39;s ID for the given object.
@@ -150,7 +150,7 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_list"
       end
-      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company"]
+      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "line_items,tracking_categories", "line_items,tracking_categories,company", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company", "payments,line_items,tracking_categories", "payments,line_items,tracking_categories,company", "payments,line_items,tracking_categories,contact", "payments,line_items,tracking_categories,contact,company", "payments,tracking_categories", "payments,tracking_categories,company", "payments,tracking_categories,contact", "payments,tracking_categories,contact,company", "tracking_categories", "tracking_categories,company", "tracking_categories,contact", "tracking_categories,contact,company"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
@@ -321,7 +321,7 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling InvoicesApi.invoices_retrieve"
       end
-      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company"]
+      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "line_items,tracking_categories", "line_items,tracking_categories,company", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company", "payments,line_items,tracking_categories", "payments,line_items,tracking_categories,company", "payments,line_items,tracking_categories,contact", "payments,line_items,tracking_categories,contact,company", "payments,tracking_categories", "payments,tracking_categories,company", "payments,tracking_categories,contact", "payments,tracking_categories,contact,company", "tracking_categories", "tracking_categories,company", "tracking_categories,contact", "tracking_categories,contact,company"]
       if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end

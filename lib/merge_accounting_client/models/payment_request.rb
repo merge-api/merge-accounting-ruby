@@ -37,6 +37,8 @@ module MergeAccountingClient
     # The total amount of money being paid to the supplier, or customer, after taxes.
     attr_accessor :total_amount
 
+    attr_accessor :tracking_categories
+
     attr_accessor :integration_params
 
     attr_accessor :linked_account_params
@@ -51,6 +53,7 @@ module MergeAccountingClient
         :'exchange_rate' => :'exchange_rate',
         :'company' => :'company',
         :'total_amount' => :'total_amount',
+        :'tracking_categories' => :'tracking_categories',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -71,6 +74,7 @@ module MergeAccountingClient
         :'exchange_rate' => :'String',
         :'company' => :'String',
         :'total_amount' => :'Float',
+        :'tracking_categories' => :'Array<String>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -134,6 +138,12 @@ module MergeAccountingClient
         self.total_amount = attributes[:'total_amount']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'integration_params')
         if (value = attributes[:'integration_params']).is_a?(Hash)
           self.integration_params = value
@@ -189,6 +199,7 @@ module MergeAccountingClient
           exchange_rate == o.exchange_rate &&
           company == o.company &&
           total_amount == o.total_amount &&
+          tracking_categories == o.tracking_categories &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -202,7 +213,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, contact, account, currency, exchange_rate, company, total_amount, integration_params, linked_account_params].hash
+      [transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

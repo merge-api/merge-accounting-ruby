@@ -14,9 +14,11 @@
 | **company** | **String** | The company the expense belongs to. | [optional] |
 | **memo** | **String** | The expense&#39;s private note. | [optional] |
 | **lines** | [**Array&lt;ExpenseLine&gt;**](ExpenseLine.md) |  | [optional] |
+| **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
 | **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
 
@@ -36,9 +38,11 @@ instance = MergeAccountingClient::Expense.new(
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   memo: New employee supplies,
   lines: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;net_amount&quot;:25.54,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;contact&quot;:&quot;c640b80b-fac9-409f-aa19-1f9221aec445&quot;,&quot;description&quot;:&quot;MacBook Pro&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;},{&quot;remote_id&quot;:&quot;121223&quot;,&quot;net_amount&quot;:10,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;item&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;account&quot;:&quot;2a56344a-a491-11ec-b909-0242ac120002&quot;,&quot;description&quot;:&quot;Desk Lamp&quot;}],
+  tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   remote_was_deleted: null,
   id: ecbe05ac-62a3-46c5-ab31-4b478b37d1b4,
   remote_id: 088899,
+  modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]
 )

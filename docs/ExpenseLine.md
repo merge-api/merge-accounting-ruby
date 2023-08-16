@@ -14,6 +14,7 @@
 | **contact** | **String** | The expense&#39;s contact. | [optional] |
 | **description** | **String** | The description of the item that was purchased by the company. | [optional] |
 | **exchange_rate** | **String** | The expense line item&#39;s exchange rate. | [optional] |
+| **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = MergeAccountingClient::ExpenseLine.new(
   account: 2a56344a-a491-11ec-b909-0242ac120002,
   contact: c640b80b-fac9-409f-aa19-1f9221aec445,
   description: MacBook Pro,
-  exchange_rate: 2.9
+  exchange_rate: 2.9,
+  modified_at: 2021-10-16T00:00Z
 )
 ```
 
