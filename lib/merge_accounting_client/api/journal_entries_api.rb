@@ -142,8 +142,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling JournalEntriesApi.journal_entries_list"
       end
-      allowable_values = ["company", "lines", "lines,company", "lines,payments", "lines,payments,company", "lines,payments,tracking_categories", "lines,payments,tracking_categories,company", "lines,tracking_categories", "lines,tracking_categories,company", "payments", "payments,company", "payments,tracking_categories", "payments,tracking_categories,company", "tracking_categories", "tracking_categories,company"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(company lines tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).empty?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       # resource path
@@ -293,8 +293,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling JournalEntriesApi.journal_entries_retrieve"
       end
-      allowable_values = ["company", "lines", "lines,company", "lines,payments", "lines,payments,company", "lines,payments,tracking_categories", "lines,payments,tracking_categories,company", "lines,tracking_categories", "lines,tracking_categories,company", "payments", "payments,company", "payments,tracking_categories", "payments,tracking_categories,company", "tracking_categories", "tracking_categories,company"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(company lines tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).empty?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       # resource path
