@@ -55,6 +55,8 @@ module MergeAccountingClient
 
     attr_accessor :field_mappings
 
+    attr_accessor :applied_to_lines
+
     attr_accessor :remote_data
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -74,6 +76,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'remote_was_deleted',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
+        :'applied_to_lines' => :'applied_to_lines',
         :'remote_data' => :'remote_data'
       }
     end
@@ -100,6 +103,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'Boolean',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
+        :'applied_to_lines' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
       }
     end
@@ -117,6 +121,7 @@ module MergeAccountingClient
         :'total_amount',
         :'remote_updated_at',
         :'field_mappings',
+        :'applied_to_lines',
         :'remote_data'
       ])
     end
@@ -196,6 +201,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'applied_to_lines')
+        if (value = attributes[:'applied_to_lines']).is_a?(Hash)
+          self.applied_to_lines = value
+        end
+      end
+
       if attributes.key?(:'remote_data')
         if (value = attributes[:'remote_data']).is_a?(Array)
           self.remote_data = value
@@ -252,6 +263,7 @@ module MergeAccountingClient
           remote_was_deleted == o.remote_was_deleted &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
+          applied_to_lines == o.applied_to_lines &&
           remote_data == o.remote_data
     end
 
