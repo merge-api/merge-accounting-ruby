@@ -28,6 +28,8 @@ module MergeAccountingClient
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
+    attr_accessor :applied_payments
+
     # The journal entry's private note.
     attr_accessor :memo
 
@@ -68,6 +70,7 @@ module MergeAccountingClient
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
         :'payments' => :'payments',
+        :'applied_payments' => :'applied_payments',
         :'memo' => :'memo',
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
@@ -96,6 +99,7 @@ module MergeAccountingClient
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
         :'payments' => :'Array<String>',
+        :'applied_payments' => :'Array<String>',
         :'memo' => :'String',
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
@@ -159,6 +163,12 @@ module MergeAccountingClient
       if attributes.key?(:'payments')
         if (value = attributes[:'payments']).is_a?(Array)
           self.payments = value
+        end
+      end
+
+      if attributes.key?(:'applied_payments')
+        if (value = attributes[:'applied_payments']).is_a?(Array)
+          self.applied_payments = value
         end
       end
 
@@ -262,6 +272,7 @@ module MergeAccountingClient
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
           payments == o.payments &&
+          applied_payments == o.applied_payments &&
           memo == o.memo &&
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
@@ -286,7 +297,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, remote_created_at, remote_updated_at, payments, memo, currency, exchange_rate, company, lines, tracking_categories, remote_was_deleted, posting_status, id, remote_id, modified_at, field_mappings, remote_data].hash
+      [transaction_date, remote_created_at, remote_updated_at, payments, applied_payments, memo, currency, exchange_rate, company, lines, tracking_categories, remote_was_deleted, posting_status, id, remote_id, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

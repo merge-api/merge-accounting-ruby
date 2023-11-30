@@ -150,8 +150,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling InvoicesApi.invoices_list"
       end
-      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "line_items,tracking_categories", "line_items,tracking_categories,company", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company", "payments,line_items,tracking_categories", "payments,line_items,tracking_categories,company", "payments,line_items,tracking_categories,contact", "payments,line_items,tracking_categories,contact,company", "payments,tracking_categories", "payments,tracking_categories,company", "payments,tracking_categories,contact", "payments,tracking_categories,contact,company", "tracking_categories", "tracking_categories,company", "tracking_categories,contact", "tracking_categories,contact,company"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(company contact line_items tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).present?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       allowable_values = ["type"]
@@ -321,8 +321,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling InvoicesApi.invoices_retrieve"
       end
-      allowable_values = ["company", "contact", "contact,company", "line_items", "line_items,company", "line_items,contact", "line_items,contact,company", "line_items,tracking_categories", "line_items,tracking_categories,company", "line_items,tracking_categories,contact", "line_items,tracking_categories,contact,company", "payments", "payments,company", "payments,contact", "payments,contact,company", "payments,line_items", "payments,line_items,company", "payments,line_items,contact", "payments,line_items,contact,company", "payments,line_items,tracking_categories", "payments,line_items,tracking_categories,company", "payments,line_items,tracking_categories,contact", "payments,line_items,tracking_categories,contact,company", "payments,tracking_categories", "payments,tracking_categories,company", "payments,tracking_categories,contact", "payments,tracking_categories,contact,company", "tracking_categories", "tracking_categories,company", "tracking_categories,contact", "tracking_categories,contact,company"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(company contact line_items tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).present?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       allowable_values = ["type"]

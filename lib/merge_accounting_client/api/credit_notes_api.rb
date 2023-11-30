@@ -70,8 +70,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && x_account_token.nil?
         fail ArgumentError, "Missing the required parameter 'x_account_token' when calling CreditNotesApi.credit_notes_list"
       end
-      allowable_values = ["line_items", "line_items,tracking_categories", "payments", "payments,line_items", "payments,line_items,tracking_categories", "payments,tracking_categories", "tracking_categories"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(line_items tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).empty?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       allowable_values = ["status", "status,type", "type"]
@@ -173,8 +173,8 @@ module MergeAccountingClient
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling CreditNotesApi.credit_notes_retrieve"
       end
-      allowable_values = ["line_items", "line_items,tracking_categories", "payments", "payments,line_items", "payments,line_items,tracking_categories", "payments,tracking_categories", "tracking_categories"]
-      if @api_client.config.client_side_validation && opts[:'expand'] && !allowable_values.include?(opts[:'expand'])
+      allowable_values = %w(line_items tracking_categories payments applied_payments)
+      if @api_client.config.client_side_validation && opts[:'expand'] && opts[:'expand'].split(',').difference(allowable_values).empty?
         fail ArgumentError, "invalid value for \"expand\", must be one of #{allowable_values}"
       end
       allowable_values = ["status", "status,type", "type"]

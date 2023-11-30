@@ -71,6 +71,8 @@ module MergeAccountingClient
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
+    attr_accessor :applied_payments
+
     attr_accessor :line_items
 
     attr_accessor :remote_was_deleted
@@ -107,6 +109,7 @@ module MergeAccountingClient
         :'remote_updated_at' => :'remote_updated_at',
         :'tracking_categories' => :'tracking_categories',
         :'payments' => :'payments',
+        :'applied_payments' => :'applied_payments',
         :'line_items' => :'line_items',
         :'remote_was_deleted' => :'remote_was_deleted',
         :'remote_id' => :'remote_id',
@@ -143,6 +146,7 @@ module MergeAccountingClient
         :'remote_updated_at' => :'Time',
         :'tracking_categories' => :'Array<String>',
         :'payments' => :'Array<String>',
+        :'applied_payments' => :'Array<String>',
         :'line_items' => :'Array<InvoiceLineItem>',
         :'remote_was_deleted' => :'Boolean',
         :'remote_id' => :'String',
@@ -272,6 +276,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'applied_payments')
+        if (value = attributes[:'applied_payments']).is_a?(Array)
+          self.applied_payments = value
+        end
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -357,6 +367,7 @@ module MergeAccountingClient
           remote_updated_at == o.remote_updated_at &&
           tracking_categories == o.tracking_categories &&
           payments == o.payments &&
+          applied_payments == o.applied_payments &&
           line_items == o.line_items &&
           remote_was_deleted == o.remote_was_deleted &&
           remote_id == o.remote_id &&
@@ -374,7 +385,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, tracking_categories, payments, line_items, remote_was_deleted, remote_id, modified_at, field_mappings, remote_data].hash
+      [id, type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, tracking_categories, payments, applied_payments, line_items, remote_was_deleted, remote_id, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash
