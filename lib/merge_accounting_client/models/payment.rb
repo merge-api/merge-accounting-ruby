@@ -103,7 +103,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'Boolean',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
-        :'applied_to_lines' => :'Hash<String, Object>',
+        :'applied_to_lines' => :'Array<String>',
         :'remote_data' => :'Array<RemoteData>'
       }
     end
@@ -202,7 +202,7 @@ module MergeAccountingClient
       end
 
       if attributes.key?(:'applied_to_lines')
-        if (value = attributes[:'applied_to_lines']).is_a?(Hash)
+        if (value = attributes[:'applied_to_lines']).is_a?(Array)
           self.applied_to_lines = value
         end
       end
