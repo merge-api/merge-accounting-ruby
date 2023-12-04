@@ -20,7 +20,10 @@
 | **remote_created_at** | **Time** | When the third party&#39;s credit note was created. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s credit note was updated. | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **applied_payments** | **Array&lt;String&gt;** | A list of the Payment Applied to Lines common models related to a given Invoice, Credit Note, or Journal Entry. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **accounting_period** | **String** | The accounting period that the CreditNote was generated in. | [optional] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -41,13 +44,16 @@ instance = MergeAccountingClient::CreditNote.new(
   exchange_rate: 2.9,
   total_amount: 50.0,
   remaining_credit: 20.0,
-  line_items: [{&quot;item&quot;:&quot;0e3fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;name&quot;:&quot;Basic Monthly&quot;,&quot;description&quot;:&quot;prorated amount for items&quot;,&quot;quantity&quot;:1,&quot;memo&quot;:&quot;privNote&quot;,&quot;unit_price&quot;:&quot;5.0&quot;,&quot;tax_rate&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;total_line_amount&quot;:&quot;5.0&quot;,&quot;tracking_category&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;tracking_categories&quot;:[&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;account&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_id&quot;:&quot;121222&quot;}],
+  line_items: [{&quot;item&quot;:&quot;0e3fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;name&quot;:&quot;Basic Monthly&quot;,&quot;description&quot;:&quot;prorated amount for items&quot;,&quot;quantity&quot;:1,&quot;memo&quot;:&quot;privNote&quot;,&quot;unit_price&quot;:&quot;5.0&quot;,&quot;tax_rate&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;total_line_amount&quot;:&quot;5.0&quot;,&quot;tracking_category&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;tracking_categories&quot;:[&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;account&quot;:&quot;8d9fd929-436c-4fd4-a48b-0c61f68d6178&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_id&quot;:&quot;121222&quot;,&quot;remote_was_deleted&quot;:true}],
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   currency: USD,
   remote_created_at: 2020-03-31T00:00Z,
   remote_updated_at: 2020-03-31T00:00Z,
   payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
+  applied_payments: [&quot;a9a94a75-19c1-41fe-90d8-d9ba959c38e5&quot;],
   remote_was_deleted: null,
+  accounting_period: b38c59b0-a9d7-4740-b1ee-5436c6751e3d,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

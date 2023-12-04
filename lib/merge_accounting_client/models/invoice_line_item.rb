@@ -48,7 +48,12 @@ module MergeAccountingClient
     # The company the line item belongs to.
     attr_accessor :company
 
+    # Indicates whether or not this object has been deleted in the third party platform.
+    attr_accessor :remote_was_deleted
+
     attr_accessor :id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -70,7 +75,9 @@ module MergeAccountingClient
         :'tracking_category' => :'tracking_category',
         :'tracking_categories' => :'tracking_categories',
         :'company' => :'company',
+        :'remote_was_deleted' => :'remote_was_deleted',
         :'id' => :'id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings'
       }
@@ -96,7 +103,9 @@ module MergeAccountingClient
         :'tracking_category' => :'String',
         :'tracking_categories' => :'Array<String>',
         :'company' => :'String',
+        :'remote_was_deleted' => :'Boolean',
         :'id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>'
       }
@@ -185,8 +194,16 @@ module MergeAccountingClient
         self.company = attributes[:'company']
       end
 
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -247,7 +264,9 @@ module MergeAccountingClient
           tracking_category == o.tracking_category &&
           tracking_categories == o.tracking_categories &&
           company == o.company &&
+          remote_was_deleted == o.remote_was_deleted &&
           id == o.id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings
     end
@@ -261,7 +280,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, id, modified_at, field_mappings].hash
+      [remote_id, description, unit_price, quantity, total_amount, currency, exchange_rate, item, account, tracking_category, tracking_categories, company, remote_was_deleted, id, created_at, modified_at, field_mappings].hash
     end
 
     # Builds the object from hash

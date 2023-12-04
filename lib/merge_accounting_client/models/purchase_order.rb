@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The PurchaseOrder Object ### Description The `PurchaseOrder` object is a record of request for a product or service between a buyer and seller.  ### Usage Example Fetch from the `LIST PurchaseOrders` endpoint and view a company's purchase orders.
+  # # The PurchaseOrder Object ### Description A `PurchaseOrder` represents a request to purchase goods or services from a vendor. It outlines the details of the purchase, such as the items or services requested, quantities, prices, and delivery details.  A `PurchaseOrder` is a crucial component of the procurement process, but does not typically result in any impact on the company’s general ledger. The general ledger is typically only affected when the `PurchaseOrder` is fulfilled as an *Accounts Payable* Invoice object.  ### Usage Example Fetch from the `LIST PurchaseOrders` endpoint and view a company's purchase orders.
   class PurchaseOrder
     # The purchase order's status.  * `DRAFT` - DRAFT * `SUBMITTED` - SUBMITTED * `AUTHORIZED` - AUTHORIZED * `BILLED` - BILLED * `DELETED` - DELETED
     attr_accessor :status
 
     # The purchase order's issue date.
     attr_accessor :issue_date
+
+    # The human-readable number of the purchase order.
+    attr_accessor :purchase_order_number
 
     # The purchase order's delivery date.
     attr_accessor :delivery_date
@@ -59,13 +62,18 @@ module MergeAccountingClient
     # When the third party's purchase order note was updated.
     attr_accessor :remote_updated_at
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    # The accounting period that the PurchaseOrder was generated in.
+    attr_accessor :accounting_period
 
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -79,6 +87,7 @@ module MergeAccountingClient
       {
         :'status' => :'status',
         :'issue_date' => :'issue_date',
+        :'purchase_order_number' => :'purchase_order_number',
         :'delivery_date' => :'delivery_date',
         :'delivery_address' => :'delivery_address',
         :'customer' => :'customer',
@@ -93,8 +102,10 @@ module MergeAccountingClient
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -111,6 +122,7 @@ module MergeAccountingClient
       {
         :'status' => :'PurchaseOrderStatusEnum',
         :'issue_date' => :'Time',
+        :'purchase_order_number' => :'String',
         :'delivery_date' => :'Time',
         :'delivery_address' => :'String',
         :'customer' => :'String',
@@ -125,8 +137,10 @@ module MergeAccountingClient
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -138,6 +152,7 @@ module MergeAccountingClient
       Set.new([
         :'status',
         :'issue_date',
+        :'purchase_order_number',
         :'delivery_date',
         :'delivery_address',
         :'customer',
@@ -149,6 +164,7 @@ module MergeAccountingClient
         :'exchange_rate',
         :'remote_created_at',
         :'remote_updated_at',
+        :'accounting_period',
         :'remote_id',
         :'field_mappings',
         :'remote_data'
@@ -176,6 +192,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'issue_date')
         self.issue_date = attributes[:'issue_date']
+      end
+
+      if attributes.key?(:'purchase_order_number')
+        self.purchase_order_number = attributes[:'purchase_order_number']
       end
 
       if attributes.key?(:'delivery_date')
@@ -238,12 +258,20 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -267,6 +295,10 @@ module MergeAccountingClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@purchase_order_number.nil? && @purchase_order_number.to_s.length > 100
+        invalid_properties.push('invalid value for "purchase_order_number", the character length must be smaller than or equal to 100.')
+      end
+
       pattern = Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       if !@exchange_rate.nil? && @exchange_rate.to_s !~ pattern
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
@@ -278,8 +310,19 @@ module MergeAccountingClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@purchase_order_number.nil? && @purchase_order_number.to_s.length > 100
       return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] purchase_order_number Value to be assigned
+    def purchase_order_number=(purchase_order_number)
+      if !purchase_order_number.nil? && purchase_order_number.to_s.length > 100
+        fail ArgumentError, 'invalid value for "purchase_order_number", the character length must be smaller than or equal to 100.'
+      end
+
+      @purchase_order_number = purchase_order_number
     end
 
     # Custom attribute writer method with validation
@@ -300,6 +343,7 @@ module MergeAccountingClient
       self.class == o.class &&
           status == o.status &&
           issue_date == o.issue_date &&
+          purchase_order_number == o.purchase_order_number &&
           delivery_date == o.delivery_date &&
           delivery_address == o.delivery_address &&
           customer == o.customer &&
@@ -314,8 +358,10 @@ module MergeAccountingClient
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
           id == o.id &&
           remote_id == o.remote_id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -330,7 +376,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, issue_date, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, line_items, tracking_categories, remote_created_at, remote_updated_at, remote_was_deleted, id, remote_id, modified_at, field_mappings, remote_data].hash
+      [status, issue_date, purchase_order_number, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, line_items, tracking_categories, remote_created_at, remote_updated_at, remote_was_deleted, accounting_period, id, remote_id, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

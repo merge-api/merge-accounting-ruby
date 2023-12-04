@@ -15,9 +15,11 @@
 | **company** | **String** | The company the transaction belongs to. | [optional] |
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **line_items** | [**Array&lt;TransactionLineItem&gt;**](TransactionLineItem.md) |  | [optional][readonly] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **accounting_period** | **String** | The accounting period that the Transaction was generated in. | [optional] |
 | **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -30,7 +32,7 @@ require 'merge_accounting_client'
 instance = MergeAccountingClient::Transaction.new(
   transaction_type: estimate,
   number: 122,
-  transaction_date: null,
+  transaction_date: 2020-03-31T00:00Z,
   account: 3e442c5d-8f51-4103-b5c9-dcee39c30a08,
   contact: 2c22ce34-5c6e-4fc7-a594-7f26bb4cf78b,
   total_amount: 260.0,
@@ -38,10 +40,12 @@ instance = MergeAccountingClient::Transaction.new(
   exchange_rate: 2.9,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
-  line_items: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;memo&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:&quot;25.0&quot;,&quot;quantity&quot;:&quot;10.0&quot;,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;,&quot;account&quot;:&quot;2b38c085-2620-4269-b5ec-75dd9095ed2c&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;total_line_amount&quot;:260.0,&quot;tax_rate&quot;:&quot;a12e7c20-1922-9df7-s75n-edfeewnn7384&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;},{&quot;memo&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;,&quot;account&quot;:&quot;3e442c5d-8f51-4103-b5c9-dcee39c30a08&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;total_line_amount&quot;:20.0,&quot;tax_rate&quot;:&quot;a12e7c20-1922-9df7-s75n-edfeewnn7384&quot;}],
+  line_items: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;memo&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:&quot;25.0&quot;,&quot;quantity&quot;:&quot;10.0&quot;,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;,&quot;account&quot;:&quot;2b38c085-2620-4269-b5ec-75dd9095ed2c&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;total_line_amount&quot;:260.0,&quot;tax_rate&quot;:&quot;a12e7c20-1922-9df7-s75n-edfeewnn7384&quot;,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_was_deleted&quot;:false},{&quot;memo&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;,&quot;account&quot;:&quot;3e442c5d-8f51-4103-b5c9-dcee39c30a08&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;total_line_amount&quot;:20.0,&quot;tax_rate&quot;:&quot;a12e7c20-1922-9df7-s75n-edfeewnn7384&quot;}],
   remote_was_deleted: null,
+  accounting_period: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   id: 0048ea5b-911e-4dff-9364-92070dea62ff,
   remote_id: 239741,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

@@ -235,6 +235,10 @@ module MergeAccountingClient
         {
           url: "https://api-sandbox.merge.dev/api/accounting/v1",
           description: "Sandbox",
+        },
+        {
+          url: "https://api-eu.merge.dev/api/accounting/v1",
+          description: "Production EU",
         }
       ]
     end

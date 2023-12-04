@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The CompanyInfo Object ### Description The `CompanyInfo` object is used to represent a company's information.  ### Usage Example Fetch from the `GET CompanyInfo` endpoint and view a company's information.
+  # # The CompanyInfo Object ### Description The `CompanyInfo` object contains information about the company of the linked account. If the company has multiple entities (also known as subsidiaries), each entity may show up as a single `CompanyInfo` record.  ### Usage Example Fetch from the `GET CompanyInfo` endpoint and view a company's information.
   class CompanyInfo
     attr_accessor :id
 
@@ -49,8 +49,10 @@ module MergeAccountingClient
 
     attr_accessor :phone_numbers
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -75,6 +77,7 @@ module MergeAccountingClient
         :'addresses' => :'addresses',
         :'phone_numbers' => :'phone_numbers',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -102,6 +105,7 @@ module MergeAccountingClient
         :'addresses' => :'Array<Address>',
         :'phone_numbers' => :'Array<AccountingPhoneNumber>',
         :'remote_was_deleted' => :'Boolean',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -196,6 +200,10 @@ module MergeAccountingClient
 
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -294,6 +302,7 @@ module MergeAccountingClient
           addresses == o.addresses &&
           phone_numbers == o.phone_numbers &&
           remote_was_deleted == o.remote_was_deleted &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -308,7 +317,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, name, legal_name, tax_number, fiscal_year_end_month, fiscal_year_end_day, currency, remote_created_at, urls, addresses, phone_numbers, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, name, legal_name, tax_number, fiscal_year_end_month, fiscal_year_end_day, currency, remote_created_at, urls, addresses, phone_numbers, remote_was_deleted, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

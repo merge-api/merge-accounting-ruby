@@ -19,8 +19,8 @@ instance = MergeAccountingClient::MetaResponse.new(
   request_schema: null,
   remote_field_classes: null,
   status: null,
-  has_conditional_params: null,
-  has_required_linked_account_params: null
+  has_conditional_params: true,
+  has_required_linked_account_params: true
 )
 ```
 

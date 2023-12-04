@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The TrackingCategory Object ### Description The `TrackingCategory` object is used to represent a company's tracking categories.  ### Usage Example Fetch from the `GET TrackingCategory` endpoint and view a company's tracking category.
+  # # The TrackingCategory Object ### Description A `TrackingCategory` object represents a categorization method used to classify transactions within an accounting platform. They are often used to group records for reporting and analysis purposes. The most common types of `TrackingCategories` are Classes and Departments.  ### Usage Example Fetch from the `GET TrackingCategory` endpoint and view a company's tracking category.
   class TrackingCategory
     # The tracking category's name.
     attr_accessor :name
@@ -31,13 +31,15 @@ module MergeAccountingClient
     # The company the tracking category belongs to.
     attr_accessor :company
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
 
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -57,6 +59,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'remote_was_deleted',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -79,6 +82,7 @@ module MergeAccountingClient
         :'remote_was_deleted' => :'Boolean',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -146,6 +150,10 @@ module MergeAccountingClient
         self.remote_id = attributes[:'remote_id']
       end
 
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -189,6 +197,7 @@ module MergeAccountingClient
           remote_was_deleted == o.remote_was_deleted &&
           id == o.id &&
           remote_id == o.remote_id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -203,7 +212,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, status, category_type, parent_category, company, remote_was_deleted, id, remote_id, modified_at, field_mappings, remote_data].hash
+      [name, status, category_type, parent_category, company, remote_was_deleted, id, remote_id, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

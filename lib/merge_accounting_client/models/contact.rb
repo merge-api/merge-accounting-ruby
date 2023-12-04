@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Contact Object ### Description The `Contact` object refers to either a supplier or a customer.  ### Usage Example Fetch from the `LIST Contacts` endpoint and view a company's contacts.
+  # # The Contact Object ### Description A `Contact` is an individual or business entity to which products and services are sold to or purchased from. The `Contact` model contains both Customers, in which products and services are sold to, and Vendors (or Suppliers), in which products and services are purchased from. * A `Contact` is a Vendor/Supplier if the `is_supplier` property is true. * A `Contact` is a customer if the `is_customer` property is true.  ### Usage Example Fetch from the `LIST Contacts` endpoint and view a company's contacts.
   class Contact
     attr_accessor :id
 
@@ -54,8 +54,10 @@ module MergeAccountingClient
     # `AccountingPhoneNumber` object for the given `Contacts` object.
     attr_accessor :phone_numbers
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -81,6 +83,7 @@ module MergeAccountingClient
         :'addresses' => :'addresses',
         :'phone_numbers' => :'phone_numbers',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -106,9 +109,10 @@ module MergeAccountingClient
         :'currency' => :'String',
         :'remote_updated_at' => :'Time',
         :'company' => :'String',
-        :'addresses' => :'Array<String>',
+        :'addresses' => :'Array<Address>',
         :'phone_numbers' => :'Array<AccountingPhoneNumber>',
         :'remote_was_deleted' => :'Boolean',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -208,6 +212,10 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -257,6 +265,7 @@ module MergeAccountingClient
           addresses == o.addresses &&
           phone_numbers == o.phone_numbers &&
           remote_was_deleted == o.remote_was_deleted &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -271,7 +280,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, name, is_supplier, is_customer, email_address, tax_number, status, currency, remote_updated_at, company, addresses, phone_numbers, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, name, is_supplier, is_customer, email_address, tax_number, status, currency, remote_updated_at, company, addresses, phone_numbers, remote_was_deleted, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

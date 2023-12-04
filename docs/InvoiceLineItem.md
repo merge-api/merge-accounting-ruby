@@ -16,7 +16,9 @@
 | **tracking_category** | **String** |  | [optional] |
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **company** | **String** | The company the line item belongs to. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
 | **id** | **String** |  | [optional][readonly] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 
@@ -38,7 +40,9 @@ instance = MergeAccountingClient::InvoiceLineItem.new(
   tracking_category: b38c59b0-a9d7-4740-b1ee-5436c6751e3d,
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
-  id: 022a2bef-57e5-4def-8ed2-7c41bd9a5ed8,
+  remote_was_deleted: null,
+  id: ecbe05ac-62a3-46c5-ab31-4b478b37d1b4,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}}
 )

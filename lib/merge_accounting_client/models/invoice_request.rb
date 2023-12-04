@@ -37,6 +37,9 @@ module MergeAccountingClient
     # The invoice's private note.
     attr_accessor :memo
 
+    # The status of the invoice.  * `PAID` - PAID * `DRAFT` - DRAFT * `SUBMITTED` - SUBMITTED * `PARTIALLY_PAID` - PARTIALLY_PAID * `OPEN` - OPEN * `VOID` - VOID
+    attr_accessor :status
+
     # The company the invoice belongs to.
     attr_accessor :company
 
@@ -68,6 +71,8 @@ module MergeAccountingClient
 
     attr_accessor :line_items
 
+    attr_accessor :purchase_orders
+
     attr_accessor :integration_params
 
     attr_accessor :linked_account_params
@@ -82,6 +87,7 @@ module MergeAccountingClient
         :'due_date' => :'due_date',
         :'paid_on_date' => :'paid_on_date',
         :'memo' => :'memo',
+        :'status' => :'status',
         :'company' => :'company',
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
@@ -93,6 +99,7 @@ module MergeAccountingClient
         :'payments' => :'payments',
         :'tracking_categories' => :'tracking_categories',
         :'line_items' => :'line_items',
+        :'purchase_orders' => :'purchase_orders',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -113,6 +120,7 @@ module MergeAccountingClient
         :'due_date' => :'Time',
         :'paid_on_date' => :'Time',
         :'memo' => :'String',
+        :'status' => :'InvoiceStatusEnum',
         :'company' => :'String',
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
@@ -124,6 +132,7 @@ module MergeAccountingClient
         :'payments' => :'Array<String>',
         :'tracking_categories' => :'Array<String>',
         :'line_items' => :'Array<InvoiceLineItemRequest>',
+        :'purchase_orders' => :'Array<String>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -139,6 +148,7 @@ module MergeAccountingClient
         :'due_date',
         :'paid_on_date',
         :'memo',
+        :'status',
         :'company',
         :'currency',
         :'exchange_rate',
@@ -195,6 +205,10 @@ module MergeAccountingClient
         self.memo = attributes[:'memo']
       end
 
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
       if attributes.key?(:'company')
         self.company = attributes[:'company']
       end
@@ -242,6 +256,12 @@ module MergeAccountingClient
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
+        end
+      end
+
+      if attributes.key?(:'purchase_orders')
+        if (value = attributes[:'purchase_orders']).is_a?(Array)
+          self.purchase_orders = value
         end
       end
 
@@ -300,6 +320,7 @@ module MergeAccountingClient
           due_date == o.due_date &&
           paid_on_date == o.paid_on_date &&
           memo == o.memo &&
+          status == o.status &&
           company == o.company &&
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
@@ -311,6 +332,7 @@ module MergeAccountingClient
           payments == o.payments &&
           tracking_categories == o.tracking_categories &&
           line_items == o.line_items &&
+          purchase_orders == o.purchase_orders &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -324,7 +346,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, payments, tracking_categories, line_items, integration_params, linked_account_params].hash
+      [type, contact, number, issue_date, due_date, paid_on_date, memo, status, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, payments, tracking_categories, line_items, purchase_orders, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash
