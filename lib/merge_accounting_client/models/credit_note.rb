@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The CreditNote Object ### Description The `CreditNote` object are an accounts payable transaction used when to represent a gift or refund to a customer. A credit note will contain information on the amount of credit owed, the customer, and the account.  ### Usage Example Fetch from the `LIST CreditNotes` endpoint and view a company's credit notes.
+  # # The CreditNote Object ### Description A `CreditNote` is transaction issued to a customer, indicating a reduction or cancellation of the amount owed by the customer. It is most generally used as an adjustment note used to rectify errors, returns, or overpayments related to a sales transaction. A `CreditNote` can be applied to *Accounts Receivable* Invoices to decrease the overall amount of the Invoice.  ### Usage Example Fetch from the `LIST CreditNotes` endpoint and view a company's credit notes.
   class CreditNote
     attr_accessor :id
 
@@ -61,8 +61,16 @@ module MergeAccountingClient
     # Array of `Payment` object IDs
     attr_accessor :payments
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # A list of the Payment Applied to Lines common models related to a given Invoice, Credit Note, or Journal Entry.
+    attr_accessor :applied_payments
+
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    # The accounting period that the CreditNote was generated in.
+    attr_accessor :accounting_period
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -90,7 +98,10 @@ module MergeAccountingClient
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
         :'payments' => :'payments',
+        :'applied_payments' => :'applied_payments',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -121,7 +132,10 @@ module MergeAccountingClient
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
         :'payments' => :'Array<String>',
+        :'applied_payments' => :'Array<String>',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -143,6 +157,7 @@ module MergeAccountingClient
         :'currency',
         :'remote_created_at',
         :'remote_updated_at',
+        :'accounting_period',
         :'field_mappings',
         :'remote_data'
       ])
@@ -233,8 +248,22 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'applied_payments')
+        if (value = attributes[:'applied_payments']).is_a?(Array)
+          self.applied_payments = value
+        end
+      end
+
       if attributes.key?(:'remote_was_deleted')
         self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -305,7 +334,10 @@ module MergeAccountingClient
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
           payments == o.payments &&
+          applied_payments == o.applied_payments &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -320,7 +352,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, transaction_date, status, number, contact, company, exchange_rate, total_amount, remaining_credit, line_items, tracking_categories, currency, remote_created_at, remote_updated_at, payments, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, transaction_date, status, number, contact, company, exchange_rate, total_amount, remaining_credit, line_items, tracking_categories, currency, remote_created_at, remote_updated_at, payments, applied_payments, remote_was_deleted, accounting_period, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

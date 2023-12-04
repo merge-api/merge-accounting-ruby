@@ -34,7 +34,12 @@ module MergeAccountingClient
     # The company the journal entry belongs to.
     attr_accessor :company
 
+    attr_accessor :tracking_categories
+
     attr_accessor :lines
+
+    # Reference number for identifying journal entries.
+    attr_accessor :journal_number
 
     # The journal's posting status.  * `UNPOSTED` - UNPOSTED * `POSTED` - POSTED
     attr_accessor :posting_status
@@ -52,7 +57,9 @@ module MergeAccountingClient
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
         :'company' => :'company',
+        :'tracking_categories' => :'tracking_categories',
         :'lines' => :'lines',
+        :'journal_number' => :'journal_number',
         :'posting_status' => :'posting_status',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
@@ -73,7 +80,9 @@ module MergeAccountingClient
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
         :'company' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'lines' => :'Array<JournalLineRequest>',
+        :'journal_number' => :'String',
         :'posting_status' => :'PostingStatusEnum',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
@@ -88,6 +97,7 @@ module MergeAccountingClient
         :'currency',
         :'exchange_rate',
         :'company',
+        :'journal_number',
         :'posting_status',
         :'integration_params',
         :'linked_account_params'
@@ -135,10 +145,20 @@ module MergeAccountingClient
         self.company = attributes[:'company']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'lines')
         if (value = attributes[:'lines']).is_a?(Array)
           self.lines = value
         end
+      end
+
+      if attributes.key?(:'journal_number')
+        self.journal_number = attributes[:'journal_number']
       end
 
       if attributes.key?(:'posting_status')
@@ -167,6 +187,10 @@ module MergeAccountingClient
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
+      if !@journal_number.nil? && @journal_number.to_s.length > 70
+        invalid_properties.push('invalid value for "journal_number", the character length must be smaller than or equal to 70.')
+      end
+
       invalid_properties
     end
 
@@ -174,6 +198,7 @@ module MergeAccountingClient
     # @return true if the model is valid
     def valid?
       return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@journal_number.nil? && @journal_number.to_s.length > 70
       true
     end
 
@@ -188,6 +213,16 @@ module MergeAccountingClient
       @exchange_rate = exchange_rate
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] journal_number Value to be assigned
+    def journal_number=(journal_number)
+      if !journal_number.nil? && journal_number.to_s.length > 70
+        fail ArgumentError, 'invalid value for "journal_number", the character length must be smaller than or equal to 70.'
+      end
+
+      @journal_number = journal_number
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -199,7 +234,9 @@ module MergeAccountingClient
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
           company == o.company &&
+          tracking_categories == o.tracking_categories &&
           lines == o.lines &&
+          journal_number == o.journal_number &&
           posting_status == o.posting_status &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
@@ -214,7 +251,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, payments, memo, currency, exchange_rate, company, lines, posting_status, integration_params, linked_account_params].hash
+      [transaction_date, payments, memo, currency, exchange_rate, company, tracking_categories, lines, journal_number, posting_status, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

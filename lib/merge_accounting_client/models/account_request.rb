@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Account Object ### Description The `Account` object is what companies use to track transactions. They can be both bank accounts or a general ledger account (also called a chart of accounts).  ### Usage Example Fetch from the `LIST Accounts` endpoint and view a company's accounts.
+  # # The Account Object ### Description An `Account` represents a category in a company’s ledger in which a financial transaction is recorded against. The aggregation of each `Account` object is often referred to as the **Chart of Accounts**.  An `Account` can be classified into one of the following categories, determined through the `classification` field: * __Asset:__ Accounts Receivable and Bank Accounts * __Liability:__ Accounts Payable and Credit Card Accounts * __Equity:__ Treasury Accounts and Retained Earnings * __Revenue:__ Income and Other Income * __Expense:__ Cost of Goods Sold and Office Expenses  ### Usage Example Fetch from the `LIST Accounts` endpoint and view a company's accounts.
   class AccountRequest
     # The account's name.
     attr_accessor :name

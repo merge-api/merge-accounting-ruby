@@ -40,6 +40,13 @@ module MergeAccountingClient
     # The vendor credit line item's exchange rate.
     attr_accessor :exchange_rate
 
+    # Indicates whether or not this object has been deleted in the third party platform.
+    attr_accessor :remote_was_deleted
+
+    attr_accessor :id
+
+    attr_accessor :created_at
+
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
 
@@ -54,6 +61,9 @@ module MergeAccountingClient
         :'account' => :'account',
         :'company' => :'company',
         :'exchange_rate' => :'exchange_rate',
+        :'remote_was_deleted' => :'remote_was_deleted',
+        :'id' => :'id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at'
       }
     end
@@ -74,6 +84,9 @@ module MergeAccountingClient
         :'account' => :'String',
         :'company' => :'String',
         :'exchange_rate' => :'String',
+        :'remote_was_deleted' => :'Boolean',
+        :'id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time'
       }
     end
@@ -140,6 +153,18 @@ module MergeAccountingClient
         self.exchange_rate = attributes[:'exchange_rate']
       end
 
+      if attributes.key?(:'remote_was_deleted')
+        self.remote_was_deleted = attributes[:'remote_was_deleted']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -193,6 +218,9 @@ module MergeAccountingClient
           account == o.account &&
           company == o.company &&
           exchange_rate == o.exchange_rate &&
+          remote_was_deleted == o.remote_was_deleted &&
+          id == o.id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at
     end
 
@@ -205,7 +233,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, net_amount, tracking_category, tracking_categories, description, account, company, exchange_rate, modified_at].hash
+      [remote_id, net_amount, tracking_category, tracking_categories, description, account, company, exchange_rate, remote_was_deleted, id, created_at, modified_at].hash
     end
 
     # Builds the object from hash

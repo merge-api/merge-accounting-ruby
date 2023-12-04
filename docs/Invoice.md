@@ -17,15 +17,20 @@
 | **exchange_rate** | **String** | The invoice&#39;s exchange rate. | [optional] |
 | **total_discount** | **Float** | The total discounts applied to the total cost. | [optional] |
 | **sub_total** | **Float** | The total amount being paid before taxes. | [optional] |
+| **status** | [**InvoiceStatusEnum**](InvoiceStatusEnum.md) | The status of the invoice.  * &#x60;PAID&#x60; - PAID * &#x60;DRAFT&#x60; - DRAFT * &#x60;SUBMITTED&#x60; - SUBMITTED * &#x60;PARTIALLY_PAID&#x60; - PARTIALLY_PAID * &#x60;OPEN&#x60; - OPEN * &#x60;VOID&#x60; - VOID | [optional] |
 | **total_tax_amount** | **Float** | The total amount being paid in taxes. | [optional] |
 | **total_amount** | **Float** | The invoice&#39;s total amount. | [optional] |
 | **balance** | **Float** | The invoice&#39;s remaining balance. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s invoice entry was updated. | [optional] |
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **payments** | **Array&lt;String&gt;** | Array of &#x60;Payment&#x60; object IDs. | [optional] |
+| **applied_payments** | **Array&lt;String&gt;** | A list of the Payment Applied to Lines common models related to a given Invoice, Credit Note, or Journal Entry. | [optional] |
 | **line_items** | [**Array&lt;InvoiceLineItem&gt;**](InvoiceLineItem.md) |  | [optional][readonly] |
 | **remote_was_deleted** | **Boolean** |  | [optional][readonly] |
+| **accounting_period** | **String** | The accounting period that the Invoice was generated in. | [optional] |
+| **purchase_orders** | **Array&lt;String&gt;** |  | [optional] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -49,15 +54,20 @@ instance = MergeAccountingClient::Invoice.new(
   exchange_rate: 2.9,
   total_discount: null,
   sub_total: 100,
+  status: DRAFT,
   total_tax_amount: 5,
   total_amount: 105,
   balance: 105,
   remote_updated_at: 2020-04-01T00:00Z,
   tracking_categories: [&quot;7dc5ca17-d311-44cd-9ce0-333080367a18&quot;,&quot;6aa0700c-48e1-4c4a-8162-02e6a582df05&quot;,&quot;8c933d61-8f5b-4360-ac0c-c9dc87bee763&quot;],
   payments: [&quot;b26fd49a-cbae-470a-a8f8-bcbc119e0390&quot;],
-  line_items: [{&quot;id&quot;:&quot;022a2bef-57e5-4def-8ed2-7c41bd9a5ed8&quot;,&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:1.0,&quot;total_amount&quot;:50.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;account&quot;:&quot;cd0f32d4-a493-11ec-b909-0242ac120002&quot;,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}],
+  applied_payments: [&quot;9017594e-dc33-4113-a5d2-b0f928e34fdd&quot;],
+  line_items: [{&quot;remote_id&quot;:&quot;8765432&quot;,&quot;description&quot;:&quot;Pickleball lessons&quot;,&quot;unit_price&quot;:50.0,&quot;quantity&quot;:1.0,&quot;total_amount&quot;:50.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;item&quot;:&quot;5b3c1341-a20f-4e51-b72c-f3830a16c97b&quot;,&quot;account&quot;:&quot;cd0f32d4-a493-11ec-b909-0242ac120002&quot;,&quot;tracking_category&quot;:&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;tracking_categories&quot;:[&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_data&quot;:[{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]}],
   remote_was_deleted: null,
+  accounting_period: 7dc5ca17-d311-44cd-9ce0-333080367a18,
+  purchase_orders: [&quot;e7378d8f-3992-4c2a-8417-ebdc4f2bfeb7&quot;,&quot;dd70ca2f-b120-46fa-889a-9604037f45fd&quot;,&quot;889b281d-739c-4759-95b8-0aedb3947131&quot;],
   remote_id: 990110,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

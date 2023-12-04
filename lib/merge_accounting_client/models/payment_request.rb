@@ -39,6 +39,12 @@ module MergeAccountingClient
 
     attr_accessor :tracking_categories
 
+    # The accounting period that the Payment was generated in.
+    attr_accessor :accounting_period
+
+    # A list of “Payment Applied to Lines” objects.
+    attr_accessor :applied_to_lines
+
     attr_accessor :integration_params
 
     attr_accessor :linked_account_params
@@ -54,6 +60,8 @@ module MergeAccountingClient
         :'company' => :'company',
         :'total_amount' => :'total_amount',
         :'tracking_categories' => :'tracking_categories',
+        :'accounting_period' => :'accounting_period',
+        :'applied_to_lines' => :'applied_to_lines',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
       }
@@ -75,6 +83,8 @@ module MergeAccountingClient
         :'company' => :'String',
         :'total_amount' => :'Float',
         :'tracking_categories' => :'Array<String>',
+        :'accounting_period' => :'String',
+        :'applied_to_lines' => :'Array<PaymentLineItemRequest>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
       }
@@ -90,6 +100,7 @@ module MergeAccountingClient
         :'exchange_rate',
         :'company',
         :'total_amount',
+        :'accounting_period',
         :'integration_params',
         :'linked_account_params'
       ])
@@ -141,6 +152,16 @@ module MergeAccountingClient
       if attributes.key?(:'tracking_categories')
         if (value = attributes[:'tracking_categories']).is_a?(Array)
           self.tracking_categories = value
+        end
+      end
+
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
+      if attributes.key?(:'applied_to_lines')
+        if (value = attributes[:'applied_to_lines']).is_a?(Array)
+          self.applied_to_lines = value
         end
       end
 
@@ -200,6 +221,8 @@ module MergeAccountingClient
           company == o.company &&
           total_amount == o.total_amount &&
           tracking_categories == o.tracking_categories &&
+          accounting_period == o.accounting_period &&
+          applied_to_lines == o.applied_to_lines &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
     end
@@ -213,7 +236,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, integration_params, linked_account_params].hash
+      [transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, accounting_period, applied_to_lines, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

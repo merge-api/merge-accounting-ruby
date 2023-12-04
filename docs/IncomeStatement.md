@@ -18,7 +18,8 @@
 | **net_operating_income** | **Float** | The revenue minus the operating expenses. | [optional] |
 | **non_operating_expenses** | [**Array&lt;ReportItem&gt;**](ReportItem.md) |  | [optional][readonly] |
 | **net_income** | **Float** | The gross profit minus the total expenses. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -44,6 +45,7 @@ instance = MergeAccountingClient::IncomeStatement.new(
   non_operating_expenses: [{&quot;remote_id&quot;:&quot;10299&quot;,&quot;name&quot;:&quot;Total Non-Operating Expenses&quot;,&quot;value&quot;:100.0,&quot;sub_items&quot;:[]}],
   net_income: 100.0,
   remote_was_deleted: null,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

@@ -12,6 +12,8 @@
 | **company** | **String** | The company the payment belongs to. | [optional] |
 | **total_amount** | **Float** | The total amount of money being paid to the supplier, or customer, after taxes. | [optional] |
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
+| **accounting_period** | **String** | The accounting period that the Payment was generated in. | [optional] |
+| **applied_to_lines** | [**Array&lt;PaymentLineItemRequest&gt;**](PaymentLineItemRequest.md) | A list of “Payment Applied to Lines” objects. | [optional] |
 | **integration_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 | **linked_account_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 
@@ -29,6 +31,8 @@ instance = MergeAccountingClient::PaymentRequest.new(
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   total_amount: 50.0,
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
+  accounting_period: b38c59b0-a9d7-4740-b1ee-5436c6751e3d,
+  applied_to_lines: [{&quot;remote_id&quot;:&quot;234&quot;,&quot;applied_amount&quot;:25,&quot;related_object_id&quot;:&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;,&quot;related_object_type&quot;:&quot;INVOICE&quot;,&quot;applied_date&quot;:&quot;2020-03-31T00:00:00Z&quot;},{&quot;remote_id&quot;:&quot;235&quot;,&quot;applied_amount&quot;:25,&quot;related_object_id&quot;:&quot;9b96a886-29a5-452b-8733-2a1e03497cf4&quot;,&quot;related_object_type&quot;:&quot;CREDIT_NOTE&quot;,&quot;applied_date&quot;:&quot;2020-03-31T00:00:00Z&quot;}],
   integration_params: {&quot;unique_integration_field&quot;:&quot;unique_integration_field_value&quot;},
   linked_account_params: {&quot;unique_linked_account_field&quot;:&quot;unique_linked_account_field_value&quot;}
 )

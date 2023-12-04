@@ -27,7 +27,7 @@ module MergeAccountingClient
     # The integration categories to show in Merge Link.
     attr_accessor :categories
 
-    # The slug of a specific pre-selected integration for this linking flow token. For examples of slugs, see https://www.merge.dev/docs/basics/integration-metadata/.
+    # The slug of a specific pre-selected integration for this linking flow token. For examples of slugs, see https://docs.merge.dev/guides/merge-link/single-integration/.
     attr_accessor :integration
 
     # An integer number of minutes between [30, 720 or 10080 if for a Magic Link URL] for how long this token is valid. Defaults to 30.

@@ -14,7 +14,8 @@
 | **sales_account** | **String** | References the default account used to record a sale. | [optional] |
 | **company** | **String** | The company the item belongs to. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s item note was updated. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -36,6 +37,7 @@ instance = MergeAccountingClient::Item.new(
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   remote_updated_at: 2020-03-31T00:00Z,
   remote_was_deleted: null,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

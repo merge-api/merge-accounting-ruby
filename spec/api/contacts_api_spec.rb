@@ -57,6 +57,8 @@ describe 'ContactsApi' do
   # @option opts [String] :expand Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   # @option opts [Boolean] :include_deleted_data Whether to include data that was marked as deleted by third party webhooks.
   # @option opts [Boolean] :include_remote_data Whether to include the original data Merge fetched from the third-party to produce these models.
+  # @option opts [String] :is_customer If provided, will only return Contacts that are denoted as customers.
+  # @option opts [String] :is_supplier If provided, will only return Contacts that are denoted as suppliers.
   # @option opts [Time] :modified_after If provided, only objects synced by Merge after this date time will be returned.
   # @option opts [Time] :modified_before If provided, only objects synced by Merge before this date time will be returned.
   # @option opts [Integer] :page_size Number of results to return per page.

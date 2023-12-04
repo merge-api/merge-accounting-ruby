@@ -12,7 +12,7 @@
 | **status** | [**Status7d1Enum**](Status7d1Enum.md) | The contact&#39;s status  * &#x60;ACTIVE&#x60; - ACTIVE * &#x60;ARCHIVED&#x60; - ARCHIVED | [optional] |
 | **currency** | **String** | The currency the contact&#39;s transactions are in. | [optional] |
 | **company** | **String** | The company the contact belongs to. | [optional] |
-| **addresses** | **Array&lt;String&gt;** | &#x60;Address&#x60; object IDs for the given &#x60;Contacts&#x60; object. | [optional] |
+| **addresses** | [**Array&lt;AddressRequest&gt;**](AddressRequest.md) | &#x60;Address&#x60; object IDs for the given &#x60;Contacts&#x60; object. | [optional] |
 | **phone_numbers** | [**Array&lt;AccountingPhoneNumberRequest&gt;**](AccountingPhoneNumberRequest.md) | &#x60;AccountingPhoneNumber&#x60; object for the given &#x60;Contacts&#x60; object. | [optional] |
 | **integration_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |
 | **linked_account_params** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional] |

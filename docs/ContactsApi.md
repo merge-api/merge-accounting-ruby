@@ -120,6 +120,8 @@ opts = {
   expand: 'addresses', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   include_deleted_data: true, # Boolean | Whether to include data that was marked as deleted by third party webhooks.
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
+  is_customer: 'is_customer_example', # String | If provided, will only return Contacts that are denoted as customers.
+  is_supplier: 'is_supplier_example', # String | If provided, will only return Contacts that are denoted as suppliers.
   modified_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, only objects synced by Merge after this date time will be returned.
   modified_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, only objects synced by Merge before this date time will be returned.
   page_size: 56, # Integer | Number of results to return per page.
@@ -167,6 +169,8 @@ end
 | **expand** | **String** | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces. | [optional] |
 | **include_deleted_data** | **Boolean** | Whether to include data that was marked as deleted by third party webhooks. | [optional] |
 | **include_remote_data** | **Boolean** | Whether to include the original data Merge fetched from the third-party to produce these models. | [optional] |
+| **is_customer** | **String** | If provided, will only return Contacts that are denoted as customers. | [optional] |
+| **is_supplier** | **String** | If provided, will only return Contacts that are denoted as suppliers. | [optional] |
 | **modified_after** | **Time** | If provided, only objects synced by Merge after this date time will be returned. | [optional] |
 | **modified_before** | **Time** | If provided, only objects synced by Merge before this date time will be returned. | [optional] |
 | **page_size** | **Integer** | Number of results to return per page. | [optional] |

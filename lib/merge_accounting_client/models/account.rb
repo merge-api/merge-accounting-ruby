@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Account Object ### Description The `Account` object is what companies use to track transactions. They can be both bank accounts or a general ledger account (also called a chart of accounts).  ### Usage Example Fetch from the `LIST Accounts` endpoint and view a company's accounts.
+  # # The Account Object ### Description An `Account` represents a category in a company’s ledger in which a financial transaction is recorded against. The aggregation of each `Account` object is often referred to as the **Chart of Accounts**.  An `Account` can be classified into one of the following categories, determined through the `classification` field: * __Asset:__ Accounts Receivable and Bank Accounts * __Liability:__ Accounts Payable and Credit Card Accounts * __Equity:__ Treasury Accounts and Retained Earnings * __Revenue:__ Income and Other Income * __Expense:__ Cost of Goods Sold and Office Expenses  ### Usage Example Fetch from the `LIST Accounts` endpoint and view a company's accounts.
   class Account
     attr_accessor :id
 
@@ -51,8 +51,10 @@ module MergeAccountingClient
     # The company the account belongs to.
     attr_accessor :company
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -77,6 +79,7 @@ module MergeAccountingClient
         :'parent_account' => :'parent_account',
         :'company' => :'company',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -104,6 +107,7 @@ module MergeAccountingClient
         :'parent_account' => :'String',
         :'company' => :'String',
         :'remote_was_deleted' => :'Boolean',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -196,6 +200,10 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -244,6 +252,7 @@ module MergeAccountingClient
           parent_account == o.parent_account &&
           company == o.company &&
           remote_was_deleted == o.remote_was_deleted &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -258,7 +267,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, name, description, classification, type, status, current_balance, currency, account_number, parent_account, company, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, name, description, classification, type, status, current_balance, currency, account_number, parent_account, company, remote_was_deleted, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash
