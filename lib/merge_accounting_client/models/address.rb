@@ -40,6 +40,8 @@ module MergeAccountingClient
     # The address's zip code.
     attr_accessor :zip_code
 
+    attr_accessor :created_at
+
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
 
@@ -54,6 +56,7 @@ module MergeAccountingClient
         :'country_subdivision' => :'country_subdivision',
         :'country' => :'country',
         :'zip_code' => :'zip_code',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at'
       }
     end
@@ -74,6 +77,7 @@ module MergeAccountingClient
         :'country_subdivision' => :'String',
         :'country' => :'CountryEnum',
         :'zip_code' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time'
       }
     end
@@ -139,6 +143,10 @@ module MergeAccountingClient
         self.zip_code = attributes[:'zip_code']
       end
 
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -170,6 +178,7 @@ module MergeAccountingClient
           country_subdivision == o.country_subdivision &&
           country == o.country &&
           zip_code == o.zip_code &&
+          created_at == o.created_at &&
           modified_at == o.modified_at
     end
 
@@ -182,7 +191,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, street_1, street_2, city, state, country_subdivision, country, zip_code, modified_at].hash
+      [type, street_1, street_2, city, state, country_subdivision, country, zip_code, created_at, modified_at].hash
     end
 
     # Builds the object from hash

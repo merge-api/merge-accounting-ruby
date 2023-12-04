@@ -49,6 +49,8 @@ module MergeAccountingClient
     # The purchase order's exchange rate.
     attr_accessor :exchange_rate
 
+    attr_accessor :tracking_categories
+
     attr_accessor :line_items
 
     attr_accessor :integration_params
@@ -69,6 +71,7 @@ module MergeAccountingClient
         :'total_amount' => :'total_amount',
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
+        :'tracking_categories' => :'tracking_categories',
         :'line_items' => :'line_items',
         :'integration_params' => :'integration_params',
         :'linked_account_params' => :'linked_account_params'
@@ -94,6 +97,7 @@ module MergeAccountingClient
         :'total_amount' => :'Float',
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
+        :'tracking_categories' => :'Array<String>',
         :'line_items' => :'Array<PurchaseOrderLineItemRequest>',
         :'integration_params' => :'Hash<String, Object>',
         :'linked_account_params' => :'Hash<String, Object>'
@@ -178,6 +182,12 @@ module MergeAccountingClient
         self.exchange_rate = attributes[:'exchange_rate']
       end
 
+      if attributes.key?(:'tracking_categories')
+        if (value = attributes[:'tracking_categories']).is_a?(Array)
+          self.tracking_categories = value
+        end
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -243,6 +253,7 @@ module MergeAccountingClient
           total_amount == o.total_amount &&
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
+          tracking_categories == o.tracking_categories &&
           line_items == o.line_items &&
           integration_params == o.integration_params &&
           linked_account_params == o.linked_account_params
@@ -257,7 +268,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, issue_date, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, line_items, integration_params, linked_account_params].hash
+      [status, issue_date, delivery_date, delivery_address, customer, vendor, memo, company, total_amount, currency, exchange_rate, tracking_categories, line_items, integration_params, linked_account_params].hash
     end
 
     # Builds the object from hash

@@ -45,8 +45,10 @@ module MergeAccountingClient
     # When the third party's item note was updated.
     attr_accessor :remote_updated_at
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -69,6 +71,7 @@ module MergeAccountingClient
         :'company' => :'company',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -94,6 +97,7 @@ module MergeAccountingClient
         :'company' => :'String',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -176,6 +180,10 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -222,6 +230,7 @@ module MergeAccountingClient
           company == o.company &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -236,7 +245,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, name, status, unit_price, purchase_price, purchase_account, sales_account, company, remote_updated_at, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, name, status, unit_price, purchase_price, purchase_account, sales_account, company, remote_updated_at, remote_was_deleted, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

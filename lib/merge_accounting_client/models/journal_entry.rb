@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The JournalEntry Object ### Description The `JournalEntry` object is used to get a record of all manually created entries made in a company’s general ledger. The journal line items for each journal entry should sum to zero.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
+  # # The JournalEntry Object ### Description A `JournalEntry` is a record of a transaction or event that is entered into a company's accounting system.  The `JournalEntry` common model contains records that are automatically created as a result of a certain type of transaction, like an Invoice, and records that are manually created against a company’s ledger.  The lines of a given `JournalEntry` object should always sum to 0. A positive `net_amount` means the line represents a debit and a negative net_amount represents a credit.  ### Usage Example Fetch from the `GET JournalEntry` endpoint and view a company's journey entry.
   class JournalEntry
     # The journal entry's transaction date.
     attr_accessor :transaction_date
@@ -27,6 +27,9 @@ module MergeAccountingClient
 
     # Array of `Payment` object IDs.
     attr_accessor :payments
+
+    # A list of the Payment Applied to Lines common models related to a given Invoice, Credit Note, or Journal Entry.
+    attr_accessor :applied_payments
 
     # The journal entry's private note.
     attr_accessor :memo
@@ -42,6 +45,9 @@ module MergeAccountingClient
 
     attr_accessor :lines
 
+    # Reference number for identifying journal entries.
+    attr_accessor :journal_number
+
     attr_accessor :tracking_categories
 
     attr_accessor :remote_was_deleted
@@ -49,10 +55,15 @@ module MergeAccountingClient
     # The journal's posting status.  * `UNPOSTED` - UNPOSTED * `POSTED` - POSTED
     attr_accessor :posting_status
 
+    # The accounting period that the JournalEntry was generated in.
+    attr_accessor :accounting_period
+
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -68,16 +79,20 @@ module MergeAccountingClient
         :'remote_created_at' => :'remote_created_at',
         :'remote_updated_at' => :'remote_updated_at',
         :'payments' => :'payments',
+        :'applied_payments' => :'applied_payments',
         :'memo' => :'memo',
         :'currency' => :'currency',
         :'exchange_rate' => :'exchange_rate',
         :'company' => :'company',
         :'lines' => :'lines',
+        :'journal_number' => :'journal_number',
         :'tracking_categories' => :'tracking_categories',
         :'remote_was_deleted' => :'remote_was_deleted',
         :'posting_status' => :'posting_status',
+        :'accounting_period' => :'accounting_period',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -96,16 +111,20 @@ module MergeAccountingClient
         :'remote_created_at' => :'Time',
         :'remote_updated_at' => :'Time',
         :'payments' => :'Array<String>',
+        :'applied_payments' => :'Array<String>',
         :'memo' => :'String',
         :'currency' => :'CurrencyEnum',
         :'exchange_rate' => :'String',
         :'company' => :'String',
         :'lines' => :'Array<JournalLine>',
+        :'journal_number' => :'String',
         :'tracking_categories' => :'Array<String>',
         :'remote_was_deleted' => :'Boolean',
         :'posting_status' => :'PostingStatusEnum',
+        :'accounting_period' => :'String',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -122,7 +141,9 @@ module MergeAccountingClient
         :'currency',
         :'exchange_rate',
         :'company',
+        :'journal_number',
         :'posting_status',
+        :'accounting_period',
         :'remote_id',
         :'field_mappings',
         :'remote_data'
@@ -162,6 +183,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'applied_payments')
+        if (value = attributes[:'applied_payments']).is_a?(Array)
+          self.applied_payments = value
+        end
+      end
+
       if attributes.key?(:'memo')
         self.memo = attributes[:'memo']
       end
@@ -184,6 +211,10 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'journal_number')
+        self.journal_number = attributes[:'journal_number']
+      end
+
       if attributes.key?(:'tracking_categories')
         if (value = attributes[:'tracking_categories']).is_a?(Array)
           self.tracking_categories = value
@@ -198,12 +229,20 @@ module MergeAccountingClient
         self.posting_status = attributes[:'posting_status']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -232,6 +271,10 @@ module MergeAccountingClient
         invalid_properties.push("invalid value for \"exchange_rate\", must conform to the pattern #{pattern}.")
       end
 
+      if !@journal_number.nil? && @journal_number.to_s.length > 70
+        invalid_properties.push('invalid value for "journal_number", the character length must be smaller than or equal to 70.')
+      end
+
       invalid_properties
     end
 
@@ -239,6 +282,7 @@ module MergeAccountingClient
     # @return true if the model is valid
     def valid?
       return false if !@exchange_rate.nil? && @exchange_rate.to_s !~ Regexp.new(/^-?\d{0,32}(?:\.\d{0,16})?$/)
+      return false if !@journal_number.nil? && @journal_number.to_s.length > 70
       true
     end
 
@@ -253,6 +297,16 @@ module MergeAccountingClient
       @exchange_rate = exchange_rate
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] journal_number Value to be assigned
+    def journal_number=(journal_number)
+      if !journal_number.nil? && journal_number.to_s.length > 70
+        fail ArgumentError, 'invalid value for "journal_number", the character length must be smaller than or equal to 70.'
+      end
+
+      @journal_number = journal_number
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -262,16 +316,20 @@ module MergeAccountingClient
           remote_created_at == o.remote_created_at &&
           remote_updated_at == o.remote_updated_at &&
           payments == o.payments &&
+          applied_payments == o.applied_payments &&
           memo == o.memo &&
           currency == o.currency &&
           exchange_rate == o.exchange_rate &&
           company == o.company &&
           lines == o.lines &&
+          journal_number == o.journal_number &&
           tracking_categories == o.tracking_categories &&
           remote_was_deleted == o.remote_was_deleted &&
           posting_status == o.posting_status &&
+          accounting_period == o.accounting_period &&
           id == o.id &&
           remote_id == o.remote_id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -286,7 +344,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_date, remote_created_at, remote_updated_at, payments, memo, currency, exchange_rate, company, lines, tracking_categories, remote_was_deleted, posting_status, id, remote_id, modified_at, field_mappings, remote_data].hash
+      [transaction_date, remote_created_at, remote_updated_at, payments, applied_payments, memo, currency, exchange_rate, company, lines, journal_number, tracking_categories, remote_was_deleted, posting_status, accounting_period, id, remote_id, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

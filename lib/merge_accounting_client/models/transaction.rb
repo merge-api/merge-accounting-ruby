@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The Transaction Object ### Description The `Transaction` includes different types of transactions. The Transactions object does not cover expenses, credit notes, vendor credit, invoices, purchase orders, and journal entries. See the “transaction_type” field for more information.  ### Usage Example Fetch from the `GET Transaction` endpoint and view a company's transactions.
+  # # The Transaction Object ### Description The `Transaction` common model includes records of all types of transactions that do not appear in other common models. The type of transaction can be identified through the type field. More specifically, it will contain all types of transactions outside of: * __Credit Notes__ * __Expenses__ * __Invoices__ * __Journal Entries__ * __Payments__ * __Purchase Orders__ * __Vendor Credits__  ### Usage Example Fetch from the `GET Transaction` endpoint and view a company's transactions.
   class Transaction
     # The type of transaction, which can by any transaction object not already included in Merge’s common model.
     attr_accessor :transaction_type
@@ -47,13 +47,18 @@ module MergeAccountingClient
 
     attr_accessor :line_items
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    # The accounting period that the Transaction was generated in.
+    attr_accessor :accounting_period
 
     attr_accessor :id
 
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -77,8 +82,10 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'line_items' => :'line_items',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
         :'id' => :'id',
         :'remote_id' => :'remote_id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -105,8 +112,10 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'line_items' => :'Array<TransactionLineItem>',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
         :'id' => :'String',
         :'remote_id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -125,6 +134,7 @@ module MergeAccountingClient
         :'currency',
         :'exchange_rate',
         :'company',
+        :'accounting_period',
         :'remote_id',
         :'field_mappings',
         :'remote_data'
@@ -198,12 +208,20 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -287,8 +305,10 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           line_items == o.line_items &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
           id == o.id &&
           remote_id == o.remote_id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -303,7 +323,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, tracking_categories, line_items, remote_was_deleted, id, remote_id, modified_at, field_mappings, remote_data].hash
+      [transaction_type, number, transaction_date, account, contact, total_amount, currency, exchange_rate, company, tracking_categories, line_items, remote_was_deleted, accounting_period, id, remote_id, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

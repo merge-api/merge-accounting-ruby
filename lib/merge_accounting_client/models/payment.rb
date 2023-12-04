@@ -47,8 +47,16 @@ module MergeAccountingClient
     # When the third party's payment entry was updated.
     attr_accessor :remote_updated_at
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    # The accounting period that the Payment was generated in.
+    attr_accessor :accounting_period
+
+    # A list of “Payment Applied to Lines” objects.
+    attr_accessor :applied_to_lines
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -72,6 +80,9 @@ module MergeAccountingClient
         :'tracking_categories' => :'tracking_categories',
         :'remote_updated_at' => :'remote_updated_at',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
+        :'applied_to_lines' => :'applied_to_lines',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -98,6 +109,9 @@ module MergeAccountingClient
         :'tracking_categories' => :'Array<String>',
         :'remote_updated_at' => :'Time',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
+        :'applied_to_lines' => :'Array<PaymentLineItem>',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -116,6 +130,7 @@ module MergeAccountingClient
         :'company',
         :'total_amount',
         :'remote_updated_at',
+        :'accounting_period',
         :'field_mappings',
         :'remote_data'
       ])
@@ -186,6 +201,20 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
+      if attributes.key?(:'applied_to_lines')
+        if (value = attributes[:'applied_to_lines']).is_a?(Array)
+          self.applied_to_lines = value
+        end
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -250,6 +279,9 @@ module MergeAccountingClient
           tracking_categories == o.tracking_categories &&
           remote_updated_at == o.remote_updated_at &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
+          applied_to_lines == o.applied_to_lines &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -264,7 +296,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, remote_updated_at, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, transaction_date, contact, account, currency, exchange_rate, company, total_amount, tracking_categories, remote_updated_at, remote_was_deleted, accounting_period, applied_to_lines, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

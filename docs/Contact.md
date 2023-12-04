@@ -15,9 +15,10 @@
 | **currency** | **String** | The currency the contact&#39;s transactions are in. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s contact was updated. | [optional] |
 | **company** | **String** | The company the contact belongs to. | [optional] |
-| **addresses** | **Array&lt;String&gt;** | &#x60;Address&#x60; object IDs for the given &#x60;Contacts&#x60; object. | [optional] |
+| **addresses** | [**Array&lt;Address&gt;**](Address.md) | &#x60;Address&#x60; object IDs for the given &#x60;Contacts&#x60; object. | [optional] |
 | **phone_numbers** | [**Array&lt;AccountingPhoneNumber&gt;**](AccountingPhoneNumber.md) | &#x60;AccountingPhoneNumber&#x60; object for the given &#x60;Contacts&#x60; object. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -42,6 +43,7 @@ instance = MergeAccountingClient::Contact.new(
   addresses: [&quot;2f2702aa-8948-492b-a412-2acdf6d2c499&quot;,&quot;d98c7428-8dda-48a8-a1da-c570f65e2375&quot;],
   phone_numbers: [{&quot;number&quot;:&quot;+3198675309&quot;,&quot;type&quot;:&quot;Mobile&quot;}],
   remote_was_deleted: null,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

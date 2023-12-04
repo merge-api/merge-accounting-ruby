@@ -118,7 +118,7 @@ opts = {
   created_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created after this datetime.
   created_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created before this datetime.
   cursor: 'cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw', # String | The pagination cursor value.
-  expand: 'company', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+  expand: 'accounting_period', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   include_deleted_data: true, # Boolean | Whether to include data that was marked as deleted by third party webhooks.
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
   issue_date_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | If provided, will only return objects created after this datetime.
@@ -292,7 +292,7 @@ api_instance = MergeAccountingClient::InvoicesApi.new
 x_account_token = 'x_account_token_example' # String | Token identifying the end user.
 id = TODO # String | 
 opts = {
-  expand: 'company', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+  expand: 'accounting_period', # String | Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
   include_remote_data: true, # Boolean | Whether to include the original data Merge fetched from the third-party to produce these models.
   remote_fields: 'type', # String | Deprecated. Use show_enum_origins.
   show_enum_origins: 'type' # String | Which fields should be returned in non-normalized form.

@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **status** | [**PurchaseOrderStatusEnum**](PurchaseOrderStatusEnum.md) | The purchase order&#39;s status.  * &#x60;DRAFT&#x60; - DRAFT * &#x60;SUBMITTED&#x60; - SUBMITTED * &#x60;AUTHORIZED&#x60; - AUTHORIZED * &#x60;BILLED&#x60; - BILLED * &#x60;DELETED&#x60; - DELETED | [optional] |
 | **issue_date** | **Time** | The purchase order&#39;s issue date. | [optional] |
+| **purchase_order_number** | **String** | The human-readable number of the purchase order. | [optional] |
 | **delivery_date** | **Time** | The purchase order&#39;s delivery date. | [optional] |
 | **delivery_address** | **String** | The purchase order&#39;s delivery address. | [optional] |
 | **customer** | **String** | The contact making the purchase order. | [optional] |
@@ -19,9 +20,11 @@
 | **tracking_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **remote_created_at** | **Time** | When the third party&#39;s purchase order note was created. | [optional] |
 | **remote_updated_at** | **Time** | When the third party&#39;s purchase order note was updated. | [optional] |
-| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted by third party webhooks. | [optional][readonly] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **accounting_period** | **String** | The accounting period that the PurchaseOrder was generated in. | [optional] |
 | **id** | **String** |  | [optional][readonly] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 | **field_mappings** | [**Hash&lt;String, AnyType&gt;**](AnyType.md) |  | [optional][readonly] |
 | **remote_data** | [**Array&lt;RemoteData&gt;**](RemoteData.md) |  | [optional][readonly] |
@@ -33,7 +36,8 @@ require 'merge_accounting_client'
 
 instance = MergeAccountingClient::PurchaseOrder.new(
   status: SUBMITTED,
-  issue_date: null,
+  issue_date: 2020-03-31T00:00Z,
+  purchase_order_number: PO1234,
   delivery_date: 2020-04-15T00:00Z,
   delivery_address: null,
   customer: 3e442c5d-8f51-4103-b5c9-dcee39c30a08,
@@ -43,13 +47,15 @@ instance = MergeAccountingClient::PurchaseOrder.new(
   total_amount: 260.0,
   currency: USD,
   exchange_rate: 2.9,
-  line_items: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;description&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:25.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:260.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;},{&quot;description&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:20.0}],
+  line_items: [{&quot;remote_id&quot;:&quot;121222&quot;,&quot;description&quot;:&quot;Pickleball paddles&quot;,&quot;unit_price&quot;:25.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;0958cbc6-6040-430a-848e-aafacbadf4ae&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:260.0,&quot;currency&quot;:&quot;USD&quot;,&quot;exchange_rate&quot;:&quot;2.9&quot;,&quot;company&quot;:&quot;595c8f97-2ac4-45b7-b000-41bdf43240b5&quot;,&quot;remote_was_deleted&quot;:false},{&quot;description&quot;:&quot;Pickleball Balls&quot;,&quot;unit_price&quot;:1.0,&quot;quantity&quot;:10.0,&quot;item&quot;:&quot;249c9faa-3045-4a31-953b-8f22d3613301&quot;,&quot;tracking_category&quot;:&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;tracking_categories&quot;:[&quot;f1214c24-2702-4617-b74b-3ddecfc0d384&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],&quot;tax_amount&quot;:10.0,&quot;total_line_amount&quot;:20.0}],
   tracking_categories: [&quot;b38c59b0-a9d7-4740-b1ee-5436c6751e3d&quot;,&quot;9b840d2-686a-465a-8a8e-7b028498f8e4&quot;,&quot;a47e11b6-c73b-4a0c-be31-130fc48177fa&quot;],
   remote_created_at: 2020-03-31T00:00Z,
   remote_updated_at: 2020-03-31T00:00Z,
   remote_was_deleted: null,
+  accounting_period: 2c22ce34-5c6e-4fc7-a594-7f26bb4cf78b,
   id: 0048ea5b-911e-4dff-9364-92070dea62ff,
   remote_id: 239741,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z,
   field_mappings: {&quot;organization_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;},&quot;linked_account_defined_targets&quot;:{&quot;custom_key&quot;:&quot;custom_value&quot;}},
   remote_data: [{&quot;path&quot;:&quot;/actions&quot;,&quot;data&quot;:[&quot;Varies by platform&quot;]}]

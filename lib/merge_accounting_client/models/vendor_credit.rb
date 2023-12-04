@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MergeAccountingClient
-  # # The VendorCredit Object ### Description The `VendorCredit` object is an accounts receivable transaction used to show that a customer is owed a gift or refund. A vendor credit will contain information on the amount of credit owed to the customer, the vendor that owes the credit, and the account.  ### Usage Example Fetch from the `GET VendorCredit` endpoint and view a company's vendor credits.
+  # # The VendorCredit Object ### Description A `VendorCredit` is transaction issued by a vendor to the accounting company, indicating a reduction or cancellation of the amount owed to the vendor. It is most generally used as an adjustment note used to rectify errors, returns, or overpayments related to a purchasing transaction. A `VendorCredit` can be applied to *Accounts Payable* Invoices to decrease the overall amount of the Invoice.  ### Usage Example Fetch from the `GET VendorCredit` endpoint and view a company's vendor credits.
   class VendorCredit
     attr_accessor :id
 
@@ -46,8 +46,13 @@ module MergeAccountingClient
 
     attr_accessor :tracking_categories
 
-    # Indicates whether or not this object has been deleted by third party webhooks.
+    # Indicates whether or not this object has been deleted in the third party platform.
     attr_accessor :remote_was_deleted
+
+    # The accounting period that the VendorCredit was generated in.
+    attr_accessor :accounting_period
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -71,6 +76,8 @@ module MergeAccountingClient
         :'lines' => :'lines',
         :'tracking_categories' => :'tracking_categories',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -97,6 +104,8 @@ module MergeAccountingClient
         :'lines' => :'Array<VendorCreditLine>',
         :'tracking_categories' => :'Array<String>',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -114,6 +123,7 @@ module MergeAccountingClient
         :'currency',
         :'exchange_rate',
         :'company',
+        :'accounting_period',
         :'field_mappings',
         :'remote_data'
       ])
@@ -186,6 +196,14 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
       if attributes.key?(:'modified_at')
         self.modified_at = attributes[:'modified_at']
       end
@@ -250,6 +268,8 @@ module MergeAccountingClient
           lines == o.lines &&
           tracking_categories == o.tracking_categories &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -264,7 +284,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, number, transaction_date, vendor, total_amount, currency, exchange_rate, company, lines, tracking_categories, remote_was_deleted, modified_at, field_mappings, remote_data].hash
+      [id, remote_id, number, transaction_date, vendor, total_amount, currency, exchange_rate, company, lines, tracking_categories, remote_was_deleted, accounting_period, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash

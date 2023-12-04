@@ -38,6 +38,9 @@ module MergeAccountingClient
     # Mapping of API endpoints to documentation urls for support. Example: {'GET': [['/common-model-scopes', 'https://docs.merge.dev/accounting/common-model-scopes/#common_model_scopes_retrieve'],['/common-model-actions', 'https://docs.merge.dev/accounting/common-model-actions/#common_model_actions_retrieve']], 'POST': []}
     attr_accessor :api_endpoints_to_documentation_urls
 
+    # Setup guide URL for third party webhook creation. Exposed in Merge Docs.
+    attr_accessor :webhook_setup_guide_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +51,8 @@ module MergeAccountingClient
         :'color' => :'color',
         :'slug' => :'slug',
         :'is_in_beta' => :'is_in_beta',
-        :'api_endpoints_to_documentation_urls' => :'api_endpoints_to_documentation_urls'
+        :'api_endpoints_to_documentation_urls' => :'api_endpoints_to_documentation_urls',
+        :'webhook_setup_guide_url' => :'webhook_setup_guide_url'
       }
     end
 
@@ -67,7 +71,8 @@ module MergeAccountingClient
         :'color' => :'String',
         :'slug' => :'String',
         :'is_in_beta' => :'Boolean',
-        :'api_endpoints_to_documentation_urls' => :'Hash<String, Object>'
+        :'api_endpoints_to_documentation_urls' => :'Hash<String, Object>',
+        :'webhook_setup_guide_url' => :'String'
       }
     end
 
@@ -76,6 +81,7 @@ module MergeAccountingClient
       Set.new([
         :'image',
         :'square_image',
+        :'webhook_setup_guide_url'
       ])
     end
 
@@ -128,6 +134,10 @@ module MergeAccountingClient
         if (value = attributes[:'api_endpoints_to_documentation_urls']).is_a?(Hash)
           self.api_endpoints_to_documentation_urls = value
         end
+      end
+
+      if attributes.key?(:'webhook_setup_guide_url')
+        self.webhook_setup_guide_url = attributes[:'webhook_setup_guide_url']
       end
     end
 
@@ -187,7 +197,8 @@ module MergeAccountingClient
           color == o.color &&
           slug == o.slug &&
           is_in_beta == o.is_in_beta &&
-          api_endpoints_to_documentation_urls == o.api_endpoints_to_documentation_urls
+          api_endpoints_to_documentation_urls == o.api_endpoints_to_documentation_urls &&
+          webhook_setup_guide_url == o.webhook_setup_guide_url
     end
 
     # @see the `==` method
@@ -199,7 +210,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, categories, image, square_image, color, slug, is_in_beta, api_endpoints_to_documentation_urls].hash
+      [name, categories, image, square_image, color, slug, is_in_beta, api_endpoints_to_documentation_urls, webhook_setup_guide_url].hash
     end
 
     # Builds the object from hash

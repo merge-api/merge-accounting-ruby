@@ -17,6 +17,9 @@
 | **account** | **String** | The credit note line item&#39;s account. | [optional] |
 | **company** | **String** | The company the credit note belongs to. | [optional] |
 | **remote_id** | **String** | The third-party API ID of the matching object. | [optional] |
+| **remote_was_deleted** | **Boolean** | Indicates whether or not this object has been deleted in the third party platform. | [optional][readonly] |
+| **id** | **String** |  | [optional][readonly] |
+| **created_at** | **Time** |  | [optional][readonly] |
 | **modified_at** | **Time** | This is the datetime that this object was last updated by Merge | [optional][readonly] |
 
 ## Example
@@ -38,6 +41,9 @@ instance = MergeAccountingClient::CreditNoteLineItem.new(
   account: 8d9fd929-436c-4fd4-a48b-0c61f68d6178,
   company: 595c8f97-2ac4-45b7-b000-41bdf43240b5,
   remote_id: 121222,
+  remote_was_deleted: true,
+  id: ecbe05ac-62a3-46c5-ab31-4b478b37d1b4,
+  created_at: 2021-09-15T00:00Z,
   modified_at: 2021-10-16T00:00Z
 )
 ```

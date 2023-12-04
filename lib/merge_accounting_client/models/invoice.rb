@@ -54,6 +54,9 @@ module MergeAccountingClient
     # The total amount being paid before taxes.
     attr_accessor :sub_total
 
+    # The status of the invoice.  * `PAID` - PAID * `DRAFT` - DRAFT * `SUBMITTED` - SUBMITTED * `PARTIALLY_PAID` - PARTIALLY_PAID * `OPEN` - OPEN * `VOID` - VOID
+    attr_accessor :status
+
     # The total amount being paid in taxes.
     attr_accessor :total_tax_amount
 
@@ -71,12 +74,22 @@ module MergeAccountingClient
     # Array of `Payment` object IDs.
     attr_accessor :payments
 
+    # A list of the Payment Applied to Lines common models related to a given Invoice, Credit Note, or Journal Entry.
+    attr_accessor :applied_payments
+
     attr_accessor :line_items
 
     attr_accessor :remote_was_deleted
 
+    # The accounting period that the Invoice was generated in.
+    attr_accessor :accounting_period
+
+    attr_accessor :purchase_orders
+
     # The third-party API ID of the matching object.
     attr_accessor :remote_id
+
+    attr_accessor :created_at
 
     # This is the datetime that this object was last updated by Merge
     attr_accessor :modified_at
@@ -101,15 +114,20 @@ module MergeAccountingClient
         :'exchange_rate' => :'exchange_rate',
         :'total_discount' => :'total_discount',
         :'sub_total' => :'sub_total',
+        :'status' => :'status',
         :'total_tax_amount' => :'total_tax_amount',
         :'total_amount' => :'total_amount',
         :'balance' => :'balance',
         :'remote_updated_at' => :'remote_updated_at',
         :'tracking_categories' => :'tracking_categories',
         :'payments' => :'payments',
+        :'applied_payments' => :'applied_payments',
         :'line_items' => :'line_items',
         :'remote_was_deleted' => :'remote_was_deleted',
+        :'accounting_period' => :'accounting_period',
+        :'purchase_orders' => :'purchase_orders',
         :'remote_id' => :'remote_id',
+        :'created_at' => :'created_at',
         :'modified_at' => :'modified_at',
         :'field_mappings' => :'field_mappings',
         :'remote_data' => :'remote_data'
@@ -137,15 +155,20 @@ module MergeAccountingClient
         :'exchange_rate' => :'String',
         :'total_discount' => :'Float',
         :'sub_total' => :'Float',
+        :'status' => :'InvoiceStatusEnum',
         :'total_tax_amount' => :'Float',
         :'total_amount' => :'Float',
         :'balance' => :'Float',
         :'remote_updated_at' => :'Time',
         :'tracking_categories' => :'Array<String>',
         :'payments' => :'Array<String>',
+        :'applied_payments' => :'Array<String>',
         :'line_items' => :'Array<InvoiceLineItem>',
         :'remote_was_deleted' => :'Boolean',
+        :'accounting_period' => :'String',
+        :'purchase_orders' => :'Array<String>',
         :'remote_id' => :'String',
+        :'created_at' => :'Time',
         :'modified_at' => :'Time',
         :'field_mappings' => :'Hash<String, Object>',
         :'remote_data' => :'Array<RemoteData>'
@@ -167,10 +190,12 @@ module MergeAccountingClient
         :'exchange_rate',
         :'total_discount',
         :'sub_total',
+        :'status',
         :'total_tax_amount',
         :'total_amount',
         :'balance',
         :'remote_updated_at',
+        :'accounting_period',
         :'remote_id',
         :'field_mappings',
         :'remote_data'
@@ -244,6 +269,10 @@ module MergeAccountingClient
         self.sub_total = attributes[:'sub_total']
       end
 
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
       if attributes.key?(:'total_tax_amount')
         self.total_tax_amount = attributes[:'total_tax_amount']
       end
@@ -272,6 +301,12 @@ module MergeAccountingClient
         end
       end
 
+      if attributes.key?(:'applied_payments')
+        if (value = attributes[:'applied_payments']).is_a?(Array)
+          self.applied_payments = value
+        end
+      end
+
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
@@ -282,8 +317,22 @@ module MergeAccountingClient
         self.remote_was_deleted = attributes[:'remote_was_deleted']
       end
 
+      if attributes.key?(:'accounting_period')
+        self.accounting_period = attributes[:'accounting_period']
+      end
+
+      if attributes.key?(:'purchase_orders')
+        if (value = attributes[:'purchase_orders']).is_a?(Array)
+          self.purchase_orders = value
+        end
+      end
+
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'modified_at')
@@ -351,15 +400,20 @@ module MergeAccountingClient
           exchange_rate == o.exchange_rate &&
           total_discount == o.total_discount &&
           sub_total == o.sub_total &&
+          status == o.status &&
           total_tax_amount == o.total_tax_amount &&
           total_amount == o.total_amount &&
           balance == o.balance &&
           remote_updated_at == o.remote_updated_at &&
           tracking_categories == o.tracking_categories &&
           payments == o.payments &&
+          applied_payments == o.applied_payments &&
           line_items == o.line_items &&
           remote_was_deleted == o.remote_was_deleted &&
+          accounting_period == o.accounting_period &&
+          purchase_orders == o.purchase_orders &&
           remote_id == o.remote_id &&
+          created_at == o.created_at &&
           modified_at == o.modified_at &&
           field_mappings == o.field_mappings &&
           remote_data == o.remote_data
@@ -374,7 +428,7 @@ module MergeAccountingClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, total_tax_amount, total_amount, balance, remote_updated_at, tracking_categories, payments, line_items, remote_was_deleted, remote_id, modified_at, field_mappings, remote_data].hash
+      [id, type, contact, number, issue_date, due_date, paid_on_date, memo, company, currency, exchange_rate, total_discount, sub_total, status, total_tax_amount, total_amount, balance, remote_updated_at, tracking_categories, payments, applied_payments, line_items, remote_was_deleted, accounting_period, purchase_orders, remote_id, created_at, modified_at, field_mappings, remote_data].hash
     end
 
     # Builds the object from hash
